@@ -2,9 +2,9 @@ package com.orange.orangetvote.basic.utils.rxHelper;
 
 import com.orange.orangetvote.basic.base.BaseModel;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.ObservableTransformer;
-import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * <p>

@@ -1,6 +1,6 @@
 package com.orange.orangetvote.basic.base;
 
-public interface BaseContract<E extends BaseEntity> {
+public interface BaseContract<E extends BaseBean> {
 
     interface ContractPresent extends Present {
         void contractPresent();

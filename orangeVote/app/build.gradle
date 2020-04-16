@@ -56,7 +56,6 @@ dependencies {
      *     Retrofit2
      */
     implementation "com.squareup.retrofit2:retrofit:${libs.retrofit}"
-    implementation "com.squareup.retrofit2:adapter-rxjava:2.8.1"
     implementation "com.squareup.retrofit2:converter-gson:${libs.retrofit}"
     implementation "com.squareup.retrofit2:converter-scalars:${libs.retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${libs.retrofit}"
@@ -64,8 +63,8 @@ dependencies {
     /**
      *    RxJava
      */
-    implementation "io.reactivex.rxjava3:rxjava:${libs.rxjava}"
-    implementation "io.reactivex.rxjava3:rxandroid:${libs.rxandroid}"
+    implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${libs.rxandroid}"
 
     /**
      *   okhttp

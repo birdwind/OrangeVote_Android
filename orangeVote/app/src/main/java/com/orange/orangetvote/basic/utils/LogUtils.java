@@ -2,6 +2,8 @@ package com.orange.orangetvote.basic.utils;
 
 import android.util.Log;
 
+import com.orange.orangetvote.BuildConfig;
+
 /**
  * Log日誌
  *

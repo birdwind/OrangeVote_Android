@@ -1,6 +1,9 @@
 package com.orange.orangetvote.basic.base;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import com.orange.orangetvote.basic.utils.rxHelper.RxObservable;
+
+import io.reactivex.disposables.CompositeDisposable;
+
 
 public abstract class BaseModel<S extends BaseService> {
 
@@ -10,6 +13,8 @@ public abstract class BaseModel<S extends BaseService> {
      * 初始化網路請求
      */
     protected abstract S apiService();
+
+    protected abstract void mVote(RxObservable rxObservable);
 
     /**
      * 取消網路請求

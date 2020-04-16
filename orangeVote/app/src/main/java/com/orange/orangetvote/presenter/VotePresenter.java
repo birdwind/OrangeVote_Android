@@ -3,7 +3,7 @@ package com.orange.orangetvote.presenter;
 import android.content.Context;
 
 import com.orange.orangetvote.basic.base.BaseContract;
-import com.orange.orangetvote.basic.base.BaseEntity;
+import com.orange.orangetvote.basic.base.BaseBean;
 import com.orange.orangetvote.basic.base.BasePresent;
 import com.orange.orangetvote.basic.utils.rxHelper.RxObservable;
 import com.orange.orangetvote.contract.VoteContract;
@@ -21,9 +21,9 @@ public class VotePresenter extends BasePresent<VoteContract.ContractView, VoteMo
         mView.showLoading();
         mModel.mVote(new RxObservable() {
             @Override
-            public void onSuccess(BaseEntity baseEntity) {
+            public void onSuccess(BaseBean baseBean) {
                 mView.hideLoading();
-                mView.viewSuccess(baseEntity);
+                mView.viewSuccess(baseBean);
             }
 
             @Override

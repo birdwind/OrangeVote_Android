@@ -13,6 +13,7 @@ public class VoteModel extends BaseModel {
         return RetrofitImpl.createClient().create(VoteService.class);
     }
 
+    @Override
     public void mVote(RxObservable rxObservable){
         apiService()
                 .getVoteList()

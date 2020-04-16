@@ -1,15 +1,15 @@
 package com.orange.orangetvote.basic.utils.rxHelper;
 
-import com.orange.orangetvote.basic.base.BaseEntity;
+import com.orange.orangetvote.basic.base.BaseBean;
 import com.orange.orangetvote.basic.base.MvpCallback;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.ToastUtils;
 
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 
-public abstract class RxObservable<T extends BaseEntity> implements Observer<T>, MvpCallback {
+public abstract class RxObservable<T extends BaseBean> implements Observer<T>, MvpCallback {
 
     public RxObservable() {
 
