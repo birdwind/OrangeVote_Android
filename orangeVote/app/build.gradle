@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 def cfg = rootProject.ext.config
 def libs = rootProject.ext.libraries
 def test = rootProject.ext.test
+def base = rootProject.ext.base
 
 android {
     buildToolsVersion cfg.buildToolsVersion
@@ -23,7 +24,16 @@ android {
     }
 
     buildTypes {
+        debug{
+            buildConfigField "String", "BASE_URL", base.debugUrl
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
         release {
+            buildConfigField "String", "BASE_URL", base.releaseUrl
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

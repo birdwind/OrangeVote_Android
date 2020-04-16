@@ -1,0 +1,6 @@
+ext{
+    base = [
+            debugUrl        : "\"{debugUrl}\"",
+            releaseUrl      : "\"{releaseUrl}\""
+    ]
+}
