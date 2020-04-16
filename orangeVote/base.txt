@@ -1,0 +1,11 @@
+ext{
+    debugBase = [
+            baseUrl        : "\"{debugUrl}\"",
+            preferences     : "\"{preferencesName}\""
+    ]
+    
+    releaseBase = [
+            baseUrl      : "\"{releaseUrl}\""
+            preferences     : "\"{preferencesName}\""
+    ]
+}
