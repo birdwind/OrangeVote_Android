@@ -74,6 +74,7 @@ public class SharedPreferencesUtils {
      */
     public static <E> E get(Context context, @NonNull String key, @NonNull E defaultValue) {
         String value = init(context).getString(key, String.valueOf(defaultValue));
+
         if (defaultValue instanceof String) {
             return (E) value;
         }
@@ -96,7 +97,6 @@ public class SharedPreferencesUtils {
         return (E) new Gson().fromJson(value, defaultValue.getClass());
     }
 
-
     /**
      * 移除某個key值已經對應的值
      *
@@ -109,6 +109,10 @@ public class SharedPreferencesUtils {
         SPCompat.apply(editor);
     }
 
+    public static void remove(String key) {
+        remove(context, key);
+    }
+
     /**
      * 清除所有數據
      *
@@ -118,6 +122,11 @@ public class SharedPreferencesUtils {
         SharedPreferences.Editor editor = init(context).edit();
         editor.clear();
         SPCompat.apply(editor);
+    }
+
+
+    public static void clear() {
+        clear(context);
     }
 
     /**
@@ -142,6 +151,10 @@ public class SharedPreferencesUtils {
      * @return
      */
     public static Map<String, ?> getAll(Context context) {
+        return init(context).getAll();
+    }
+
+    public static Map<String, ?> getAll() {
         return init(context).getAll();
     }
 

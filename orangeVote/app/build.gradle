@@ -25,9 +25,9 @@ android {
     }
 
     buildTypes {
-        debug{
-            buildConfigField ("String", "BASE_URL", debugBase.baseUrl)
-            buildConfigField ("String", "PREFERENCE_NAME", debugBase.preferences)
+        debug {
+            buildConfigField("String", "BASE_URL", debugBase.baseUrl)
+            buildConfigField("String", "PREFERENCE_NAME", debugBase.preferences)
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${libs.androidx}"
     implementation "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}"
     implementation "androidx.recyclerview:recyclerview:${libs.androidx}"
+    implementation "androidx.cardview:cardview:${libs.androidx_cardview}"
 
     /**
      *     ButterKnife
@@ -85,7 +86,20 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${libs.okhttp3}"
     implementation "com.squareup.okhttp3:logging-interceptor:${libs.logging}"
 
+    /**
+     *   android-async-http
+     */
+    implementation 'com.loopj.android:android-async-http:1.4.10'
 
+    /**
+     *   BaseRecycleView
+     */
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${libs.base_recycleview}"
+
+    /**
+     *   Picasso
+     */
+    implementation "com.squareup.picasso:picasso:${libs.picasso}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

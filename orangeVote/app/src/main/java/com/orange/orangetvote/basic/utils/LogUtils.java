@@ -24,7 +24,7 @@ public class LogUtils {
     private static String getClassName(){
         StackTraceElement thisMethodStack = (new Exception()).getStackTrace()[2];
         String result = thisMethodStack.getClassName();
-        result = result.substring(result.lastIndexOf("."), result.length());
+        result = result.substring(result.lastIndexOf(".") + 1, result.length());
         return result;
     }
 

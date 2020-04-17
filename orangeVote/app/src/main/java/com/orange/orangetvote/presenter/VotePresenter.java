@@ -1,37 +1,30 @@
 package com.orange.orangetvote.presenter;
 
-import android.content.Context;
+import com.orange.orangetvote.basic.base.BaseObserver;
+import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.server.VoteApiServer;
+import com.orange.orangetvote.view.callback.VoteView;
 
-import com.orange.orangetvote.basic.base.BaseContract;
-import com.orange.orangetvote.basic.base.BaseBean;
-import com.orange.orangetvote.basic.base.BasePresent;
-import com.orange.orangetvote.basic.utils.rxHelper.RxObservable;
-import com.orange.orangetvote.contract.VoteContract;
-import com.orange.orangetvote.model.VoteModel;
+public class VotePresenter extends BasePresenter<VoteView> {
 
-public class VotePresenter extends BasePresent<VoteContract.ContractView, VoteModel> implements VoteContract.ContractPresent {
-
-
-    public VotePresenter(Context mContext, BaseContract.ContractView mView, VoteModel mModel) {
-        super(mContext, mView, mModel);
+    public VotePresenter(VoteView baseView) {
+        super(baseView);
     }
 
-    @Override
-    public void contractPresent() {
-        mView.showLoading();
-        mModel.mVote(new RxObservable() {
+    public void getList(){
+        paramsMap.clear();
+        headerMap.clear();
+
+        addDisposable(apiServer.executeGet(VoteApiServer.VOTE_LIST.valueOfName(), paramsMap, headerMap), new BaseObserver(baseView) {
             @Override
-            public void onSuccess(BaseBean baseBean) {
-                mView.hideLoading();
-                mView.viewSuccess(baseBean);
+            public void onSuccess(Object o) {
+                baseView.onListSucc(o);
             }
 
             @Override
-            public void onFail(String reason) {
-                mView.hideLoading();
-                mView.viewError(reason);
+            public void onError(String msg) {
+                baseView.showError(msg);
             }
         });
-
     }
 }
