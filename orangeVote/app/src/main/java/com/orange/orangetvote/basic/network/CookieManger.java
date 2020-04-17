@@ -24,6 +24,14 @@ public class CookieManger implements CookieJar {
         }
     }
 
+    public List<Cookie> getCookies(){
+        return cookieStore.getCookies();
+    }
+
+    public void removeCookies(){
+        cookieStore.removeAll();
+    }
+
     @NotNull
     @Override
     public List<Cookie> loadForRequest(HttpUrl httpUrl) {

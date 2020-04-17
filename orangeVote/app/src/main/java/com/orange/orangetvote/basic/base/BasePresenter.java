@@ -1,7 +1,7 @@
-package com.orange.orangetvote.basic.base2;
+package com.orange.orangetvote.basic.base;
 
 import com.orange.orangetvote.basic.network.ApiRetrofit;
-import com.orange.orangetvote.service.ApiServer;
+import com.orange.orangetvote.basic.network.ApiServer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -58,5 +58,9 @@ public class BasePresenter<V extends BaseView> {
         if (compositeDisposable != null) {
             compositeDisposable.dispose();
         }
+    }
+
+    protected void removeCookie(){
+        ApiRetrofit.getInstance().removeCookies();
     }
 }

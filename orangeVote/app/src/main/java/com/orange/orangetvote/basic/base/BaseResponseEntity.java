@@ -1,4 +1,4 @@
-package com.orange.orangetvote.basic.base2;
+package com.orange.orangetvote.basic.base;
 
 import java.io.Serializable;
 

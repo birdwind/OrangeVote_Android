@@ -1,4 +1,4 @@
-package com.orange.orangetvote.basic.base2;
+package com.orange.orangetvote.basic.base;
 
 public interface BaseView {
     /**

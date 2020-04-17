@@ -2,25 +2,15 @@ package com.orange.orangetvote.basic.network;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.orange.orangetvote.MainApplication;
-import com.orange.orangetvote.basic.base2.BaseObserver;
 import com.orange.orangetvote.basic.config.Config;
-import com.orange.orangetvote.basic.network.interceptor.HeaderInterceptor;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
-import com.orange.orangetvote.service.ApiServer;
-
-import org.reactivestreams.Subscriber;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -40,6 +30,8 @@ public class ApiRetrofit {
     private static ApiRetrofit sNewInstance;
     private String baseUrl = Config.BASE_URL;
     private ApiServer apiServer;
+    private Context context = MainApplication.getAppContext();
+    private static CookieManger cookieManger;
 
     private static class SingletonHolder {
         private static ApiRetrofit INSTANCE = new ApiRetrofit();
@@ -59,17 +51,18 @@ public class ApiRetrofit {
     }
 
     private ApiRetrofit(String baseUrl) {
-        Context mContext = MainApplication.getAppContext();
         if (TextUtils.isEmpty(baseUrl)) {
             baseUrl = this.baseUrl;
         }
-        //.addInterceptor(new HeaderInterceptor(Map<String, String> headers)
+        if(cookieManger == null) {
+            cookieManger = new CookieManger(context);
+        }
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(
                         new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
-                .cookieJar(new CookieManger(mContext))
+                .cookieJar(new CookieManger(context))
                 .addInterceptor(interceptor)
-//                .addInterceptor(new HeaderInterceptor()
+                //.addInterceptor(new HeaderInterceptor(Map<String, String> headers)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -85,7 +78,7 @@ public class ApiRetrofit {
         apiServer = retrofit.create(ApiServer.class);
     }
 
-    public ApiServer getApiService(){
+    public ApiServer getApiService() {
         return apiServer;
     }
 
@@ -100,9 +93,10 @@ public class ApiRetrofit {
             MediaType mediaType = response.body().contentType();
             String responseBody = response.body().string();
             String responseHeader = response.headers().toString();
-            String responseSetCookie = response.header("Set-Cookie");
+            String cookies = cookieManger.getCookies().toString();
 
             LogUtils.d(TAG, "----------Request Start----------------");
+            LogUtils.d(TAG, "| Cookies: " + cookies);
             LogUtils.d(TAG, "| Request: " + request);
             LogUtils.d(TAG, "| RequestUrl: " + request.url());
             LogUtils.d(TAG, "| RequestMethod: " + request.method());
@@ -111,13 +105,15 @@ public class ApiRetrofit {
             LogUtils.d(TAG, "| ResponseBody: " + responseBody);
             LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
 
-            if(responseSetCookie != null && responseSetCookie.contains("JSESSIONID")) {
-                SharedPreferencesUtils.put("JSESSIONID", responseSetCookie);
-            }
+            SharedPreferencesUtils.put("JSESSIONID", cookies);
 
             return response.newBuilder()
                     .body(ResponseBody.create(mediaType, responseBody))
                     .build();
         }
     };
+
+    public void removeCookies(){
+        cookieManger.removeCookies();
+    }
 }

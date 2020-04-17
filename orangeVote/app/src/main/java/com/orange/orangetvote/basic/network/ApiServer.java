@@ -1,4 +1,4 @@
-package com.orange.orangetvote.service;
+package com.orange.orangetvote.basic.network;
 
 import java.util.List;
 import java.util.Map;

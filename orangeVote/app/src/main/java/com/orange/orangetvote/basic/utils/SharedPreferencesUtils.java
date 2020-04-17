@@ -74,6 +74,7 @@ public class SharedPreferencesUtils {
      */
     public static <E> E get(Context context, @NonNull String key, @NonNull E defaultValue) {
         String value = init(context).getString(key, String.valueOf(defaultValue));
+
         if (defaultValue instanceof String) {
             return (E) value;
         }
@@ -91,9 +92,6 @@ public class SharedPreferencesUtils {
         }
         if (defaultValue instanceof Double) {
             return (E) Double.valueOf(value);
-        }
-        if(defaultValue == null){
-            return null;
         }
         //json为null的时候返回对象为null,gson已处理
         return (E) new Gson().fromJson(value, defaultValue.getClass());

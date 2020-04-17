@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_small">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_vote_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="隊長選舉"/>
+
+        <TextView
+            android:id="@+id/tv_vote_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="這是對長選舉"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

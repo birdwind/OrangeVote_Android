@@ -1,6 +1,5 @@
-package com.orange.orangetvote.basic.base2;
+package com.orange.orangetvote.basic.base;
 
-import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.rxHelper.RxException;
 
 import io.reactivex.observers.DisposableObserver;
