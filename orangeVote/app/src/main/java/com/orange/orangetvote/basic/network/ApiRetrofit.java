@@ -7,12 +7,16 @@ import android.util.Log;
 import com.orange.orangetvote.MainApplication;
 import com.orange.orangetvote.basic.base2.BaseObserver;
 import com.orange.orangetvote.basic.config.Config;
+import com.orange.orangetvote.basic.network.interceptor.HeaderInterceptor;
+import com.orange.orangetvote.basic.utils.LogUtils;
+import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.service.ApiServer;
 
 import org.reactivestreams.Subscriber;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -65,7 +69,7 @@ public class ApiRetrofit {
                         new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
                 .cookieJar(new CookieManger(mContext))
                 .addInterceptor(interceptor)
-//.addInterceptor(new HeaderInterceptor(Map<String, String> headers)
+//                .addInterceptor(new HeaderInterceptor()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -94,22 +98,26 @@ public class ApiRetrofit {
             long endTime = System.currentTimeMillis();
             long duration = endTime - startTime;
             MediaType mediaType = response.body().contentType();
-            String content = response.body().string();
-            Log.e(TAG, "----------Request Start----------------");
-            Log.e(TAG, "| " + request.toString() + request.headers().toString());
-            Log.e(TAG, "| Response:" + content);
-            Log.e(TAG, "----------Request End:" + duration + "毫秒----------");
+            String responseBody = response.body().string();
+            String responseHeader = response.headers().toString();
+            String responseSetCookie = response.header("Set-Cookie");
+
+            LogUtils.d(TAG, "----------Request Start----------------");
+            LogUtils.d(TAG, "| Request: " + request);
+            LogUtils.d(TAG, "| RequestUrl: " + request.url());
+            LogUtils.d(TAG, "| RequestMethod: " + request.method());
+            LogUtils.d(TAG, "| RequestHeader: " + request.headers().toString());
+            LogUtils.d(TAG, "| ResponseHeader: " + responseHeader);
+            LogUtils.d(TAG, "| ResponseBody: " + responseBody);
+            LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
+
+            if(responseSetCookie != null && responseSetCookie.contains("JSESSIONID")) {
+                SharedPreferencesUtils.put("JSESSIONID", responseSetCookie);
+            }
+
             return response.newBuilder()
-                    .body(ResponseBody.create(mediaType, content))
+                    .body(ResponseBody.create(mediaType, responseBody))
                     .build();
         }
     };
-
-    public void get(String url, Map headers, Map parameters, BaseObserver observer) {
-        apiServer.executeGet(url, headers, parameters)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
 }

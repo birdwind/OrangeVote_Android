@@ -92,10 +92,12 @@ public class SharedPreferencesUtils {
         if (defaultValue instanceof Double) {
             return (E) Double.valueOf(value);
         }
+        if(defaultValue == null){
+            return null;
+        }
         //json为null的时候返回对象为null,gson已处理
         return (E) new Gson().fromJson(value, defaultValue.getClass());
     }
-
 
     /**
      * 移除某個key值已經對應的值
@@ -109,6 +111,10 @@ public class SharedPreferencesUtils {
         SPCompat.apply(editor);
     }
 
+    public static void remove(String key) {
+        remove(context, key);
+    }
+
     /**
      * 清除所有數據
      *
@@ -118,6 +124,11 @@ public class SharedPreferencesUtils {
         SharedPreferences.Editor editor = init(context).edit();
         editor.clear();
         SPCompat.apply(editor);
+    }
+
+
+    public static void clear() {
+        clear(context);
     }
 
     /**
@@ -142,6 +153,10 @@ public class SharedPreferencesUtils {
      * @return
      */
     public static Map<String, ?> getAll(Context context) {
+        return init(context).getAll();
+    }
+
+    public static Map<String, ?> getAll() {
         return init(context).getAll();
     }
 

@@ -2,6 +2,7 @@ package com.orange.orangetvote.basic.base2;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -51,7 +52,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     public void showtoast(String s) {
         Toast.makeText(context, s, Toast.LENGTH_LONG).show();
     }
-
 
     public void showFileDialog() {
         dialog = new ProgressDialog(context);
@@ -123,5 +123,26 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         }
     }
 
+    /**
+     * activity跳轉（無代參數）
+     *
+     * @param className class名稱
+     */
+    public void startActivity(Class<?> className) {
+        Intent intent = new Intent(context, className);
+        startActivity(intent);
+    }
+
+    /**
+     * activity跳轉（有代參數）
+     *
+     * @param className class名稱
+     * @param bundle    bundle
+     */
+    public void startActivity(Class<?> className, Bundle bundle) {
+        Intent intent = new Intent(context, className);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
 }

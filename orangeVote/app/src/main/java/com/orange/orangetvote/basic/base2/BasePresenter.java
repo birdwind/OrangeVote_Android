@@ -3,6 +3,9 @@ package com.orange.orangetvote.basic.base2;
 import com.orange.orangetvote.basic.network.ApiRetrofit;
 import com.orange.orangetvote.service.ApiServer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -13,6 +16,9 @@ public class BasePresenter<V extends BaseView> {
 
     public CompositeDisposable compositeDisposable;
 
+    protected Map<String, String> paramsMap = new HashMap<>();
+
+    public Map<String, String> headerMap = new HashMap<>();
 
     public V baseView;
 

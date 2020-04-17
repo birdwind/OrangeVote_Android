@@ -3,7 +3,7 @@ package com.orange.orangetvote.basic.base2;
 import java.io.Serializable;
 
 public class BaseModel<T> implements Serializable {
-    private int status;
+    private boolean status;
     private int errorCode;
     private String errorMsg;
     private int httpStatus;
@@ -36,7 +36,7 @@ public class BaseModel<T> implements Serializable {
         this.httpStatus = httpStatus;
     }
 
-    public int getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
@@ -72,7 +72,7 @@ public class BaseModel<T> implements Serializable {
         this.response = response;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 }

@@ -17,7 +17,7 @@
 
     <item android:state_enabled="false" >
         <shape>
-            <solid android:color="@color/colorTheme_grey"/>
+            <solid android:color="@color/colorThemeGrey"/>
 
             <padding android:left="1dp"
                 android:top="1dp"

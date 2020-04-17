@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:${libs.androidx}"
     implementation "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}"
     implementation "androidx.recyclerview:recyclerview:${libs.androidx}"
+    implementation "androidx.cardview:cardview:${libs.androidx_cardview}"
 
     /**
      *     ButterKnife
@@ -89,6 +90,16 @@ dependencies {
      *   android-async-http
      */
     implementation 'com.loopj.android:android-async-http:1.4.10'
+
+    /**
+     *   BaseRecycleView
+     */
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${libs.base_recycleview}"
+
+    /**
+     *   Picasso
+     */
+    implementation "com.squareup.picasso:picasso:${libs.picasso}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

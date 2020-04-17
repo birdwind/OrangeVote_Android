@@ -15,31 +15,42 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
-import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface ApiServer {
 
-    @GET("{url}")
-    Observable<ResponseBody> executeGet(@Path("url") String url, @QueryMap Map<String, String> maps , @HeaderMap Map<String, String> headers);
+    @GET()
+    Observable<ResponseBody> executeGet(@Url String url,
+                                        @QueryMap Map<String, String> paramMap,
+                                        @HeaderMap Map<String, String> headerMap);
 
     @FormUrlEncoded
-    @POST("{url}")
-    Observable<ResponseBody> executeFormPost(@Path("url") String url, @FieldMap Map<String, String> maps);
+    @POST()
+    Observable<ResponseBody> executeFormPost(@Url String url,
+                                             @FieldMap Map<String, String> fieldMap,
+                                             @HeaderMap Map<String, String> headerMap);
 
-    @POST("{url}")
-    Observable<ResponseBody> executePost(@Path("url") String url, @QueryMap Map<String, String> maps);
+    @POST()
+    Observable<ResponseBody> executePost(@Url String url,
+                                         @QueryMap Map<String, String> paramMap,
+                                         @HeaderMap Map<String, String> headerMap);
 
     @Multipart
-    @POST("{url}")
-    Observable<ResponseBody> executePost(@Path("url") String url, List<MultipartBody.Part> parts);
+    @POST()
+    Observable<ResponseBody> executePost(@Url String url,
+                                         List<MultipartBody.Part> parts,
+                                         @HeaderMap Map<String, String> headerMap);
 
     @Multipart
-    @POST("{url}")
-    Observable<ResponseBody> upLoadFile(@Path("url") String url, @Part("image\"; filename=\"image.jpg") RequestBody avatar);
+    @POST()
+    Observable<ResponseBody> upLoadFile(@Url String url,
+                                        @Part("image\"; filename=\"image.jpg") RequestBody avatar,
+                                        @HeaderMap Map<String, String> headerMap);
 
-    @POST("{url}")
-    Observable<ResponseBody> uploadFiles(@Path("url") String url,
-            @Part("filename") String description,
-            @PartMap()  Map<String, RequestBody> maps);
+    @POST()
+    Observable<ResponseBody> uploadFiles(@Url String url,
+                                         @Part("filename") String description,
+                                         @PartMap() Map<String, RequestBody> maps,
+                                         @HeaderMap Map<String, String> headerMap);
 }
