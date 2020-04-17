@@ -3,4 +3,6 @@
 
     <string name="username">帳號</string>
     <string name="app_name">小椪柑</string>
+    <string name="password">密碼</string>
+    <string name="login">登入</string>
 </resources>

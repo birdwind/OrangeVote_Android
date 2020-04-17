@@ -1,20 +1,52 @@
 package com.orange.orangetvote.view.activity;
 
-import com.orange.orangetvote.basic.base.BaseActivity;
 
-public class LoginActivity extends BaseActivity {
-    @Override
-    public int setContentViewId() {
-        return 0;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.base2.BaseActivity;
+import com.orange.orangetvote.basic.base2.BasePresenter;
+import com.orange.orangetvote.presenter.LoginPresenter;
+import com.orange.orangetvote.view.LoginView;
+
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginView {
+
+    @BindView(R.id.et_username)
+    EditText etUsername;
+    @BindView(R.id.et_password)
+    EditText etPassword;
+
+    @OnClick(R.id.bt_login)
+    void click_btLogin(){
+        presenter.login(etUsername.getText().toString(), etPassword.getText().toString());
     }
 
     @Override
-    public void createPresenter() {
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_login;
+    }
+
+    @Override
+    protected void addListener() {
 
     }
 
     @Override
     protected void initView() {
 
+    }
+
+    @Override
+    public void onLoginSucc() {
+        showtoast("登入成功");
     }
 }
