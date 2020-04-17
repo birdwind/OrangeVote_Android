@@ -1,8 +1,10 @@
 package com.orange.orangetvote.basic.base;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
-public class BaseModel<T> implements Serializable {
+public class BaseResponseListModel<T extends BaseResponseEntity> implements Serializable {
     private boolean status;
     private int errorCode;
     private String errorMsg;
@@ -10,7 +12,7 @@ public class BaseModel<T> implements Serializable {
     private String requestUrl;
     private String method;
     private String resourceName;
-    private T response;
+    private Collection<T> response;
 
     public int getErrorCode() {
         return errorCode;
@@ -56,7 +58,7 @@ public class BaseModel<T> implements Serializable {
         return resourceName;
     }
 
-    public T getResponse() {
+    public Collection<T> getResponse() {
         return response;
     }
 
@@ -68,7 +70,7 @@ public class BaseModel<T> implements Serializable {
         this.resourceName = resourceName;
     }
 
-    public void setResponse(T response) {
+    public void setResponse(Collection<T> response) {
         this.response = response;
     }
 
