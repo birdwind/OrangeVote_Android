@@ -38,7 +38,6 @@ public class LoginPresenter extends BasePresenter<LoginView> {
                 }
                 System.out.println(baseEntity.getResponse());
 
-//                SharedPreferencesUtils.put("JESSIONID", );
                 baseView.onLoginSucc();
             }
 

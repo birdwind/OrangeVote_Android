@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
                 JSESSIONID = SharedPreferencesUtils.get("JSESSIONID", "");
                 LogUtils.print(JSESSIONID);
                 Intent intent;
-                if(JSESSIONID == null){
+                if(JSESSIONID.equals("")){
                     intent = new Intent(getApplicationContext(), LoginActivity.class);
                 }else{
                     intent = new Intent(getApplicationContext(), MainActivity.class);

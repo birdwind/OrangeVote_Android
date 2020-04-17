@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
@@ -53,7 +54,14 @@ public class GsonUtils {
 
             JsonArray array = new JsonParser().parse(json).getAsJsonArray();
             for (final JsonElement elem : array) {
-                lst.add(parseJsonToBean(elem.getAsString(), clazz));
+                if(elem.isJsonObject()){
+                    LogUtils.d("這是Object拉");
+                }
+                if( elem instanceof JsonObject){
+                    lst.add(parseJsonToBean(elem.getAsJsonObject().getAsString(), clazz));
+                }else {
+                    lst.add(parseJsonToBean(elem.getAsString(), clazz));
+                }
             }
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
