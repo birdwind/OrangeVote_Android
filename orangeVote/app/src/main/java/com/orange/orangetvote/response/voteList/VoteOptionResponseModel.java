@@ -1,14 +1,14 @@
-package com.orange.orangetvote.entity;
+package com.orange.orangetvote.response.voteList;
 
 import com.orange.orangetvote.basic.base.BaseResponseEntity;
 
-public class VoteOptionResponseEntity extends BaseResponseEntity {
+public class VoteOptionResponseModel extends BaseResponseEntity {
 
     private boolean select;
     private String text;
     private String value;
 
-    public VoteOptionResponseEntity(boolean select, String text, String value) {
+    public VoteOptionResponseModel(boolean select, String text, String value) {
         this.select = select;
         this.text = text;
         this.value = value;

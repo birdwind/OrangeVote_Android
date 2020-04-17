@@ -1,9 +1,9 @@
 package com.orange.orangetvote.presenter;
 
-import com.orange.orangetvote.basic.base.BaseModel;
 import com.orange.orangetvote.basic.base.BaseObserver;
 import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.utils.GsonUtils;
+import com.orange.orangetvote.response.login.LoginResponseEntity;
 import com.orange.orangetvote.view.callback.LoginView;
 
 import java.io.IOException;
@@ -29,14 +29,14 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             @Override
             public void onSuccess(Object o) {
                 ResponseBody responseBody = (ResponseBody) o;
-                BaseModel baseEntity = null;
+                LoginResponseEntity loginResponseEntity = null;
                 try {
-                    baseEntity = GsonUtils.parseJsonToBean(responseBody.string(), BaseModel.class);
+                    loginResponseEntity = GsonUtils.parseJsonToBean(responseBody.string(), LoginResponseEntity.class);
                     System.out.println(responseBody.string());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.out.println(baseEntity.getResponse());
+                System.out.println(loginResponseEntity.getResponse());
 
                 baseView.onLoginSucc();
             }

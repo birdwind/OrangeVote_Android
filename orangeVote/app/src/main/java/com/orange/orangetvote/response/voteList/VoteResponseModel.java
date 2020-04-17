@@ -1,10 +1,10 @@
-package com.orange.orangetvote.entity;
+package com.orange.orangetvote.response.voteList;
 
 import com.orange.orangetvote.basic.base.BaseResponseEntity;
 
 import java.util.List;
 
-public class VoteResponseEntity extends BaseResponseEntity {
+public class VoteResponseModel extends BaseResponseEntity {
 
     private String text;
     private String value;
@@ -12,9 +12,9 @@ public class VoteResponseEntity extends BaseResponseEntity {
     private int multiSelection;
     private boolean isAllowAdd;
     private boolean isSign;
-    private List option;
+    private List<VoteOptionResponseModel> option;
 
-    public VoteResponseEntity(String text, String value, String content, int multiSelection, boolean isAllowAdd, boolean isSign, List option){
+    public VoteResponseModel(String text, String value, String content, int multiSelection, boolean isAllowAdd, boolean isSign, List<VoteOptionResponseModel> option){
         this.text = text;
         this.value = value;
         this.content = content;
@@ -32,7 +32,7 @@ public class VoteResponseEntity extends BaseResponseEntity {
         this.text = text;
     }
 
-    public List getOption() {
+    public List<VoteOptionResponseModel> getOption() {
         return option;
     }
 
@@ -68,7 +68,7 @@ public class VoteResponseEntity extends BaseResponseEntity {
         this.multiSelection = multiSelection;
     }
 
-    public void setOption(List option) {
+    public void setOption(List<VoteOptionResponseModel> option) {
         this.option = option;
     }
 

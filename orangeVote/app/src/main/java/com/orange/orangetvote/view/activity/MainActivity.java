@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.BaseActivity;
-import com.orange.orangetvote.entity.VoteResponseEntity;
+import com.orange.orangetvote.response.voteList.VoteResponseModel;
 import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.view.adapter.VoteAdapte;
 import com.orange.orangetvote.view.callback.VoteView;
@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity<VotePresenter> implements VoteVie
 
     private VoteAdapte voteAdapte;
 
-    private List<VoteResponseEntity> voteResponseEntities;
+    private List<VoteResponseModel> voteResponseEntities;
 
     @Override
     protected VotePresenter createPresenter() {
@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity<VotePresenter> implements VoteVie
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onListSucc(List<VoteResponseEntity> o) {
+    public void onListSucc(List<VoteResponseModel> o) {
         voteResponseEntities.addAll(o);
         voteAdapte.notifyDataSetChanged();
     }
