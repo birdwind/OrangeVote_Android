@@ -1,6 +1,6 @@
 package com.orange.orangetvote.basic.base;
 
-import com.orange.orangetvote.basic.network.ApiRetrofit;
+import com.orange.orangetvote.basic.network.RetrofitManager;
 import com.orange.orangetvote.basic.network.ApiServer;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class BasePresenter<V extends BaseView> {
 
     public V baseView;
 
-    protected ApiServer apiServer = ApiRetrofit.getInstance().getApiService();
+    protected ApiServer apiServer = RetrofitManager.getInstance().getApiService();
 
     public BasePresenter(V baseView) {
         this.baseView = baseView;
@@ -61,6 +61,6 @@ public class BasePresenter<V extends BaseView> {
     }
 
     protected void removeCookie(){
-        ApiRetrofit.getInstance().removeCookies();
+        RetrofitManager.getInstance().removeCookies();
     }
 }

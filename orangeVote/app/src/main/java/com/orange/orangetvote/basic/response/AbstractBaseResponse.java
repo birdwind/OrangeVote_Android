@@ -1,10 +1,6 @@
-package com.orange.orangetvote.basic.base;
+package com.orange.orangetvote.basic.response;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-
-public class BaseResponseListModel<T extends BaseResponseEntity> implements Serializable {
+public abstract class AbstractBaseResponse extends AbstractResponse {
     private boolean status;
     private int errorCode;
     private String errorMsg;
@@ -12,7 +8,6 @@ public class BaseResponseListModel<T extends BaseResponseEntity> implements Seri
     private String requestUrl;
     private String method;
     private String resourceName;
-    private Collection<T> response;
 
     public int getErrorCode() {
         return errorCode;
@@ -58,20 +53,12 @@ public class BaseResponseListModel<T extends BaseResponseEntity> implements Seri
         return resourceName;
     }
 
-    public Collection<T> getResponse() {
-        return response;
-    }
-
     public void setRequestUrl(String requestUrl) {
         this.requestUrl = requestUrl;
     }
 
     public void setResourceName(String resourceName) {
         this.resourceName = resourceName;
-    }
-
-    public void setResponse(Collection<T> response) {
-        this.response = response;
     }
 
     public void setStatus(boolean status) {

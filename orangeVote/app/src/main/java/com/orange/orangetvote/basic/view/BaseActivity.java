@@ -1,10 +1,14 @@
-package com.orange.orangetvote.basic.base;
+package com.orange.orangetvote.basic.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.BaseView;
+import com.orange.orangetvote.view.activity.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
@@ -145,4 +149,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         startActivity(intent);
     }
 
+    public void startLoginActivityAndFinish(){
+        startActivity(LoginActivity.class);
+        finish();
+    }
+
+    @Override
+    public void onLoginError() {
+        startLoginActivityAndFinish();
+    }
 }

@@ -45,5 +45,7 @@ public interface BaseView {
      */
     void onErrorCode(int code, String msg);
 
+    void onLoginError();
+
 
 }

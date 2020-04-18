@@ -4,7 +4,7 @@ package com.orange.orangetvote.view.activity;
 import android.widget.EditText;
 
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.base.BaseActivity;
+import com.orange.orangetvote.basic.view.BaseActivity;
 import com.orange.orangetvote.presenter.LoginPresenter;
 import com.orange.orangetvote.view.callback.LoginView;
 

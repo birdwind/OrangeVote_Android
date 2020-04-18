@@ -5,7 +5,8 @@ import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.utils.GsonUtils;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.rxHelper.RxException;
-import com.orange.orangetvote.response.voteList.VoteListResponseEntity;
+import com.orange.orangetvote.response.voteList.VoteListServerResponse;
+import com.orange.orangetvote.response.voteList.VoteResponse;
 import com.orange.orangetvote.server.VoteApiServer;
 import com.orange.orangetvote.view.callback.VoteView;
 
@@ -26,15 +27,23 @@ public class VotePresenter extends BasePresenter<VoteView> {
         addDisposable(apiServer.executeGet(VoteApiServer.VOTE_LIST.valueOfName(), paramsMap, headerMap), new BaseObserver(baseView) {
             @Override
             public void onSuccess(Object o) {
-                ResponseBody responseBody = (ResponseBody) o;
-                VoteListResponseEntity voteListResponseEntity = null;
+                VoteListServerResponse voteListServerResponse = null;
+                VoteResponse voteResponse = null;
                 try {
-                    voteListResponseEntity = GsonUtils.parseJsonToBean(responseBody.string(), VoteListResponseEntity.class);
+                    String responseBody = ((ResponseBody) o).string();
+                    voteListServerResponse = GsonUtils.parseJsonToBean(responseBody, VoteListServerResponse.class);
+                    if(voteListServerResponse.getErrorCode() == 2){
+                        baseView.onLoginError();
+                        return;
+                    }else{
+                        voteResponse = GsonUtils.parseJsonToBean(responseBody, VoteResponse.class);
+                    }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     LogUtils.d(RxException.handleException(e).getMessage());
                 }
 
-                baseView.onListSucc(new ArrayList<>(voteListResponseEntity.getResponse()));
+                baseView.onListSucc(voteResponse);
             }
 
             @Override

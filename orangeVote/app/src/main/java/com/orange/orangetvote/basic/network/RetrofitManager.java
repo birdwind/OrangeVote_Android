@@ -9,8 +9,10 @@ import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Cookie;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -23,34 +25,34 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
-public class ApiRetrofit {
+public class RetrofitManager {
 
     private String TAG = "ApiRetrofit";
     private static final int DEFAULT_TIMEOUT = 10;
-    private static ApiRetrofit sNewInstance;
+    private static RetrofitManager sNewInstance;
     private String baseUrl = Config.BASE_URL;
     private ApiServer apiServer;
     private Context context = MainApplication.getAppContext();
     private static CookieManger cookieManger;
 
     private static class SingletonHolder {
-        private static ApiRetrofit INSTANCE = new ApiRetrofit();
+        private static RetrofitManager INSTANCE = new RetrofitManager();
     }
 
-    public static ApiRetrofit getInstance() {
+    public static RetrofitManager getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-    public static ApiRetrofit getInstance(String url) {
-        sNewInstance = new ApiRetrofit(url);
+    public static RetrofitManager getInstance(String url) {
+        sNewInstance = new RetrofitManager(url);
         return sNewInstance;
     }
 
-    private ApiRetrofit() {
+    private RetrofitManager() {
         this(null);
     }
 
-    private ApiRetrofit(String baseUrl) {
+    private RetrofitManager(String baseUrl) {
         if (TextUtils.isEmpty(baseUrl)) {
             baseUrl = this.baseUrl;
         }
@@ -105,8 +107,6 @@ public class ApiRetrofit {
             LogUtils.d(TAG, "| ResponseBody: " + responseBody);
             LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
 
-            SharedPreferencesUtils.put("JSESSIONID", cookies);
-
             return response.newBuilder()
                     .body(ResponseBody.create(mediaType, responseBody))
                     .build();
@@ -115,5 +115,9 @@ public class ApiRetrofit {
 
     public void removeCookies(){
         cookieManger.removeCookies();
+    }
+
+    public List<Cookie> getCookies(){
+        return cookieManger.getCookies();
     }
 }

@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.base.BaseActivity;
-import com.orange.orangetvote.response.voteList.VoteResponseModel;
+import com.orange.orangetvote.basic.view.BaseActivity;
+import com.orange.orangetvote.response.voteList.VoteListServerResponse;
+import com.orange.orangetvote.response.voteList.VoteResponse;
 import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.view.adapter.VoteAdapte;
 import com.orange.orangetvote.view.callback.VoteView;
@@ -27,7 +28,7 @@ public class MainActivity extends BaseActivity<VotePresenter> implements VoteVie
 
     private VoteAdapte voteAdapte;
 
-    private List<VoteResponseModel> voteResponseEntities;
+    private List<VoteResponse.VoteResponseEntity> voteResponseList;
 
     @Override
     protected VotePresenter createPresenter() {
@@ -47,8 +48,8 @@ public class MainActivity extends BaseActivity<VotePresenter> implements VoteVie
     @Override
     protected void initView() {
         presenter.getList();
-        voteResponseEntities = new ArrayList<>();
-        voteAdapte = new VoteAdapte(R.layout.component_vote_item, voteResponseEntities);
+        voteResponseList = new ArrayList<>();
+        voteAdapte = new VoteAdapte(R.layout.component_vote_item, voteResponseList);
         rvVote.setHasFixedSize(true);
         rvVote.setLayoutManager(new LinearLayoutManager(context));
         voteAdapte.setOnItemChildClickListener(this);
@@ -57,8 +58,8 @@ public class MainActivity extends BaseActivity<VotePresenter> implements VoteVie
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public void onListSucc(List<VoteResponseModel> o) {
-        voteResponseEntities.addAll(o);
+    public void onListSucc(VoteResponse voteResponse) {
+        voteResponseList.addAll(voteResponse.getResponse());
         voteAdapte.notifyDataSetChanged();
     }
 
