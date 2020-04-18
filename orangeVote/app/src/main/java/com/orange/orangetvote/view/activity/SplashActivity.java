@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 
@@ -23,9 +24,8 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferencesUtils.remove("JSESSIONID");
-                JSESSIONID = SharedPreferencesUtils.get("JSESSIONID", "");
-                LogUtils.print(JSESSIONID);
+//                SharedPreferencesUtils.remove("JSESSIONID");
+                JSESSIONID = SharedPreferencesUtils.get(Config.COOKIES, "");
                 Intent intent;
                 if(JSESSIONID.equals("")){
                     intent = new Intent(getApplicationContext(), LoginActivity.class);

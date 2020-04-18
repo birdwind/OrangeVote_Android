@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.base.BaseView;
+import com.orange.orangetvote.basic.config.Config;
+import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.view.activity.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -133,8 +135,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
      * @param className class名稱
      */
     public void startActivity(Class<?> className) {
-        Intent intent = new Intent(context, className);
-        startActivity(intent);
+        startActivity(className, null);
     }
 
     /**
@@ -145,17 +146,44 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
      */
     public void startActivity(Class<?> className, Bundle bundle) {
         Intent intent = new Intent(context, className);
-        intent.putExtras(bundle);
+        if(bundle != null) {
+            intent.putExtras(bundle);
+        }
         startActivity(intent);
     }
 
-    public void startLoginActivityAndFinish(){
+    /**
+     * activity跳轉（無代參數）並結束（）
+     *
+     * @param className class名稱
+     */
+    public void startActivityWithFinish(Class<?> className){
+        startActivityWithFinish(className, null);
+    }
+
+    /**
+     * activity跳轉（有代參數）並結束（）
+     *
+     * @param className class名稱
+     * @param bundle    bundle
+     */
+    public void startActivityWithFinish(Class<?> className, Bundle bundle){
+        startActivity(className, bundle);
+        finish();
+    }
+
+    /**
+     * activity跳轉至登入（）
+     *
+     */
+    public void startLoginActivityWithFinish(){
+        SharedPreferencesUtils.remove(Config.COOKIES);
         startActivity(LoginActivity.class);
         finish();
     }
 
     @Override
     public void onLoginError() {
-        startLoginActivityAndFinish();
+        startLoginActivityWithFinish();
     }
 }
