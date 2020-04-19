@@ -13,6 +13,8 @@ import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.view.activity.LoginActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -185,5 +187,22 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     public void onLoginError() {
         startLoginActivityWithFinish();
+    }
+
+    protected void addFragment(int containerViewId, Fragment fragment) {
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        addFragment(containerViewId, fragment, fragmentTransaction);
+    }
+
+    private void addFragment(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
+        fragmentTransaction.add(containerViewId, fragment);
+        fragmentTransaction.commit();
+    }
+
+    protected void addFragmentWithBack(int containerViewId, Fragment fragment){
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        String backStateName = fragment.getClass().getSimpleName();
+        fragmentTransaction.addToBackStack(backStateName);
+        addFragment(containerViewId, fragment, fragmentTransaction);
     }
 }

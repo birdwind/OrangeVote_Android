@@ -21,19 +21,6 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(T o) {
-//        try {
-//            BaseModel model = (BaseModel) o;
-//            if (model.getErrorCode() == 0) {
-//                onSuccess(o);
-//            } else {
-//                if (view != null) {
-//                    view.onErrorCode(model.getErrorCode(), model.getErrorMsg());
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            onError(e.toString());
-//        }
         onSuccess(o);
     }
 

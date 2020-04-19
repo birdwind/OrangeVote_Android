@@ -5,28 +5,57 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_small">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_small">
 
         <TextView
             android:id="@+id/tv_vote_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="隊長選舉"/>
+            android:text="隊長選舉"
+            android:textSize="@dimen/textSize_normal"
+            android:textColor="@color/colorBlack"
+            android:layout_toStartOf="@id/tv_vote_team"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/tv_vote_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            android:textSize="@dimen/textSize_normal"
+            android:textColor="@color/colorTheme"
+            android:layout_alignParentEnd="true"/>
+
 
         <TextView
             android:id="@+id/tv_vote_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="這是對長選舉"/>
+            android:text="這是對長選舉"
+            android:textSize="@dimen/textSize_small"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:textColor="@color/colorBlack"
+            android:layout_below="@id/tv_vote_title"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_option"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_vote_description"/>
 
-    </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="投票"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_radius_theme_enabled"
+            android:layout_below="@id/rv_option"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

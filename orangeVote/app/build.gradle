@@ -59,6 +59,7 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}"
     implementation "androidx.recyclerview:recyclerview:${libs.androidx}"
     implementation "androidx.cardview:cardview:${libs.androidx_cardview}"
+    implementation "com.google.android.material:material:${libs.androidx}"
 
     /**
      *     ButterKnife
@@ -100,6 +101,11 @@ dependencies {
      *   Picasso
      */
     implementation "com.squareup.picasso:picasso:${libs.picasso}"
+
+    /**
+     * BottomNavigationViewEx
+     */
+    implementation "com.github.ittianyu:BottomNavigationViewEx:${libs.bottomNavigationViewEx}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
