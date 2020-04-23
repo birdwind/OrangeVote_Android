@@ -1,11 +1,12 @@
 package com.orange.orangetvote.view.adapter.callback;
 
-import com.orange.orangetvote.response.voteList.VoteOptionResponse;
-import android.view.View;
+public interface VoteListener {
 
-public interface VoteOptionListener {
+    Boolean onClickOption(String voteUuid, String optionUuid);
 
-    void onClickOption(VoteOptionResponse voteOptionResponse, View view, int position);
+    void onCancelOption(String voteUuid, String optionUuid);
 
-    void onIsAddOptionFocus(Boolean isFocus, String oprion);
+    Boolean onAddOption(String voteUuid, String option);
+
+    void onCancelAddOption(String voteUuid, String option);
 }
