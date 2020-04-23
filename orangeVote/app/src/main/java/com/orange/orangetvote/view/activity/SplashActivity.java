@@ -7,7 +7,6 @@ import android.os.Handler;
 
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.config.Config;
-import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 
 public class SplashActivity extends Activity {
@@ -30,7 +29,7 @@ public class SplashActivity extends Activity {
                 if(JSESSIONID.equals("")){
                     intent = new Intent(getApplicationContext(), LoginActivity.class);
                 }else{
-                    intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent = new Intent(getApplicationContext(), BottomNavigationActivity.class);
                 }
                 startActivity(intent);
                 finish();

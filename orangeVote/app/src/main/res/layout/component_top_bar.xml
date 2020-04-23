@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tools_height"
+    android:background="@color/colorTheme">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/tv_topbar_title"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:id="@+id/ll_topbar_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_normal"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="@dimen/tools_icon"
+                android:layout_height="@dimen/tools_icon"
+                android:src="@drawable/icon_close" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_topbar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_normal"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="@dimen/tools_icon"
+                android:layout_height="@dimen/tools_icon"
+                android:src="@drawable/icon_back" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_topbar_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_normal"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="@dimen/tools_icon"
+                android:layout_height="@dimen/tools_icon"
+                android:src="@drawable/icon_menu" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_topbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/textsize_normal"
+        android:textColor="@color/colorWhite"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

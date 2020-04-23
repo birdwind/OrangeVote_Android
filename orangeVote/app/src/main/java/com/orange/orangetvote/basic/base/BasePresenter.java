@@ -16,9 +16,9 @@ public class BasePresenter<V extends BaseView> {
 
     public CompositeDisposable compositeDisposable;
 
-    protected Map<String, String> paramsMap = new HashMap<>();
+    protected Map<String, Object> paramsMap = new HashMap<>();
 
-    public Map<String, String> headerMap = new HashMap<>();
+    public Map<String, Object> headerMap = new HashMap<>();
 
     public V baseView;
 

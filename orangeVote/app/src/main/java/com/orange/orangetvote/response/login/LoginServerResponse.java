@@ -1,6 +1,6 @@
 package com.orange.orangetvote.response.login;
 
-import com.orange.orangetvote.basic.response.AbstractBaseResponse;
+import com.orange.orangetvote.basic.response.AbstractResponse;
 
-public class LoginServerResponse extends AbstractBaseResponse {
+public class LoginServerResponse extends AbstractResponse<LoginResponse> {
 }

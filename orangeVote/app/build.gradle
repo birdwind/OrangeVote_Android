@@ -55,6 +55,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     implementation "androidx.appcompat:appcompat:${libs.androidx}"
     implementation "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}"
     implementation "androidx.recyclerview:recyclerview:${libs.androidx}"
@@ -106,6 +109,17 @@ dependencies {
      * BottomNavigationViewEx
      */
     implementation "com.github.ittianyu:BottomNavigationViewEx:${libs.bottomNavigationViewEx}"
+
+    /**
+     * SmartRefreshLayout
+     */
+    implementation "com.scwang.smartrefresh:SmartRefreshLayout:${libs.smartRefreshLayout}"
+    implementation "com.scwang.smartrefresh:SmartRefreshHeader:${libs.smartRefreshLayout}"
+
+    /**
+     * StatusBarUtil
+     */
+    implementation "com.jaeger.statusbarutil:library:${libs.statusBarUtil}"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

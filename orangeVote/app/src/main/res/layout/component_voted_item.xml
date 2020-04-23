@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_small"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorThemeGrey">
 
         <TextView
             android:id="@+id/tv_vote_title"
@@ -47,37 +48,9 @@
             android:layout_below="@id/tv_vote_description" />
 
         <LinearLayout
-            android:id="@+id/ll_vote_addOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_vote_option"
-            android:layout_marginStart="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:id="@+id/cb_vote_addOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"/>
-
-            <EditText
-                android:id="@+id/et_vote_addOption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_raduis"
-                android:focusableInTouchMode="true"
-                android:hint="新增選項"
-                android:padding="@dimen/padding_6dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ll_vote_addOption"
-            android:layout_toStartOf="@id/bt_vote"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -121,16 +94,6 @@
                 android:textColor="@color/colorWhite" />
 
         </LinearLayout>
-
-        <Button
-            android:id="@+id/bt_vote"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/buttonheight_normal"
-            android:layout_below="@id/ll_vote_addOption"
-            android:layout_alignParentEnd="true"
-            android:background="@drawable/button_radius_theme_enabled"
-            android:text="投票"
-            android:textColor="@color/colorWhite" />
 
     </RelativeLayout>
 

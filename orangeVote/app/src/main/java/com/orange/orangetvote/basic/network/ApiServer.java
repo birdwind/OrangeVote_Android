@@ -22,35 +22,35 @@ public interface ApiServer {
 
     @GET()
     Observable<ResponseBody> executeGet(@Url String url,
-                                        @QueryMap Map<String, String> paramMap,
-                                        @HeaderMap Map<String, String> headerMap);
+                                        @QueryMap Map<String, Object> paramMap,
+                                        @HeaderMap Map<String, Object> headerMap);
 
     @FormUrlEncoded
     @POST()
     Observable<ResponseBody> executeFormPost(@Url String url,
-                                             @FieldMap Map<String, String> fieldMap,
-                                             @HeaderMap Map<String, String> headerMap);
+                                             @FieldMap Map<String, Object> fieldMap,
+                                             @HeaderMap Map<String, Object> headerMap);
 
     @POST()
     Observable<ResponseBody> executePost(@Url String url,
-                                         @QueryMap Map<String, String> paramMap,
-                                         @HeaderMap Map<String, String> headerMap);
+                                         @QueryMap Map<String, Object> paramMap,
+                                         @HeaderMap Map<String, Object> headerMap);
 
     @Multipart
     @POST()
     Observable<ResponseBody> executePost(@Url String url,
-                                         List<MultipartBody.Part> parts,
-                                         @HeaderMap Map<String, String> headerMap);
+                                         @Part() List<MultipartBody.Part> parts,
+                                         @HeaderMap Map<String, Object> headerMap);
 
     @Multipart
     @POST()
     Observable<ResponseBody> upLoadFile(@Url String url,
                                         @Part("image\"; filename=\"image.jpg") RequestBody avatar,
-                                        @HeaderMap Map<String, String> headerMap);
+                                        @HeaderMap Map<String, Object> headerMap);
 
     @POST()
     Observable<ResponseBody> uploadFiles(@Url String url,
                                          @Part("filename") String description,
                                          @PartMap() Map<String, RequestBody> maps,
-                                         @HeaderMap Map<String, String> headerMap);
+                                         @HeaderMap Map<String, Object> headerMap);
 }

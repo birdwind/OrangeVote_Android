@@ -23,7 +23,7 @@
                 android:inputType="text"
                 android:hint="@string/username"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:padding="@dimen/paddin_2dp"/>
+                android:padding="@dimen/padding_6dp"/>
 
             <EditText
                 android:id="@+id/et_password"
@@ -33,7 +33,7 @@
                 android:inputType="textPassword"
                 android:hint="@string/password"
                 android:layout_marginBottom="@dimen/margin_small"
-                android:padding="@dimen/paddin_2dp"/>
+                android:padding="@dimen/padding_6dp"/>
 
             <Button
                 android:id="@+id/bt_login"

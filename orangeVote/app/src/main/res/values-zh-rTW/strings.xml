@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="app_name">小椪柑志工服務隊</string>
     <string name="username">帳號</string>
-    <string name="app_name">小椪柑</string>
     <string name="password">密碼</string>
+
+    <!--登入-->
     <string name="login">登入</string>
+
+    <!--底部導航列-->
+    <string name="navigation_home">首頁</string>
+    <string name="navigation_add">新增</string>
+    <string name="navigation_account">帳戶</string>
+
+    <!--投票Item-->
+    <string name="vote_multiply">多選</string>
+    <string name="vote_sign">記名</string>
+    <string name="new_option">新增選項</string>
+
+    <!--投票-->
+    <string name="vote_error_multiply">最多選擇{multiply}項</string>
 </resources>

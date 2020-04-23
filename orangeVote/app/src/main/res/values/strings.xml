@@ -1,6 +1,21 @@
 <resources>
-    <string name="app_name">OrangetVote</string>
+    <string name="app_name">SPGVolunteer</string>
     <string name="username">username</string>
     <string name="password">password</string>
+
+    <!--登入-->
     <string name="login">login</string>
+
+    <!--底部導航列-->
+    <string name="navigation_home">Home</string>
+    <string name="navigation_add">Add</string>
+    <string name="navigation_account">Account</string>
+
+    <!--投票Item-->
+    <string name="vote_multiply">Multiply</string>
+    <string name="vote_sign">Sign</string>
+    <string name="new_option">Add Option</string>
+
+    <!--投票-->
+    <string name="vote_error_multiply">Select up to {multiply} item</string>
 </resources>

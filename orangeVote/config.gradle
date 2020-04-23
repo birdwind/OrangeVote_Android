@@ -23,6 +23,8 @@ ext {
             retrofit                : "2.8.1",
             rxjava                  : "2.0.1",
             rxandroid               : "2.0.1",
+            smartRefreshLayout      : "1.1.2",
+            statusBarUtil           : "1.5.1",
     ]
 
     test = [

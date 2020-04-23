@@ -1,208 +1,24 @@
 package com.orange.orangetvote.basic.view;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.orange.orangetvote.basic.base.BasePresenter;
-import com.orange.orangetvote.basic.base.BaseView;
-import com.orange.orangetvote.basic.config.Config;
-import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
-import com.orange.orangetvote.view.activity.LoginActivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
+public interface BaseActivity<P extends BasePresenter> {
 
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements BaseView {
-    public Context context;
-    private ProgressDialog dialog;
-    protected P presenter;
-    protected Unbinder unbinder;
+    P createPresenter();
 
-    protected abstract P createPresenter();
+    int getLayoutId();
 
-    protected abstract int getLayoutId();
+    void addListener();
 
-    protected abstract void addListener();
+    void initView();
 
-    protected abstract void initView();
+    void initData();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        context = this;
-        setContentView(getLayoutId());
-        presenter = createPresenter();
-        unbinder = ButterKnife.bind(this);
-        initView();
-        addListener();
-    }
+    void doSomething();
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (presenter != null) {
-            presenter.detachView();
-        }
-        if (unbinder != null) {
-            unbinder.unbind();
-        }
-    }
+    default String setClassName() {
+        return getClass().getSimpleName();
+    };
 
-    /**
-     * @param s
-     */
-    public void showtoast(String s) {
-        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
-    }
-
-    public void showFileDialog() {
-        dialog = new ProgressDialog(context);
-        dialog.setMessage("正在下载中,请稍後");
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setMax(100);
-        dialog.show();
-    }
-
-    public void hideFileDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }
-
-
-    private void closeLoadingDialog() {
-        if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
-        }
-    }
-
-
-    private void showLoadingDialog() {
-        if (dialog == null) {
-            dialog = new ProgressDialog(context);
-        }
-        dialog.setCancelable(false);
-        dialog.show();
-    }
-
-    @Override
-    public void showLoading() {
-        showLoadingDialog();
-    }
-
-
-    @Override
-    public void hideLoading() {
-        closeLoadingDialog();
-    }
-
-
-    @Override
-    public void showError(String msg) {
-        showtoast(msg);
-    }
-
-    @Override
-    public void onErrorCode(int code, String msg) {
-        showtoast(msg);
-    }
-
-    @Override
-    public void showLoadingFileDialog() {
-        showFileDialog();
-    }
-
-    @Override
-    public void hideLoadingFileDialog() {
-        hideFileDialog();
-    }
-
-    @Override
-    public void onProgress(long totalSize, long downSize) {
-        if (dialog != null) {
-            dialog.setProgress((int) (downSize * 100 / totalSize));
-        }
-    }
-
-    /**
-     * activity跳轉（無代參數）
-     *
-     * @param className class名稱
-     */
-    public void startActivity(Class<?> className) {
-        startActivity(className, null);
-    }
-
-    /**
-     * activity跳轉（有代參數）
-     *
-     * @param className class名稱
-     * @param bundle    bundle
-     */
-    public void startActivity(Class<?> className, Bundle bundle) {
-        Intent intent = new Intent(context, className);
-        if(bundle != null) {
-            intent.putExtras(bundle);
-        }
-        startActivity(intent);
-    }
-
-    /**
-     * activity跳轉（無代參數）並結束（）
-     *
-     * @param className class名稱
-     */
-    public void startActivityWithFinish(Class<?> className){
-        startActivityWithFinish(className, null);
-    }
-
-    /**
-     * activity跳轉（有代參數）並結束（）
-     *
-     * @param className class名稱
-     * @param bundle    bundle
-     */
-    public void startActivityWithFinish(Class<?> className, Bundle bundle){
-        startActivity(className, bundle);
-        finish();
-    }
-
-    /**
-     * activity跳轉至登入（）
-     *
-     */
-    public void startLoginActivityWithFinish(){
-        SharedPreferencesUtils.remove(Config.COOKIES);
-        startActivity(LoginActivity.class);
-        finish();
-    }
-
-    @Override
-    public void onLoginError() {
-        startLoginActivityWithFinish();
-    }
-
-    protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-        addFragment(containerViewId, fragment, fragmentTransaction);
-    }
-
-    private void addFragment(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
-        fragmentTransaction.add(containerViewId, fragment);
-        fragmentTransaction.commit();
-    }
-
-    protected void addFragmentWithBack(int containerViewId, Fragment fragment){
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-        String backStateName = fragment.getClass().getSimpleName();
-        fragmentTransaction.addToBackStack(backStateName);
-        addFragment(containerViewId, fragment, fragmentTransaction);
-    }
 }

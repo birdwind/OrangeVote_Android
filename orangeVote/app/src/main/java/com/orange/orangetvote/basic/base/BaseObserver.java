@@ -2,7 +2,9 @@ package com.orange.orangetvote.basic.base;
 
 import com.orange.orangetvote.basic.utils.rxHelper.RxException;
 
+import java.io.IOException;
 import io.reactivex.observers.DisposableObserver;
+import okhttp3.ResponseBody;
 
 public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
@@ -21,7 +23,11 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(T o) {
-        onSuccess(o);
+        try {
+            onSuccess((ResponseBody) o);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -44,7 +50,7 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
         }
     }
 
-    public abstract void onSuccess(T o);
+    public abstract void onSuccess(ResponseBody responseBody) throws IOException;
 
     public abstract void onError(String msg);
 }

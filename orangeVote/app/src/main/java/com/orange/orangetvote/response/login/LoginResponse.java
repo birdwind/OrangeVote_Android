@@ -1,46 +1,16 @@
 package com.orange.orangetvote.response.login;
 
-import com.orange.orangetvote.basic.response.AbstractResponse;
+import com.orange.orangetvote.basic.response.BaseResponse;
+import lombok.Getter;
+import lombok.Setter;
 
-public class LoginResponse extends AbstractResponse {
+@Getter
+@Setter
+public class LoginResponse implements BaseResponse {
 
-    public Response response;
+    private String orangeId;
 
-    public Response getResponse() {
-        return response;
-    }
+    private String username;
 
-    public void setResponse(Response response) {
-        this.response = response;
-    }
-
-    public class Response extends AbstractResponse {
-        private String orangeId;
-        private String username;
-        private boolean status;
-
-        public String getOrangeId() {
-            return orangeId;
-        }
-
-        public String getUsername() {
-            return username;
-        }
-
-        public boolean isStatus() {
-            return status;
-        }
-
-        public void setStatus(boolean status) {
-            this.status = status;
-        }
-
-        public void setOrangeId(String orangeId) {
-            this.orangeId = orangeId;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-    }
+    private boolean status;
 }
