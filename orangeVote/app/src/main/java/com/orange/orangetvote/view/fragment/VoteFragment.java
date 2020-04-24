@@ -1,10 +1,13 @@
 package com.orange.orangetvote.view.fragment;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.model.AddVoteOptionModel;
 import com.orange.orangetvote.presenter.VotePresenter;
-import com.orange.orangetvote.response.voteList.VoteResponse;
+import com.orange.orangetvote.request.VoteRequest;
+import com.orange.orangetvote.response.vote.VoteResponse;
 import com.orange.orangetvote.view.adapter.VoteAdapte;
 import com.orange.orangetvote.view.adapter.callback.VoteListener;
 import com.orange.orangetvote.view.callback.VoteView;
@@ -15,13 +18,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
-import butterknife.OnClick;
 
-public class VoteFragment extends AbstractFragment<VotePresenter> implements VoteView, VoteListener, OnRefreshListener {
+public class VoteFragment extends AbstractFragment<VotePresenter>
+    implements VoteView, VoteListener, OnRefreshListener, BaseQuickAdapter.OnItemChildClickListener {
 
     private List<VoteResponse> voteResponseList;
 
@@ -37,11 +41,6 @@ public class VoteFragment extends AbstractFragment<VotePresenter> implements Vot
     @BindView(R.id.refreshlayout)
     SmartRefreshLayout smartRefreshLayout;
 
-    @OnClick(R.id.bt_vote)
-    void clickBtVote(){
-        presenter.vote();
-    }
-
     @Override
     public VotePresenter createPresenter() {
         return new VotePresenter(this);
@@ -54,6 +53,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter> implements Vot
 
     @Override
     public void addListener() {
+        voteAdapte.setOnItemChildClickListener(this);
         smartRefreshLayout.setOnRefreshListener(this);
     }
 
@@ -67,9 +67,8 @@ public class VoteFragment extends AbstractFragment<VotePresenter> implements Vot
     @Override
     public void initData() {
         voteResponseList = new ArrayList<>();
+        initLocalTempData();
         voteAdapte = new VoteAdapte(R.layout.component_vote_item, voteResponseList, this);
-        optionListMap = new HashMap<>();
-        addOptionModelListMap = new HashMap<>();
     }
 
     @Override
@@ -78,16 +77,27 @@ public class VoteFragment extends AbstractFragment<VotePresenter> implements Vot
     }
 
     @Override
-    public void onListSucc(List<VoteResponse> voteResponseList) {
+    public void loadVoteListApiSuccess(List<VoteResponse> voteResponseList) {
         this.voteResponseList.clear();
         this.voteResponseList.addAll(voteResponseList);
         voteAdapte.notifyDataSetChanged();
     }
 
     @Override
+    public void onVotedApiSuccess() {
+        showToast(getString(R.string.vote_success));
+    }
+
+    @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        initLocalTempData();
         presenter.voteList();
         refreshLayout.finishRefresh();
+    }
+
+    private void initLocalTempData(){
+        optionListMap = new HashMap<>();
+        addOptionModelListMap = new HashMap<>();
     }
 
     private int getVoteSelectedOption(String voteUuid) {
@@ -107,7 +117,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter> implements Vot
 
         for (int i = 0; i < voteResponseList.size(); i++) {
             VoteResponse voteResponse = voteResponseList.get(i);
-            if (voteResponse.getValue().equals(voteUuid)) {
+            if (voteResponse.getVoteUuid().equals(voteUuid)) {
                 multiply = voteResponse.getMultiSelection();
             }
         }
@@ -187,13 +197,23 @@ public class VoteFragment extends AbstractFragment<VotePresenter> implements Vot
     @Override
     public void onCancelAddOption(String voteUuid, String option) {
         List<AddVoteOptionModel> addVoteOptionModelList = addOptionModelListMap.get(voteUuid);
-        if(addVoteOptionModelList != null){
-            for(int i = 0; i < addVoteOptionModelList.size(); i++){
-                if(addVoteOptionModelList.get(i).getValue().equals(option)){
+        if (addVoteOptionModelList != null) {
+            for (int i = 0; i < addVoteOptionModelList.size(); i++) {
+                if (addVoteOptionModelList.get(i).getValue().equals(option)) {
                     addVoteOptionModelList.remove(i);
                     break;
                 }
             }
+        }
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        if(view.getId() == R.id.bt_vote){
+            LogUtils.e("按鍵");
+            String voteUuid = view.getTag().toString();
+            VoteRequest voteRequest = new VoteRequest(voteUuid, optionListMap.get(voteUuid), addOptionModelListMap.get(voteUuid));
+            presenter.vote(voteRequest);
         }
     }
 }

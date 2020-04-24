@@ -6,12 +6,12 @@ import java.io.Serializable;
 
 public enum VoteApiServer implements BaseEnums {
 
-    VOTE_LIST("api/vote/list");
+    VOTE_LIST("/list"), VOTE("/option");
 
     private String Url;
 
     VoteApiServer(String Url){
-        this.Url = Url;
+        this.Url = "api/vote" + Url;
     }
 
     @Override

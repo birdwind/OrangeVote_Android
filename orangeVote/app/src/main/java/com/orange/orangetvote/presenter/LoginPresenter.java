@@ -27,7 +27,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
         removeCookie();
 
-        addDisposable(apiServer.executeFormPost(AuthApiServer.Login.valueOfName(), paramsMap, headerMap),
+        addDisposable(apiServer.executePostFormUrlEncode(AuthApiServer.Login.valueOfName(), paramsMap, headerMap),
             new BaseObserver(baseView) {
                 @Override
                 public void onSuccess(ResponseBody responseBody) throws IOException {

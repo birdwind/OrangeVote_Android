@@ -11,6 +11,8 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class BasePresenter<V extends BaseView> {
 
@@ -18,7 +20,9 @@ public class BasePresenter<V extends BaseView> {
 
     protected Map<String, Object> paramsMap = new HashMap<>();
 
-    public Map<String, Object> headerMap = new HashMap<>();
+    protected Map<String, Object> headerMap = new HashMap<>();
+
+    protected Map<String, RequestBody> requestBodyMap = new HashMap<>();
 
     public V baseView;
 
@@ -62,5 +66,32 @@ public class BasePresenter<V extends BaseView> {
 
     protected void removeCookie(){
         RetrofitManager.getInstance().removeCookies();
+    }
+
+    protected void initParamAndHeader() {
+        initParamMap();
+        initHeaderMap();
+        initRequestBodyMap();
+    }
+
+    protected void initParamMap() {
+        paramsMap.clear();
+    }
+
+    protected void initHeaderMap() {
+        headerMap.clear();
+    }
+
+    protected void initRequestBodyMap(){
+        requestBodyMap.clear();
+    }
+
+    protected void packageToRequestBody() {
+        initRequestBodyMap();
+        for (String key : paramsMap.keySet()) {
+            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"),
+                    paramsMap.get(key) == null ? "" : paramsMap.get(key).toString());
+            requestBodyMap.put(key, requestBody);
+        }
     }
 }

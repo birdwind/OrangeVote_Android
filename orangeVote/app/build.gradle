@@ -55,14 +55,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compileOnly 'org.projectlombok:lombok:1.18.12'
-    annotationProcessor 'org.projectlombok:lombok:1.18.12'
-
     implementation "androidx.appcompat:appcompat:${libs.androidx}"
     implementation "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}"
     implementation "androidx.recyclerview:recyclerview:${libs.androidx}"
     implementation "androidx.cardview:cardview:${libs.androidx_cardview}"
     implementation "com.google.android.material:material:${libs.androidx}"
+
+    /**
+     *     Lombok
+     */
+    compileOnly "org.projectlombok:lombok:${libs.lombok}"
+    annotationProcessor "org.projectlombok:lombok:${libs.lombok}"
 
     /**
      *     ButterKnife

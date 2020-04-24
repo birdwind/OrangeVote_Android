@@ -3,11 +3,8 @@ package com.orange.orangetvote.view.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.response.voteList.VoteOptionResponse;
+import com.orange.orangetvote.response.vote.VoteOptionResponse;
 import java.util.List;
-import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
 
 public class VoteOptionAdapte extends BaseQuickAdapter<VoteOptionResponse, BaseViewHolder>{
 

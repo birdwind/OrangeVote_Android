@@ -1,10 +1,7 @@
 package com.orange.orangetvote.basic.network;
 
-import java.util.List;
 import java.util.Map;
-
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.FieldMap;
@@ -21,36 +18,34 @@ import retrofit2.http.Url;
 public interface ApiServer {
 
     @GET()
-    Observable<ResponseBody> executeGet(@Url String url,
-                                        @QueryMap Map<String, Object> paramMap,
-                                        @HeaderMap Map<String, Object> headerMap);
+    Observable<ResponseBody> executeGet(@Url String url, @QueryMap Map<String, Object> paramMap,
+        @HeaderMap Map<String, Object> headerMap);
 
     @FormUrlEncoded
     @POST()
-    Observable<ResponseBody> executeFormPost(@Url String url,
-                                             @FieldMap Map<String, Object> fieldMap,
-                                             @HeaderMap Map<String, Object> headerMap);
+    Observable<ResponseBody> executePostFormUrlEncode(@Url String url, @FieldMap Map<String, Object> fieldMap,
+        @HeaderMap Map<String, Object> headerMap);
 
     @POST()
-    Observable<ResponseBody> executePost(@Url String url,
-                                         @QueryMap Map<String, Object> paramMap,
-                                         @HeaderMap Map<String, Object> headerMap);
+    Observable<ResponseBody> executePostWithGet(@Url String url, @QueryMap Map<String, Object> paramMap,
+        @HeaderMap Map<String, Object> headerMap);
+
+    // @Multipart
+    // @POST()
+    // Observable<ResponseBody> executePost(@Url String url,
+    // @Part() List<MultipartBody.Part> parts,
+    // @HeaderMap Map<String, Object> headerMap);
+    @Multipart
+    @POST()
+    Observable<ResponseBody> executePostMultipart(@Url String url, @PartMap Map<String, RequestBody> partMap,
+        @HeaderMap Map<String, Object> headerMap);
 
     @Multipart
     @POST()
-    Observable<ResponseBody> executePost(@Url String url,
-                                         @Part() List<MultipartBody.Part> parts,
-                                         @HeaderMap Map<String, Object> headerMap);
-
-    @Multipart
-    @POST()
-    Observable<ResponseBody> upLoadFile(@Url String url,
-                                        @Part("image\"; filename=\"image.jpg") RequestBody avatar,
-                                        @HeaderMap Map<String, Object> headerMap);
+    Observable<ResponseBody> upLoadFile(@Url String url, @Part("image\"; filename=\"image.jpg") RequestBody avatar,
+        @HeaderMap Map<String, Object> headerMap);
 
     @POST()
-    Observable<ResponseBody> uploadFiles(@Url String url,
-                                         @Part("filename") String description,
-                                         @PartMap() Map<String, RequestBody> maps,
-                                         @HeaderMap Map<String, Object> headerMap);
+    Observable<ResponseBody> uploadFiles(@Url String url, @Part("filename") String description,
+        @PartMap() Map<String, RequestBody> maps, @HeaderMap Map<String, Object> headerMap);
 }

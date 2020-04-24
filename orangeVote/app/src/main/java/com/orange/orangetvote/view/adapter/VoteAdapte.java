@@ -3,8 +3,8 @@ package com.orange.orangetvote.view.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.response.voteList.VoteOptionResponse;
-import com.orange.orangetvote.response.voteList.VoteResponse;
+import com.orange.orangetvote.response.vote.VoteOptionResponse;
+import com.orange.orangetvote.response.vote.VoteResponse;
 import com.orange.orangetvote.view.adapter.callback.VoteListener;
 import java.util.List;
 import android.view.View;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+//TODO: 設定已投票樣式
 public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> implements
     BaseQuickAdapter.OnItemChildClickListener, View.OnFocusChangeListener{
 
@@ -31,11 +32,11 @@ public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> i
     protected void convert(BaseViewHolder helper, VoteResponse item) {
         final RecyclerView recyclerView = helper.getView(R.id.rv_vote_option);
         final VoteOptionAdapte voteOptionAdapte =
-            new VoteOptionAdapte(R.layout.component_vote_option_item, item.getOption(), item.getValue());
+            new VoteOptionAdapte(R.layout.component_vote_option_item, item.getVoteOptions(), item.getVoteUuid());
         recyclerView.setLayoutManager(
             new LinearLayoutManager(helper.itemView.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
-        helper.setText(R.id.tv_vote_title, item.getText());
+        helper.setText(R.id.tv_vote_title, item.getVoteName());
         helper.setText(R.id.tv_vote_description, item.getContent());
         helper.setText(R.id.tv_vote_team, item.getTeam());
 
@@ -60,10 +61,15 @@ public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> i
 
         recyclerView.setAdapter(voteOptionAdapte);
         voteOptionAdapte.setOnItemChildClickListener(this);
-        helper.setTag(R.id.et_vote_addOption, item.getValue());
         cbAddOption = helper.getView(R.id.cb_vote_addOption);
         etAddOption = helper.getView(R.id.et_vote_addOption);
         etAddOption.setOnFocusChangeListener(this);
+
+
+        helper.setTag(R.id.et_vote_addOption, item.getVoteUuid());
+        helper.setTag(R.id.bt_vote, item.getVoteUuid());
+
+        helper.addOnClickListener(R.id.bt_vote);
     }
 
     @Override
@@ -94,6 +100,7 @@ public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> i
                 if (!option.isEmpty()) {
                     boolean isCanAdded = voteListener.onAddOption(view.getTag().toString(), option);
                     if (!isCanAdded) {
+                        voteListener.onCancelAddOption(view.getTag().toString(), option);
                         cbAddOption.setChecked(false);
                     }
                 } else {

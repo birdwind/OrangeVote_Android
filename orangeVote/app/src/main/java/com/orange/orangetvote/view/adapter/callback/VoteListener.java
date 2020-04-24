@@ -9,4 +9,5 @@ public interface VoteListener {
     Boolean onAddOption(String voteUuid, String option);
 
     void onCancelAddOption(String voteUuid, String option);
+
 }
