@@ -28,14 +28,9 @@ public class BottomNavigationActivity extends AbstractActivity
     implements BottomNavigationView.OnNavigationItemSelectedListener, FragmentNavigationListener,
     FragNavController.RootFragmentListener, FragNavController.TransactionListener {
 
-    private List<Fragment> fragments;
-
     private FragNavController mNavController;
 
     private FragmentHistory fragmentHistory;
-
-    @BindArray(R.array.tab_name)
-    String[] TABS;
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationViewEx bottomNavigationViewEx;
@@ -66,16 +61,12 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        fragments = new ArrayList<>(3);
-        fragments.add(new VoteFragment());
-        fragments.add(new AppendVoteFragment());
-        fragments.add(new AccountFragment());
 
         fragmentHistory = new FragmentHistory();
 
         mNavController =
             FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_container)
-                .transactionListener(this).rootFragmentListener(this, TABS.length).build();
+                .transactionListener(this).rootFragmentListener(this, 3).build();
     }
 
     @Override
