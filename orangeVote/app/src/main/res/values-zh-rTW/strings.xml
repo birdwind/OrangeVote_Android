@@ -20,4 +20,20 @@
     <!--投票-->
     <string name="vote_error_multiply">最多選擇{multiply}項</string>
     <string name="vote_success">投票成功</string>
+
+    <!--新增投票-->
+    <string name="append_vote_title">標題</string>
+    <string name="append_vote_description">描述</string>
+    <string name="append_vote_option">選項</string>
+    <string name="append_vote_add_option">+ 新增選項</string>
+    <string name="append_vote_is_allow_add">允許添加選項</string>
+    <string name="append_vote_open_voting">開放投票</string>
+    <string name="append_vote_sign">記名</string>
+    <string name="append_vote_multiply">多選</string>
+
+    <!--帳戶-->
+    <string name="account_personal">個人資料</string>
+    <string name="account_vote_record">投票紀錄</string>
+    <string name="account_authority">權限管理</string>
+    <string name="account_logout">登出</string>
 </resources>

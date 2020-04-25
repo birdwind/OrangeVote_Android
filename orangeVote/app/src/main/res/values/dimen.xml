@@ -13,12 +13,15 @@
     <dimen name="padding_normal">16dp</dimen>
     <dimen name="padding_small">10dp</dimen>
     <dimen name="padding_2dp">2dp</dimen>
-    <dimen name="padding_6dp">6dp</dimen>
+    <dimen name="padding_default">6dp</dimen>
 
     <dimen name="textsize_large">24sp</dimen>
     <dimen name="textsize_normal">20sp</dimen>
     <dimen name="textsize_small">13sp</dimen>
     <dimen name="textsize_min">12sp</dimen>
+
+    <dimen name="component_default_size">35dp</dimen>
+    <dimen name="component_down_arrow_size">20dp</dimen>
 
     <dimen name="buttonheight_normal">30dp</dimen>
 

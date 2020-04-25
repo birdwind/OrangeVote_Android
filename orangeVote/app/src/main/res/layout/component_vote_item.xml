@@ -66,10 +66,10 @@
                 android:id="@+id/et_vote_addOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_raduis"
+                android:background="@drawable/style_edittext_raduis_theme"
                 android:focusableInTouchMode="true"
                 android:hint="新增選項"
-                android:padding="@dimen/padding_6dp" />
+                android:padding="@dimen/padding_default" />
 
         </LinearLayout>
 
@@ -85,12 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_small"
-                android:background="@drawable/button_radius_theme_enabled"
+                android:background="@drawable/style_button_radius_theme"
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_6dp"
+                android:paddingTop="@dimen/padding_default"
                 android:paddingEnd="@dimen/padding_small"
-                android:paddingBottom="@dimen/padding_6dp">
+                android:paddingBottom="@dimen/padding_default">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -112,11 +112,11 @@
                 android:id="@+id/tv_vote_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_radius_theme_enabled"
+                android:background="@drawable/style_button_radius_theme"
                 android:paddingStart="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_6dp"
+                android:paddingTop="@dimen/padding_default"
                 android:paddingEnd="@dimen/padding_small"
-                android:paddingBottom="@dimen/padding_6dp"
+                android:paddingBottom="@dimen/padding_default"
                 android:text="@string/vote_sign"
                 android:textColor="@color/colorWhite" />
 
@@ -128,7 +128,7 @@
             android:layout_height="@dimen/buttonheight_normal"
             android:layout_below="@id/ll_vote_addOption"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/button_radius_theme_enabled"
+            android:background="@drawable/style_button_radius_theme"
             android:text="投票"
             android:textColor="@color/colorWhite" />
 

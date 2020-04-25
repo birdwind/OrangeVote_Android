@@ -58,12 +58,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_small"
-                android:background="@drawable/button_radius_theme_enabled"
+                android:background="@drawable/style_button_radius_theme"
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_6dp"
+                android:paddingTop="@dimen/padding_default"
                 android:paddingEnd="@dimen/padding_small"
-                android:paddingBottom="@dimen/padding_6dp">
+                android:paddingBottom="@dimen/padding_default">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -85,11 +85,11 @@
                 android:id="@+id/tv_vote_sign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_radius_theme_enabled"
+                android:background="@drawable/style_button_radius_theme"
                 android:paddingStart="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_6dp"
+                android:paddingTop="@dimen/padding_default"
                 android:paddingEnd="@dimen/padding_small"
-                android:paddingBottom="@dimen/padding_6dp"
+                android:paddingBottom="@dimen/padding_default"
                 android:text="@string/vote_sign"
                 android:textColor="@color/colorWhite" />
 

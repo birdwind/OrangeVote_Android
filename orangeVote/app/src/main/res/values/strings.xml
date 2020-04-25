@@ -19,4 +19,20 @@
     <!--投票-->
     <string name="vote_error_multiply">Select up to {multiply} item</string>
     <string name="vote_success">Success</string>
+
+    <!--新增投票-->
+    <string name="append_vote_title">Title</string>
+    <string name="append_vote_description">Description</string>
+    <string name="append_vote_option">Option</string>
+    <string name="append_vote_add_option">+ Add Option</string>
+    <string name="append_vote_is_allow_add">Allow Add Option</string>
+    <string name="append_vote_open_voting">Open Voting</string>
+    <string name="append_vote_sign">Sign</string>
+    <string name="append_vote_multiply">Multiply</string>
+
+    <!--帳戶-->
+    <string name="account_personal">Personal Information</string>
+    <string name="account_vote_record">Vote Record</string>
+    <string name="account_authority">Authority Management</string>
+    <string name="account_logout">Logout</string>
 </resources>

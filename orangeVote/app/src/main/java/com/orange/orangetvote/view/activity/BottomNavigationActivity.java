@@ -5,6 +5,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractActivity;
 import com.orange.orangetvote.presenter.VotePresenter;
+import com.orange.orangetvote.view.fragment.AccountFragment;
+import com.orange.orangetvote.view.fragment.AppendVoteFragment;
 import com.orange.orangetvote.view.fragment.VoteFragment;
 import com.orange.orangetvote.view.adapter.ViewPageAdapter;
 import java.util.ArrayList;
@@ -91,8 +93,8 @@ public class BottomNavigationActivity extends AbstractActivity
     public void initData() {
         fragments = new ArrayList<>(3);
         fragments.add(new VoteFragment());
-        fragments.add(new VoteFragment());
-        fragments.add(new VoteFragment());
+        fragments.add(new AppendVoteFragment());
+        fragments.add(new AccountFragment());
     }
 
     @Override
@@ -139,5 +141,10 @@ public class BottomNavigationActivity extends AbstractActivity
     private void resetDefaultIcon() {
         Menu menu = bottomNavigationViewEx.getMenu();
         menu.findItem(R.id.i_home).setIcon(R.drawable.icon_home);
+    }
+
+    @Override
+    protected void onBackPress() {
+
     }
 }

@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ThemeEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/component_default_size</item>
+        <item name="android:background">@drawable/style_edittext_raduis_theme</item>
+        <item name="android:layout_marginBottom">@dimen/margin_small</item>
+        <item name="android:padding">@dimen/padding_default</item>
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="UnderLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/colorBlack</item>
+    </style>
+
 </resources>

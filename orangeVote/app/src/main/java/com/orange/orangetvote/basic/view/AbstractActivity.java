@@ -287,4 +287,12 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
         }
         return false;
     }
+
+    @Override
+    public void onBackPressed() {
+        onBackPress();
+        super.onBackPressed();
+    }
+
+    protected abstract void onBackPress();
 }

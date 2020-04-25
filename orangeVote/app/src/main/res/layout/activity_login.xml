@@ -17,23 +17,14 @@
 
             <EditText
                 android:id="@+id/et_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_raduis"
-                android:inputType="text"
                 android:hint="@string/username"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:padding="@dimen/padding_6dp"/>
+                style="@style/ThemeEditText"/>
 
             <EditText
                 android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext_raduis"
                 android:inputType="textPassword"
                 android:hint="@string/password"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:padding="@dimen/padding_6dp"/>
+                style="@style/ThemeEditText"/>
 
             <Button
                 android:id="@+id/bt_login"
@@ -41,7 +32,7 @@
                 android:layout_height="40dp"
                 android:text="@string/login"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/button_radius_theme_enabled"
+                android:background="@drawable/style_button_radius_theme"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="17dp"/>
 

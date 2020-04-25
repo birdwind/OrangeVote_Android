@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_normal"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/et_append_vote_title"
+        android:hint="@string/append_vote_title"
+        style="@style/ThemeEditText"/>
+
+    <EditText
+        android:id="@+id/et_append_vote_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/append_vote_description"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:gravity="top|left"
+        style="@style/ThemeEditText"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/spinner_append_vote_team"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/style_textview_radius_theme"
+            android:padding="@dimen/padding_default"
+            android:layout_marginBottom="@dimen/margin_small"/>
+
+        <ImageView
+            android:layout_width="@dimen/component_down_arrow_size"
+            android:layout_height="@dimen/component_down_arrow_size"
+            android:src="@drawable/icon_down_arrow"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_append_vote_date"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/component_default_size"
+            android:text="2020/03/25"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/style_textview_radius_theme"
+            android:padding="@dimen/padding_default"/>
+
+        <ImageView
+            android:layout_width="@dimen/component_down_arrow_size"
+            android:layout_height="@dimen/component_down_arrow_size"
+            android:src="@drawable/icon_down_arrow"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_normal"/>
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_append_vote_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/btv_append_vote_append_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/append_vote_add_option"
+        android:textColor="@color/colorTheme"
+        android:textSize="@dimen/textsize_small"
+        android:paddingTop="@dimen/padding_default"
+        android:paddingBottom="@dimen/padding_default"/>
+
+    <CheckBox
+        android:id="@+id/cb_append_vote_allow_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/append_vote_is_allow_add"
+        android:textSize="@dimen/textsize_small"/>
+
+    <CheckBox
+        android:id="@+id/cb_append_vote_open_voting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/append_vote_open_voting"
+        android:textSize="@dimen/textsize_small"/>
+
+    <CheckBox
+        android:id="@+id/cb_append_vote_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/append_vote_sign"
+        android:textSize="@dimen/textsize_small"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_append_vote_multiply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/append_vote_multiply"
+            android:textSize="@dimen/textsize_small"
+            android:layout_marginRight="@dimen/margin_small"/>
+
+        <EditText
+            android:id="@+id/et_append_vote_multiply"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="1"
+            style="@style/ThemeEditText"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -56,4 +56,9 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
         showToast("登入成功");
         startActivity(BottomNavigationActivity.class);
     }
+
+    @Override
+    protected void onBackPress() {
+
+    }
 }

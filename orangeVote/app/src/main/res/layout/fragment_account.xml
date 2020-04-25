@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_account_personal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/account_personal"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal"/>
+
+        <ImageView
+            android:layout_width="@dimen/component_down_arrow_size"
+            android:layout_height="@dimen/component_down_arrow_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:src="@drawable/icon_right_arrow" />
+
+        <View
+            style="@style/UnderLine"
+            android:layout_below="@id/tv_account_personal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@color/colorThemeGrey" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_account_vote_record"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/account_vote_record"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal" />
+
+        <ImageView
+            android:layout_width="@dimen/component_down_arrow_size"
+            android:layout_height="@dimen/component_down_arrow_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:src="@drawable/icon_right_arrow" />
+
+        <View
+            style="@style/UnderLine"
+            android:layout_below="@id/tv_account_vote_record"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@color/colorThemeGrey" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_account_authority"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/account_authority"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal" />
+
+        <ImageView
+            android:layout_width="@dimen/component_down_arrow_size"
+            android:layout_height="@dimen/component_down_arrow_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:src="@drawable/icon_right_arrow" />
+
+        <View
+            style="@style/UnderLine"
+            android:layout_below="@id/tv_account_authority"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:background="@color/colorThemeGrey" />
+
+    </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_account_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/account_logout"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_normal"
+            android:paddingEnd="@dimen/padding_normal"/>
+
+</LinearLayout>
