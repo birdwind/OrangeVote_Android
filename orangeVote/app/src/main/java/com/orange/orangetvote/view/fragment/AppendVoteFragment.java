@@ -3,6 +3,7 @@ package com.orange.orangetvote.view.fragment;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.view.AbstractFragment;
+import android.os.Bundle;
 
 public class AppendVoteFragment extends AbstractFragment {
     @Override
@@ -26,7 +27,7 @@ public class AppendVoteFragment extends AbstractFragment {
     }
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
 
     }
 

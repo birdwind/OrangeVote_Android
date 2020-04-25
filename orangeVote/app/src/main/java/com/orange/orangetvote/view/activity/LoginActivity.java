@@ -4,6 +4,7 @@ import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractActivity;
 import com.orange.orangetvote.presenter.LoginPresenter;
 import com.orange.orangetvote.view.callback.LoginView;
+import android.os.Bundle;
 import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,7 +43,7 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
     }
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
 
     }
 

@@ -45,7 +45,7 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
         presenter = createPresenter();
         unbinder = ButterKnife.bind(this);
         StatusBarUtil.setColor(this, getResources().getColor(R.color.colorTheme));
-        initData();
+        initData(savedInstanceState);
         initView();
         addListener();
         doSomething();

@@ -2,6 +2,7 @@ package com.orange.orangetvote.basic.view;
 
 
 import com.orange.orangetvote.basic.base.BasePresenter;
+import android.os.Bundle;
 
 public interface BaseActivity<P extends BasePresenter> {
 
@@ -13,7 +14,7 @@ public interface BaseActivity<P extends BasePresenter> {
 
     void initView();
 
-    void initData();
+    void initData(Bundle savedInstanceState);
 
     void doSomething();
 

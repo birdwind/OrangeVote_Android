@@ -14,6 +14,7 @@ import com.orange.orangetvote.basic.base.BaseView;
 import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
+import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,8 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
 
     protected Unbinder unbinder;
 
+    protected FragmentNavigationListener fragmentNavigationListener;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +51,7 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
         presenter = createPresenter();
         context = getActivity();
         className = setClassName();
-        initData();
+        initData(savedInstanceState);
         initView();
         addListener();
         doSomething();
@@ -185,6 +188,9 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        if(context instanceof FragmentNavigationListener){
+            fragmentNavigationListener = (FragmentNavigationListener)context;
+        }
         LogUtils.e(className, "OnAttach");
     }
 

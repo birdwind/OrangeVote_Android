@@ -61,6 +61,8 @@ dependencies {
     implementation "androidx.cardview:cardview:${libs.androidx_cardview}"
     implementation "com.google.android.material:material:${libs.androidx}"
 
+    implementation "com.ncapdevi:frag-nav:${libs.frag_nav}"
+
     /**
      *     Lombok
      */

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,7 +66,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     }
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
         voteResponseList = new ArrayList<>();
         initLocalTempData();
         voteAdapte = new VoteAdapte(R.layout.component_vote_item, voteResponseList, this);

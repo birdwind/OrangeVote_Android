@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="example">
-        <item>3</item>
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
-    </string-array>
+    <array name="tab_name">
+        <item>@string/navigation_home</item>
+        <item>@string/navigation_add</item>
+        <item>@string/navigation_account</item>
+    </array>
 </resources>

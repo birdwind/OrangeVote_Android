@@ -3,67 +3,48 @@ package com.orange.orangetvote.view.activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.view.AbstractActivity;
 import com.orange.orangetvote.presenter.VotePresenter;
+import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavController;
+import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentHistory;
+import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
 import com.orange.orangetvote.view.fragment.AccountFragment;
 import com.orange.orangetvote.view.fragment.AppendVoteFragment;
 import com.orange.orangetvote.view.fragment.VoteFragment;
-import com.orange.orangetvote.view.adapter.ViewPageAdapter;
 import java.util.ArrayList;
 import java.util.List;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import butterknife.BindArray;
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class BottomNavigationActivity extends AbstractActivity
-    implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-    private ViewPageAdapter viewPageAdapter;
+    implements BottomNavigationView.OnNavigationItemSelectedListener, FragmentNavigationListener,
+    FragNavController.RootFragmentListener, FragNavController.TransactionListener {
 
     private List<Fragment> fragments;
+
+    private FragNavController mNavController;
+
+    private FragmentHistory fragmentHistory;
+
+    @BindArray(R.array.tab_name)
+    String[] TABS;
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationViewEx bottomNavigationViewEx;
 
-    @BindView(R.id.viewpager_bottomnavigation)
-    ViewPager viewpager;
-
-    @BindView(R.id.ll_topbar_close)
-    LinearLayout llClose;
-
-    @BindView(R.id.ll_topbar_back)
-    LinearLayout llBack;
-
-    @BindView(R.id.ll_topbar_menu)
-    LinearLayout llMenu;
-
-    @BindView(R.id.tv_topbar_title)
-    TextView tvTitle;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @BindView(R.id.main_container)
     FrameLayout frameLayout;
-
-    @OnClick(R.id.ll_topbar_menu)
-    void clickLlMenu() {
-        // startActivity(MenuActivity.class);
-    }
-
-    @OnClick(R.id.ll_topbar_back)
-    void clickLlBack() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-            showBackButton(false);
-        }
-        onBackPressed();
-    }
 
     @Override
     public VotePresenter createPresenter() {
@@ -81,60 +62,55 @@ public class BottomNavigationActivity extends AbstractActivity
     }
 
     @Override
-    public void initView() {
-        viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments);
-        viewpager.setAdapter(viewPageAdapter);
-
-        bottomNavigationViewEx.setupWithViewPager(viewpager);
-    }
+    public void initView() {}
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
         fragments = new ArrayList<>(3);
         fragments.add(new VoteFragment());
         fragments.add(new AppendVoteFragment());
         fragments.add(new AccountFragment());
+
+        fragmentHistory = new FragmentHistory();
+
+        mNavController =
+            FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_container)
+                .transactionListener(this).rootFragmentListener(this, TABS.length).build();
     }
 
     @Override
     public void doSomething() {
-
+        initToolbar();
     }
 
-    public void showBackButton(boolean isShow) {
-        if (isShow) {
-            llBack.setVisibility(View.VISIBLE);
-        } else {
-            llBack.setVisibility(View.GONE);
-        }
-    }
-
-    public void showMenuButton(boolean isShow) {
-        if (isShow) {
-            llMenu.setVisibility(View.VISIBLE);
-        } else {
-            llMenu.setVisibility(View.GONE);
-        }
-    }
-
-    public void showCloseButton(boolean isShow) {
-        if (isShow) {
-            llClose.setVisibility(View.VISIBLE);
-        } else {
-            llClose.setVisibility(View.GONE);
-        }
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        resetDefaultIcon();
+         resetDefaultIcon();
+
         switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
             case R.id.i_home:
                 item.setIcon(R.drawable.icon_home_selected);
-                break;
+                switchTab(0);
+                fragmentHistory.push(0);
+                return true;
+            case R.id.i_add:
+                switchTab(1);
+                fragmentHistory.push(1);
+                return true;
+            case R.id.i_account:
+                switchTab(2);
+                fragmentHistory.push(2);
+                return true;
         }
-        popBackAllFragment();
+
+        fragmentHistory.push(item.getItemId());
         return true;
     }
 
@@ -146,5 +122,73 @@ public class BottomNavigationActivity extends AbstractActivity
     @Override
     protected void onBackPress() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!mNavController.isRootFragment()) {
+            mNavController.popFragment();
+        } else {
+            if (fragmentHistory.isEmpty()) {
+                super.onBackPressed();
+            } else {
+                if (fragmentHistory.getStackSize() > 1) {
+
+                    int position = fragmentHistory.popPrevious();
+
+                    switchTab(position);
+
+                } else {
+                    switchTab(0);
+
+                    fragmentHistory.emptyStack();
+                }
+            }
+        }
+    }
+
+    @Override
+    public Fragment getRootFragment(int index) {
+        switch (index) {
+            case FragNavController.TAB1:
+                return new VoteFragment();
+            case FragNavController.TAB2:
+                return new AppendVoteFragment();
+            case FragNavController.TAB3:
+                return new AccountFragment();
+        }
+        throw new IllegalStateException("Need to send an index that we know");
+    }
+
+    @Override
+    public void onTabTransaction(Fragment fragment, int index) {
+        if (getSupportActionBar() != null && mNavController != null) {
+            updateToolbar();
+        }
+    }
+
+    @Override
+    public void onFragmentTransaction(Fragment fragment, FragNavController.TransactionType transactionType) {
+        if (getSupportActionBar() != null && mNavController != null) {
+            updateToolbar();
+        }
+    }
+
+    private void updateToolbar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(!mNavController.isRootFragment());
+        getSupportActionBar().setDisplayShowHomeEnabled(!mNavController.isRootFragment());
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+    }
+
+    @Override
+    public void pushFragment(Fragment fragment) {
+        if (mNavController != null) {
+            mNavController.pushFragment(fragment);
+        }
+    }
+
+    private void switchTab(int position) {
+        mNavController.switchTab(position);
+        bottomNavigationViewEx.setSelectedItemId(position);
     }
 }
