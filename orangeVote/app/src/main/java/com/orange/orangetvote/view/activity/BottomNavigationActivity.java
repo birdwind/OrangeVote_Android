@@ -3,25 +3,23 @@ package com.orange.orangetvote.view.activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.utils.LogUtils;
-import com.orange.orangetvote.basic.view.AbstractActivity;
-import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavController;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentHistory;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
+import com.orange.orangetvote.basic.view.AbstractActivity;
+import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.view.fragment.AccountFragment;
 import com.orange.orangetvote.view.fragment.AppendVoteFragment;
 import com.orange.orangetvote.view.fragment.VoteFragment;
-import java.util.ArrayList;
-import java.util.List;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import butterknife.BindArray;
 import butterknife.BindView;
 
 public class BottomNavigationActivity extends AbstractActivity
@@ -35,8 +33,20 @@ public class BottomNavigationActivity extends AbstractActivity
     @BindView(R.id.bottom_navigation)
     BottomNavigationViewEx bottomNavigationViewEx;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.ll_topbar_close)
+    LinearLayout llClose;
+
+    @BindView(R.id.ll_topbar_menu)
+    LinearLayout llMenu;
+
+    @BindView(R.id.ll_topbar_back)
+    LinearLayout llBack;
+
+    @BindView(R.id.tv_topbar_title)
+    TextView tvTitle;
+
+    // @BindView(R.id.toolbar)
+    // Toolbar toolbar;
 
     @BindView(R.id.main_container)
     FrameLayout frameLayout;
@@ -74,13 +84,9 @@ public class BottomNavigationActivity extends AbstractActivity
         initToolbar();
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-         resetDefaultIcon();
+        resetDefaultIcon();
 
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -103,11 +109,6 @@ public class BottomNavigationActivity extends AbstractActivity
 
         fragmentHistory.push(item.getItemId());
         return true;
-    }
-
-    private void resetDefaultIcon() {
-        Menu menu = bottomNavigationViewEx.getMenu();
-        menu.findItem(R.id.i_home).setIcon(R.drawable.icon_home);
     }
 
     @Override
@@ -165,17 +166,56 @@ public class BottomNavigationActivity extends AbstractActivity
         }
     }
 
-    private void updateToolbar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(!mNavController.isRootFragment());
-        getSupportActionBar().setDisplayShowHomeEnabled(!mNavController.isRootFragment());
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-    }
-
     @Override
     public void pushFragment(Fragment fragment) {
         if (mNavController != null) {
             mNavController.pushFragment(fragment);
         }
+    }
+
+    @Override
+    public void updateToolbar(String title, Boolean isShowBack, Boolean isShowClose, Boolean isShowMenu) {
+        tvTitle.setText(title);
+        showBackButton(isShowBack);
+    }
+
+    private void showBackButton(boolean isShow) {
+        if (isShow) {
+            llBack.setVisibility(View.VISIBLE);
+        } else {
+            llBack.setVisibility(View.GONE);
+        }
+    }
+
+    private void showMenuButton(boolean isShow) {
+        if (isShow) {
+            llMenu.setVisibility(View.VISIBLE);
+        } else {
+            llMenu.setVisibility(View.GONE);
+        }
+    }
+
+    private void showCloseButton(boolean isShow) {
+        if (isShow) {
+            llClose.setVisibility(View.VISIBLE);
+        } else {
+            llClose.setVisibility(View.GONE);
+        }
+    }
+
+    private void initToolbar() {
+        // setSupportActionBar(toolbar);
+    }
+
+    private void updateToolbar() {
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(!mNavController.isRootFragment());
+        // getSupportActionBar().setDisplayShowHomeEnabled(!mNavController.isRootFragment());
+        // getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+    }
+
+    private void resetDefaultIcon() {
+        Menu menu = bottomNavigationViewEx.getMenu();
+        menu.findItem(R.id.i_home).setIcon(R.drawable.icon_home);
     }
 
     private void switchTab(int position) {

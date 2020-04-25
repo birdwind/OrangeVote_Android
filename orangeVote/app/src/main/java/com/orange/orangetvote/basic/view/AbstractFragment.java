@@ -15,6 +15,7 @@ import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
+import com.orange.orangetvote.view.activity.LoginActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +23,7 @@ import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class AbstractFragment<P extends BasePresenter> extends Fragment implements BaseView, BaseActivity<P> {
+public abstract class AbstractFragment<P extends BasePresenter> extends Fragment implements BaseView, BaseFragment<P> {
     public Context context;
 
     private String className;
@@ -176,20 +177,11 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
         startActivity(className, bundle);
     }
 
-    /**
-     * activity跳轉至登入（）
-     *
-     */
-    public void startLoginActivityWithFinish() {
-        SharedPreferencesUtils.remove(Config.COOKIES);
-        // startActivity(LoginActivity.class);
-    }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof FragmentNavigationListener){
-            fragmentNavigationListener = (FragmentNavigationListener)context;
+        if (context instanceof FragmentNavigationListener) {
+            fragmentNavigationListener = (FragmentNavigationListener) context;
         }
         LogUtils.e(className, "OnAttach");
     }
@@ -209,6 +201,10 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        if (context instanceof FragmentNavigationListener) {
+            fragmentNavigationListener.updateToolbar(setTitle(), isNeedShowBackOnToolBar(), isNeedShowCloseOnToolBar(),
+                isNeedShowMenuOnToolBar());
+        }
         LogUtils.e(className, "onResume");
     }
 
@@ -238,6 +234,8 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
 
     @Override
     public void onLoginError() {
-        ((AbstractActivity)context).startLoginActivityWithFinish();
+        ((AbstractActivity) context).startLoginActivityWithFinish();
     }
+
+    protected abstract String setTitle();
 }

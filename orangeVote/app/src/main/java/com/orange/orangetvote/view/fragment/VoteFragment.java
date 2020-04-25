@@ -96,7 +96,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
         refreshLayout.finishRefresh();
     }
 
-    private void initLocalTempData(){
+    private void initLocalTempData() {
         optionListMap = new HashMap<>();
         addOptionModelListMap = new HashMap<>();
     }
@@ -210,11 +210,22 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        if(view.getId() == R.id.bt_vote){
+        if (view.getId() == R.id.bt_vote) {
             LogUtils.e("按鍵");
             String voteUuid = view.getTag().toString();
-            VoteRequest voteRequest = new VoteRequest(voteUuid, optionListMap.get(voteUuid), addOptionModelListMap.get(voteUuid));
+            VoteRequest voteRequest =
+                new VoteRequest(voteUuid, optionListMap.get(voteUuid), addOptionModelListMap.get(voteUuid));
             presenter.vote(voteRequest);
         }
+    }
+
+    @Override
+    protected String setTitle() {
+        return getString(R.string.navigation_home);
+    }
+
+    @Override
+    public Boolean isNeedShowBackOnToolBar() {
+        return false;
     }
 }

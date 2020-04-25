@@ -35,4 +35,14 @@ public class AppendVoteFragment extends AbstractFragment {
     public void doSomething() {
 
     }
+
+    @Override
+    protected String setTitle() {
+        return getString(R.string.navigation_add);
+    }
+
+    @Override
+    public Boolean isNeedShowBackOnToolBar() {
+        return false;
+    }
 }

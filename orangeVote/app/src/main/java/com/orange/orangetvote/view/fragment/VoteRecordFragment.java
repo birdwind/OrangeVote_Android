@@ -35,4 +35,9 @@ public class VoteRecordFragment extends AbstractFragment {
     public void doSomething() {
 
     }
+
+    @Override
+    protected String setTitle() {
+        return getString(R.string.account_vote_record);
+    }
 }

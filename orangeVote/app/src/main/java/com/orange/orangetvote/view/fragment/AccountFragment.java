@@ -9,7 +9,7 @@ import butterknife.OnClick;
 public class AccountFragment extends AbstractFragment {
 
     @OnClick(R.id.tv_account_vote_record)
-    void clickVoteRecord(){
+    void clickVoteRecord() {
         fragmentNavigationListener.pushFragment(new VoteRecordFragment());
     }
 
@@ -41,5 +41,15 @@ public class AccountFragment extends AbstractFragment {
     @Override
     public void doSomething() {
 
+    }
+
+    @Override
+    protected String setTitle() {
+        return getString(R.string.navigation_account);
+    }
+
+    @Override
+    public Boolean isNeedShowBackOnToolBar() {
+        return false;
     }
 }
