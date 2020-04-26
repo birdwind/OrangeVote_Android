@@ -44,4 +44,5 @@
     <string name="personal_school">學校</string>
     <string name="personal_major">系所</string>
     <string name="personal_password">密碼</string>
+    <string name="personal_update">更新個人資料</string>
 </resources>

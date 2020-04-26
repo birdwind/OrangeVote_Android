@@ -43,4 +43,5 @@
     <string name="personal_school">School</string>
     <string name="personal_major">Major</string>
     <string name="personal_password">Password</string>
+    <string name="personal_update">Update Info</string>
 </resources>

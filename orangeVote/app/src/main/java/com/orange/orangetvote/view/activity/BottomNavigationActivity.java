@@ -32,7 +32,11 @@ public class BottomNavigationActivity extends AbstractActivity
 
     private FragmentHistory fragmentHistory;
 
-    private FragNavTransactionOptions fragNavTransactionOptions;
+    private FragNavTransactionOptions popFragNavTransactionOptions;
+
+    private FragNavTransactionOptions tabToRightFragNavTransactionOptions;
+
+    private FragNavTransactionOptions tabToLeftFragNavTransactionOptions;
 
     private int currentNavigationPosition;
 
@@ -55,7 +59,7 @@ public class BottomNavigationActivity extends AbstractActivity
     FrameLayout frameLayout;
 
     @OnClick(R.id.ll_topbar_back)
-    void clickBack(){
+    void clickBack() {
         onBackPressed();
     }
 
@@ -75,21 +79,29 @@ public class BottomNavigationActivity extends AbstractActivity
     }
 
     @Override
-    public void initView() {
-    }
+    public void initView() {}
 
     @Override
     public void initData(Bundle savedInstanceState) {
         currentNavigationPosition = 0;
 
-        fragNavTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(R.anim.slide_in_from_right,
-            R.anim.slide_out_to_left, R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
+        FragNavTransactionOptions defaultFragNavTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(R.anim.slide_in_from_right,
+                R.anim.slide_out_to_left, R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
+
+        popFragNavTransactionOptions = FragNavTransactionOptions.newBuilder()
+            .customAnimations(R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
+
+        tabToRightFragNavTransactionOptions = FragNavTransactionOptions.newBuilder()
+            .customAnimations(R.anim.slide_in_from_right, R.anim.slide_out_to_left).build();;
+
+        tabToLeftFragNavTransactionOptions = FragNavTransactionOptions.newBuilder()
+            .customAnimations(R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
 
         fragmentHistory = new FragmentHistory();
 
         mNavController = FragNavController
             .newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_container).transactionListener(this)
-            .rootFragmentListener(this, 3).defaultTransactionOptions(fragNavTransactionOptions).build();
+            .rootFragmentListener(this, 3).defaultTransactionOptions(defaultFragNavTransactionOptions).build();
 
     }
 
@@ -133,7 +145,7 @@ public class BottomNavigationActivity extends AbstractActivity
     @Override
     public void onBackPressed() {
         if (!mNavController.isRootFragment()) {
-            mNavController.popFragment();
+            mNavController.popFragment(popFragNavTransactionOptions);
         } else {
             if (fragmentHistory.isEmpty()) {
                 super.onBackPressed();
@@ -202,6 +214,8 @@ public class BottomNavigationActivity extends AbstractActivity
     public void updateToolbar(String title, Boolean isShowBack, Boolean isShowClose, Boolean isShowMenu) {
         tvTitle.setText(title);
         showBackButton(isShowBack);
+        showCloseButton(isShowClose);
+        showMenuButton(isShowMenu);
     }
 
     private void showBackButton(boolean isShow) {
@@ -234,21 +248,12 @@ public class BottomNavigationActivity extends AbstractActivity
     }
 
     private void switchTab(int position) {
-        FragNavTransactionOptions transactionOptions;
         if (position > currentNavigationPosition) {
-            transactionOptions = FragNavTransactionOptions.newBuilder()
-                .customAnimations(R.anim.slide_in_from_right, R.anim.slide_out_to_left).build();
-            mNavController.switchTab(position, transactionOptions);
+            mNavController.switchTab(position, tabToRightFragNavTransactionOptions);
         } else if (position < currentNavigationPosition) {
-            transactionOptions = FragNavTransactionOptions.newBuilder()
-                .customAnimations(R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
-            mNavController.switchTab(position, transactionOptions);
+            mNavController.switchTab(position, tabToLeftFragNavTransactionOptions);
         }
         currentNavigationPosition = position;
         bottomNavigationViewEx.setSelectedItemId(position);
-    }
-
-    private void switchFragment(int position, Fragment fragment) {
-
     }
 }
