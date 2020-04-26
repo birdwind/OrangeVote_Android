@@ -22,6 +22,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class BottomNavigationActivity extends AbstractActivity
     implements BottomNavigationView.OnNavigationItemSelectedListener, FragmentNavigationListener,
@@ -52,6 +53,11 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @BindView(R.id.main_container)
     FrameLayout frameLayout;
+
+    @OnClick(R.id.ll_topbar_back)
+    void clickBack(){
+        onBackPressed();
+    }
 
     @Override
     public VotePresenter createPresenter() {
