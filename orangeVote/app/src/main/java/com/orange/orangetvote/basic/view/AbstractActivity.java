@@ -203,20 +203,18 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
         startLoginActivityWithFinish();
     }
 
-    public void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-        addFragment(containerViewId, fragment, fragmentTransaction);
+    public void switchFragment(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
+        switchFrag(containerViewId, fragment, fragmentTransaction);
     }
 
-    public void addFragmentWithBack(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+    public void switchFragmentWithBack(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
         String backStateName = fragment.getClass().getSimpleName();
         fragmentTransaction.addToBackStack(backStateName);
-        addFragment(containerViewId, fragment, fragmentTransaction);
+        switchFrag(containerViewId, fragment, fragmentTransaction);
     }
 
-    private void addFragment(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
-        fragmentTransaction.add(containerViewId, fragment);
+    private void switchFrag(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
+        fragmentTransaction.replace(containerViewId, fragment);
         fragmentTransaction.commit();
     }
 

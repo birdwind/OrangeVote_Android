@@ -4,6 +4,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavController;
+import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavTransactionOptions;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentHistory;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
 import com.orange.orangetvote.basic.view.AbstractActivity;
@@ -30,6 +31,10 @@ public class BottomNavigationActivity extends AbstractActivity
 
     private FragmentHistory fragmentHistory;
 
+    private FragNavTransactionOptions fragNavTransactionOptions;
+
+    private int currentNavigationPosition;
+
     @BindView(R.id.bottom_navigation)
     BottomNavigationViewEx bottomNavigationViewEx;
 
@@ -44,9 +49,6 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @BindView(R.id.tv_topbar_title)
     TextView tvTitle;
-
-    // @BindView(R.id.toolbar)
-    // Toolbar toolbar;
 
     @BindView(R.id.main_container)
     FrameLayout frameLayout;
@@ -67,21 +69,27 @@ public class BottomNavigationActivity extends AbstractActivity
     }
 
     @Override
-    public void initView() {}
+    public void initView() {
+    }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        currentNavigationPosition = 0;
+
+        fragNavTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(R.anim.slide_in_from_right,
+            R.anim.slide_out_to_left, R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
 
         fragmentHistory = new FragmentHistory();
 
-        mNavController =
-            FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_container)
-                .transactionListener(this).rootFragmentListener(this, 3).build();
+        mNavController = FragNavController
+            .newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_container).transactionListener(this)
+            .rootFragmentListener(this, 3).defaultTransactionOptions(fragNavTransactionOptions).build();
+
     }
 
     @Override
     public void doSomething() {
-        initToolbar();
+
     }
 
     @Override
@@ -90,7 +98,7 @@ public class BottomNavigationActivity extends AbstractActivity
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                onBackPressed();
+                mNavController.popFragment();
                 return true;
             case R.id.i_home:
                 item.setIcon(R.drawable.icon_home_selected);
@@ -154,15 +162,26 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @Override
     public void onTabTransaction(Fragment fragment, int index) {
+        resetDefaultIcon();
+        Menu menu = bottomNavigationViewEx.getMenu();
+
+        // 依靠tab煥頁
+        switch (index) {
+            case 0:
+                menu.getItem(0).setIcon(R.drawable.icon_home_selected);
+                break;
+            case 1:
+            case 2:
+        }
+
         if (getSupportActionBar() != null && mNavController != null) {
-            updateToolbar();
         }
     }
 
     @Override
     public void onFragmentTransaction(Fragment fragment, FragNavController.TransactionType transactionType) {
+        // fragment煥頁
         if (getSupportActionBar() != null && mNavController != null) {
-            updateToolbar();
         }
     }
 
@@ -203,23 +222,27 @@ public class BottomNavigationActivity extends AbstractActivity
         }
     }
 
-    private void initToolbar() {
-        // setSupportActionBar(toolbar);
-    }
-
-    private void updateToolbar() {
-        // getSupportActionBar().setDisplayHomeAsUpEnabled(!mNavController.isRootFragment());
-        // getSupportActionBar().setDisplayShowHomeEnabled(!mNavController.isRootFragment());
-        // getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
-    }
-
     private void resetDefaultIcon() {
         Menu menu = bottomNavigationViewEx.getMenu();
         menu.findItem(R.id.i_home).setIcon(R.drawable.icon_home);
     }
 
     private void switchTab(int position) {
-        mNavController.switchTab(position);
+        FragNavTransactionOptions transactionOptions;
+        if (position > currentNavigationPosition) {
+            transactionOptions = FragNavTransactionOptions.newBuilder()
+                .customAnimations(R.anim.slide_in_from_right, R.anim.slide_out_to_left).build();
+            mNavController.switchTab(position, transactionOptions);
+        } else if (position < currentNavigationPosition) {
+            transactionOptions = FragNavTransactionOptions.newBuilder()
+                .customAnimations(R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
+            mNavController.switchTab(position, transactionOptions);
+        }
+        currentNavigationPosition = position;
         bottomNavigationViewEx.setSelectedItemId(position);
+    }
+
+    private void switchFragment(int position, Fragment fragment) {
+
     }
 }
