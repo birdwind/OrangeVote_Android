@@ -35,4 +35,12 @@
     <string name="account_vote_record">Vote Record</string>
     <string name="account_authority">Authority Management</string>
     <string name="account_logout">Logout</string>
+
+    <!--個人資料-->
+    <string name="personal_orangeId">Orange ID</string>
+    <string name="personal_name">Name</string>
+    <string name="personal_nickname">Nickname</string>
+    <string name="personal_school">School</string>
+    <string name="personal_major">Major</string>
+    <string name="personal_password">Password</string>
 </resources>

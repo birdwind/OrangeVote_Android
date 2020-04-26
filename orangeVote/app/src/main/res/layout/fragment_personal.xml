@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/personal_orangeId"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal" />
+
+        <TextView
+            android:id="@+id/tv_personal_orangeid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_textview_radius_theme"
+            android:enabled="false"
+            android:padding="@dimen/padding_default"
+            android:text="20200426001"
+            android:textSize="@dimen/textsize_normal" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/personal_name"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal" />
+
+        <TextView
+            android:id="@+id/tv_personal_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_textview_radius_theme"
+            android:enabled="false"
+            android:padding="@dimen/padding_default"
+            android:text="小椪柑志工服務隊"
+            android:textSize="@dimen/textsize_normal" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/personal_nickname"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal" />
+
+        <EditText
+            android:id="@+id/et_personal_nickname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_textview_radius_theme"
+            android:padding="@dimen/padding_default"
+            android:text="小椪柑"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_normal" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/personal_school"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal" />
+
+        <EditText
+            android:id="@+id/et_personal_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_textview_radius_theme"
+            android:padding="@dimen/padding_default"
+            android:text="小椪柑"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_normal" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/personal_major"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal" />
+
+        <EditText
+            android:id="@+id/et_personal_major"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_textview_radius_theme"
+            android:padding="@dimen/padding_default"
+            android:text="小椪柑"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/textsize_normal" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_marginStart="@dimen/margin_normal"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_width="match_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:text="@string/personal_password"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_normal" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <EditText
+                android:id="@+id/et_personal_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/style_textview_radius_theme"
+                android:padding="@dimen/padding_default"
+                android:text="12345678"
+                android:inputType="textPassword"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textsize_normal" />
+
+            <ImageView
+                android:id="@+id/iv_personal_show_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+    </TableRow>
+
+</TableLayout>

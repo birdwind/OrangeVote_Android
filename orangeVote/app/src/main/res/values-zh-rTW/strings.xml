@@ -36,4 +36,12 @@
     <string name="account_vote_record">投票紀錄</string>
     <string name="account_authority">權限管理</string>
     <string name="account_logout">登出</string>
+
+    <!--個人資料-->
+    <string name="personal_orangeId">椪柑證號</string>
+    <string name="personal_name">姓名</string>
+    <string name="personal_nickname">綽號</string>
+    <string name="personal_school">學校</string>
+    <string name="personal_major">系所</string>
+    <string name="personal_password">密碼</string>
 </resources>

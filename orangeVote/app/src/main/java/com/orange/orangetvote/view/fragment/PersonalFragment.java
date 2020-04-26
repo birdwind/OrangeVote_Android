@@ -4,20 +4,8 @@ import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import android.os.Bundle;
-import butterknife.OnClick;
 
-public class AccountFragment extends AbstractFragment {
-
-    @OnClick(R.id.tv_account_personal)
-    void clickPersonal(){
-        fragmentNavigationListener.pushFragment(new PersonalFragment());
-    }
-
-    @OnClick(R.id.tv_account_vote_record)
-    void clickVoteRecord() {
-        fragmentNavigationListener.pushFragment(new VoteRecordFragment());
-    }
-
+public class PersonalFragment extends AbstractFragment {
     @Override
     public BasePresenter createPresenter() {
         return null;
@@ -25,7 +13,7 @@ public class AccountFragment extends AbstractFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_account;
+        return R.layout.fragment_personal;
     }
 
     @Override
@@ -50,11 +38,6 @@ public class AccountFragment extends AbstractFragment {
 
     @Override
     protected String setTitle() {
-        return getString(R.string.navigation_account);
-    }
-
-    @Override
-    public Boolean isNeedShowBackOnToolBar() {
-        return false;
+        return getString(R.string.account_personal);
     }
 }
