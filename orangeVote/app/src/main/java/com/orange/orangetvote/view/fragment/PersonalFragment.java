@@ -14,14 +14,14 @@ import butterknife.BindView;
 
 public class PersonalFragment extends AbstractFragment<PersonalPresenter> implements PersonalView {
 
-    @BindView(R.id.tv_personal_orangeid)
-    TextView tvOrangeId;
+    @BindView(R.id.et_personal_orangeid)
+    EditText etOrangeId;
 
-    @BindView(R.id.tv_personal_username)
-    TextView tvUsername;
+    @BindView(R.id.et_personal_username)
+    EditText etUsername;
 
-    @BindView(R.id.tv_personal_name)
-    TextView tvName;
+    @BindView(R.id.et_personal_name)
+    EditText etName;
 
     @BindView(R.id.et_personal_nickname)
     EditText etNickname;
@@ -70,9 +70,9 @@ public class PersonalFragment extends AbstractFragment<PersonalPresenter> implem
     @Override
     public void loadPersonalSuccess(List<PersonalResponse> personalResponseList) {
         PersonalResponse personalResponse = personalResponseList.get(0);
-        tvOrangeId.setText(personalResponse.getOrangeId());
-        tvName.setText(personalResponse.getName());
-        tvUsername.setText(personalResponse.getUsername());
+        etOrangeId.setText(personalResponse.getOrangeId());
+        etName.setText(personalResponse.getName());
+        etUsername.setText(personalResponse.getUsername());
         etNickname.setText(personalResponse.getNickname());
         etMajor.setText(personalResponse.getMajor());
         etSchool.setText(personalResponse.getSchool());

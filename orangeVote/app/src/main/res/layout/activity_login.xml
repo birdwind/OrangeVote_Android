@@ -18,23 +18,21 @@
             <EditText
                 android:id="@+id/et_username"
                 android:hint="@string/username"
-                style="@style/ThemeEditText"/>
+                style="@style/ThemeEditText"
+                android:layout_marginBottom="@dimen/margin_small"/>
 
             <EditText
                 android:id="@+id/et_password"
                 android:inputType="textPassword"
                 android:hint="@string/password"
-                style="@style/ThemeEditText"/>
+                style="@style/ThemeEditText"
+                android:layout_marginBottom="@dimen/margin_small"/>
 
             <Button
                 android:id="@+id/bt_login"
-                android:layout_width="114dp"
-                android:layout_height="40dp"
+                style="@style/ThemeButton"
                 android:text="@string/login"
-                android:textColor="@color/colorWhite"
-                android:background="@drawable/style_button_radius_theme"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="17dp"/>
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 

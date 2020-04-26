@@ -5,41 +5,36 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="margin_large">24dp</dimen>
-    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
     <dimen name="margin_small">7dp</dimen>
     <dimen name="margin_2dp">2dp</dimen>
 
     <dimen name="padding_large">22dp</dimen>
-    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
     <dimen name="padding_small">10dp</dimen>
     <dimen name="padding_2dp">2dp</dimen>
-    <dimen name="padding_default">6dp</dimen>
 
-    <dimen name="textsize_large">24sp</dimen>
-    <dimen name="textsize_normal">20sp</dimen>
-    <dimen name="textsize_small">13sp</dimen>
+    <dimen name="textsize_max">24sp</dimen>
+    <dimen name="textsize_large">20sp</dimen>
+    <dimen name="textsize_default">13sp</dimen>
     <dimen name="textsize_min">12sp</dimen>
 
     <dimen name="component_default_size">35dp</dimen>
-    <dimen name="component_down_arrow_size">20dp</dimen>
 
-    <dimen name="buttonheight_normal">30dp</dimen>
+    <dimen name="bottom_height_normal">30dp</dimen>
 
     <!--bottomNavigation-->
     <dimen name="bottom_height">75dp</dimen>
 
     <!--tools bar-->
-    <dimen name="tools_height">54dp</dimen>
-    <dimen name="tools_icon">20dp</dimen>
+<!--    <dimen name="toolbar_height"></dimen>-->
+    <dimen name="toolbar_icon">20dp</dimen>
 
-    <!--commodity-->
-    <dimen name="commodity_top">30sp</dimen>
-    <dimen name="commodity_cart">24dp</dimen>
-    <dimen name="commodity_img">99dp</dimen>
+    <!--theme setting-->
+    <dimen name="theme_button_height">25dp</dimen>
+    <dimen name="theme_button_padding">40dp</dimen>
+    <dimen name="theme_spinner_down_arrow_size">20dp</dimen>
+    <dimen name="theme_text_view_height">30dp</dimen>
+    <dimen name="theme_text_view_padding">15dp</dimen>
 
-    <!--menu-->
-    <dimen name="menu_text_hight">33dp</dimen>
-
-    <!--search-->
-    <dimen name="search_icon">14dp</dimen>
 </resources>

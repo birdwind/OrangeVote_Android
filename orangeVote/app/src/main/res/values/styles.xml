@@ -12,9 +12,29 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/component_default_size</item>
         <item name="android:background">@drawable/style_edittext_raduis_theme</item>
-        <item name="android:layout_marginBottom">@dimen/margin_small</item>
-        <item name="android:padding">@dimen/padding_default</item>
+        <item name="android:paddingStart">@dimen/padding_default</item>
+        <item name="android:paddingEnd">@dimen/padding_default</item>
         <item name="android:inputType">text</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="ThemeButton" parent="TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/theme_button_height</item>
+        <item name="android:background">@drawable/style_button_radius_theme</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="paddingStart">@dimen/theme_button_padding</item>
+        <item name="paddingEnd">@dimen/theme_button_padding</item>
+    </style>
+
+
+    <style name="ThemeTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/theme_text_view_height</item>
+        <item name="android:background">@drawable/style_button_radius_theme</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="UnderLine">

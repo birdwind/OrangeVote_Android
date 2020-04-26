@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_normal">
+    android:layout_margin="@dimen/margin_default">
 
     <TableLayout
         android:layout_width="match_parent"
@@ -11,9 +11,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_small"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -22,25 +23,22 @@
                 android:layout_weight="0"
                 android:text="@string/personal_orangeId"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/textsize_normal" />
+                android:textSize="@dimen/textsize_default" />
 
-            <TextView
-                android:id="@+id/tv_personal_orangeid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/et_personal_orangeid"
+                style="@style/ThemeEditText"
                 android:layout_weight="1"
-                android:background="@drawable/style_textview_radius_theme"
-                android:enabled="false"
-                android:padding="@dimen/padding_default"
-                android:textSize="@dimen/textsize_normal" />
+                android:enabled="false"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_small"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,25 +47,22 @@
                 android:layout_weight="0"
                 android:text="@string/username"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/textsize_normal" />
+                android:textSize="@dimen/textsize_default" />
 
-            <TextView
-                android:id="@+id/tv_personal_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/et_personal_username"
+                style="@style/ThemeEditText"
                 android:layout_weight="1"
-                android:background="@drawable/style_textview_radius_theme"
-                android:enabled="false"
-                android:padding="@dimen/padding_default"
-                android:textSize="@dimen/textsize_normal" />
+                android:enabled="false"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_small"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -76,25 +71,22 @@
                 android:layout_weight="0"
                 android:text="@string/personal_name"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/textsize_normal" />
+                android:textSize="@dimen/textsize_default" />
 
-            <TextView
-                android:id="@+id/tv_personal_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/et_personal_name"
+                style="@style/ThemeEditText"
                 android:layout_weight="1"
-                android:background="@drawable/style_textview_radius_theme"
-                android:enabled="false"
-                android:padding="@dimen/padding_default"
-                android:textSize="@dimen/textsize_normal" />
+                android:enabled="false"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_small"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,24 +95,21 @@
                 android:layout_weight="0"
                 android:text="@string/personal_nickname"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/textsize_normal" />
+                android:textSize="@dimen/textsize_default" />
 
             <EditText
                 android:id="@+id/et_personal_nickname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/style_edittext_raduis_theme"
-                android:padding="@dimen/padding_default"
-                android:textSize="@dimen/textsize_normal" />
+                style="@style/ThemeEditText"
+                android:layout_weight="1"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_small"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -129,24 +118,21 @@
                 android:layout_weight="0"
                 android:text="@string/personal_school"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/textsize_normal" />
+                android:textSize="@dimen/textsize_default" />
 
             <EditText
                 android:id="@+id/et_personal_school"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/style_edittext_raduis_theme"
-                android:padding="@dimen/padding_default"
-                android:textSize="@dimen/textsize_normal" />
+                style="@style/ThemeEditText"
+                android:layout_weight="1"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginBottom="@dimen/margin_small"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -155,30 +141,24 @@
                 android:layout_weight="0"
                 android:text="@string/personal_major"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/textsize_normal" />
+                android:textSize="@dimen/textsize_default" />
 
             <EditText
                 android:id="@+id/et_personal_major"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/style_edittext_raduis_theme"
-                android:padding="@dimen/padding_default"
-                android:textSize="@dimen/textsize_normal" />
+                style="@style/ThemeEditText"
+                android:layout_weight="1"/>
 
         </TableRow>
     </TableLayout>
 
     <Button
         android:id="@+id/bt_personal_update"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/component_default_size"
-        android:text="@string/personal_update"
-        android:textColor="@color/colorWhite"
-        android:background="@drawable/style_button_radius_theme"
-        android:padding="@dimen/padding_default"
+        style="@style/ThemeButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:text="@string/personal_update"
+        android:paddingStart="@dimen/theme_button_padding"
+        android:paddingEnd="@dimen/theme_button_padding"/>
 
 
 </RelativeLayout>

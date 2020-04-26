@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_enabled="true" >
+    <item android:state_enabled="true"
+        android:state_pressed="false"
+        android:state_focused="false">
         <shape>
             <solid android:color="@color/colorTheme"/>
 
@@ -28,4 +30,21 @@
                 android:topLeftRadius="16dip" android:topRightRadius="16dip"/>
         </shape>
     </item>
+
+    <item android:state_enabled="true"
+        android:state_pressed="true"
+        android:state_focused="true">
+        <shape>
+            <solid android:color="@color/colorPink"/>
+
+            <padding android:left="1dp"
+                android:top="1dp"
+                android:right="1dp"
+                android:bottom="1dp" />
+
+            <corners android:bottomRightRadius="16dip" android:bottomLeftRadius="16dip"
+                android:topLeftRadius="16dip" android:topRightRadius="16dip"/>
+        </shape>
+    </item>
+
 </selector>

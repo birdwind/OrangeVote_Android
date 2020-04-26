@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_small"
+        android:padding="@dimen/padding_default"
         android:orientation="vertical"
         android:background="@color/colorThemeGrey">
 
@@ -19,7 +19,7 @@
             android:layout_toStartOf="@id/tv_vote_team"
             android:text="隊長選舉"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/textsize_normal" />
+            android:textSize="@dimen/textsize_large" />
 
         <TextView
             android:id="@+id/tv_vote_team"
@@ -28,7 +28,7 @@
             android:layout_alignParentEnd="true"
             android:text="全部"
             android:textColor="@color/colorTheme"
-            android:textSize="@dimen/textsize_small" />
+            android:textSize="@dimen/textsize_default" />
 
 
         <TextView
@@ -36,10 +36,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_vote_title"
-            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_marginLeft="@dimen/margin_default"
             android:text="這是對長選舉"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/textsize_small" />
+            android:textSize="@dimen/textsize_min" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_vote_option"
@@ -56,16 +56,16 @@
             <LinearLayout
                 android:id="@+id/ll_vote_multiply"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/theme_text_view_height"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:background="@drawable/style_button_radius_theme"
                 android:orientation="horizontal"
-                android:paddingStart="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_default"
-                android:paddingEnd="@dimen/padding_small"
-                android:paddingBottom="@dimen/padding_default">
+                android:paddingStart="@dimen/theme_text_view_padding"
+                android:paddingEnd="@dimen/theme_text_view_padding"
+                android:gravity="center">
 
                 <TextView
+                    style="@style/ThemeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/vote_multiply"
@@ -83,17 +83,13 @@
 
             <TextView
                 android:id="@+id/tv_vote_sign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/style_button_radius_theme"
-                android:paddingStart="@dimen/padding_small"
-                android:paddingTop="@dimen/padding_default"
-                android:paddingEnd="@dimen/padding_small"
-                android:paddingBottom="@dimen/padding_default"
+                style="@style/ThemeTextView"
                 android:text="@string/vote_sign"
-                android:textColor="@color/colorWhite" />
+                android:paddingStart="@dimen/theme_text_view_padding"
+                android:paddingEnd="@dimen/theme_text_view_padding"/>
 
         </LinearLayout>
+
 
     </RelativeLayout>
 

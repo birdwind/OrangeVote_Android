@@ -3,22 +3,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_normal"
+    android:layout_margin="@dimen/margin_default"
     android:orientation="vertical">
 
     <EditText
         android:id="@+id/et_append_vote_title"
         android:hint="@string/append_vote_title"
-        style="@style/ThemeEditText"/>
+        style="@style/ThemeEditText"
+        android:layout_marginBottom="@dimen/margin_small"/>
 
     <EditText
         android:id="@+id/et_append_vote_content"
-        android:layout_height="wrap_content"
         android:hint="@string/append_vote_description"
         android:inputType="textMultiLine"
         android:lines="5"
         android:gravity="top|left"
-        style="@style/ThemeEditText"/>
+        style="@style/ThemeEditText"
+        android:layout_marginBottom="@dimen/margin_small"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,12 +34,12 @@
             android:layout_marginBottom="@dimen/margin_small"/>
 
         <ImageView
-            android:layout_width="@dimen/component_down_arrow_size"
-            android:layout_height="@dimen/component_down_arrow_size"
+            android:layout_width="@dimen/theme_spinner_down_arrow_size"
+            android:layout_height="@dimen/theme_spinner_down_arrow_size"
             android:src="@drawable/icon_down_arrow"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/margin_normal"/>
+            android:layout_marginEnd="@dimen/margin_default"/>
 
     </RelativeLayout>
 
@@ -56,12 +57,12 @@
             android:padding="@dimen/padding_default"/>
 
         <ImageView
-            android:layout_width="@dimen/component_down_arrow_size"
-            android:layout_height="@dimen/component_down_arrow_size"
+            android:layout_width="@dimen/theme_spinner_down_arrow_size"
+            android:layout_height="@dimen/theme_spinner_down_arrow_size"
             android:src="@drawable/icon_down_arrow"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/margin_normal"/>
+            android:layout_marginEnd="@dimen/margin_default"/>
 
     </RelativeLayout>
 
@@ -77,7 +78,7 @@
         android:layout_height="wrap_content"
         android:text="@string/append_vote_add_option"
         android:textColor="@color/colorTheme"
-        android:textSize="@dimen/textsize_small"
+        android:textSize="@dimen/textsize_default"
         android:paddingTop="@dimen/padding_default"
         android:paddingBottom="@dimen/padding_default"/>
 
@@ -86,41 +87,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/append_vote_is_allow_add"
-        android:textSize="@dimen/textsize_small"/>
+        android:textSize="@dimen/textsize_default"/>
 
     <CheckBox
         android:id="@+id/cb_append_vote_open_voting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/append_vote_open_voting"
-        android:textSize="@dimen/textsize_small"/>
+        android:textSize="@dimen/textsize_default"/>
 
     <CheckBox
         android:id="@+id/cb_append_vote_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/append_vote_sign"
-        android:textSize="@dimen/textsize_small"/>
+        android:textSize="@dimen/textsize_default"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
         <CheckBox
             android:id="@+id/cb_append_vote_multiply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/append_vote_multiply"
-            android:textSize="@dimen/textsize_small"
+            android:textSize="@dimen/textsize_default"
             android:layout_marginRight="@dimen/margin_small"/>
 
         <EditText
             android:id="@+id/et_append_vote_multiply"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
             android:text="1"
-            style="@style/ThemeEditText"/>
+            style="@style/ThemeEditText"
+            android:layout_width="50dp"/>
 
     </LinearLayout>
 

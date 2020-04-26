@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/component_top_bar"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_default">
+
+        <EditText
+            style="@style/ThemeEditText"
+            android:text="EditText"/>
+
+        <EditText
+            style="@style/ThemeEditText"
+            android:text="EditText"
+            android:enabled="false"/>
+
+        <Button
+            style="@style/ThemeButton"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:text="按鈕"/>
+
+        <TextView
+            style="@style/ThemeTextView"
+            android:text="文字"
+            android:paddingStart="@dimen/theme_text_view_padding"
+            android:paddingEnd="@dimen/theme_text_view_padding"
+            android:layout_marginBottom="@dimen/margin_default"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Spinner
+                android:id="@+id/spinner_append_vote_team"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/style_textview_radius_theme"
+                android:padding="@dimen/padding_default"
+                android:layout_marginBottom="@dimen/margin_small"/>
+
+            <ImageView
+                android:layout_width="@dimen/theme_spinner_down_arrow_size"
+                android:layout_height="@dimen/theme_spinner_down_arrow_size"
+                android:src="@drawable/icon_down_arrow"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_default"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
