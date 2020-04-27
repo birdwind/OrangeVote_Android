@@ -9,21 +9,21 @@ import lombok.Setter;
 @Setter
 public abstract class AbstractResponse<R extends BaseResponse> implements BaseResponse {
 
-    private boolean status;
-
-    private int errorCode;
-
-    private String errorMsg;
-
-    private int httpStatus;
-
-    private String requestUrl;
-
-    private String method;
-
-    private String resourceName;
-
-    private String timeStamp;
+//    private boolean status;
+//
+//    private int errorCode;
+//
+//    private String errorMsg;
+//
+//    private int httpStatus;
+//
+//    private String requestUrl;
+//
+//    private String method;
+//
+//    private String resourceName;
+//
+//    private String timeStamp;
 
     private List<R> response;
 

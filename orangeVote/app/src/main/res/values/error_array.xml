@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--個人資料-->
+    <string-array name="error_personal">
+        <item>@string/error_personal_0</item>
+        <item>@string/error_personal_1</item>
+        <item>@string/error_personal_2</item>
+        <item>@string/error_personal_3</item>
+        <item>@string/error_personal_4</item>
+    </string-array>
+</resources>

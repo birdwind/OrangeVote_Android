@@ -54,7 +54,6 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
 
     @Override
     public void onLoginSucc() {
-        showToast("登入成功");
         startActivity(BottomNavigationActivity.class);
     }
 

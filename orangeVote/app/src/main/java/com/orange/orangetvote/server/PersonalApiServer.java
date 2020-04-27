@@ -4,7 +4,7 @@ import com.orange.orangetvote.basic.enums.BaseEnums;
 import java.io.Serializable;
 
 public enum PersonalApiServer implements BaseEnums {
-    PERSONAL_INFO("");
+    PERSONAL_INFO(""), PERSONAL_UPDATE("");
 
     private String url;
 

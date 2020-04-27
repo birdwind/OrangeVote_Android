@@ -7,4 +7,6 @@ import java.util.List;
 public interface PersonalView extends BaseView {
 
     void loadPersonalSuccess(List<PersonalResponse> personalResponseList);
+
+    void updatePersonalSuccess(List<PersonalResponse> personalResponseList);
 }

@@ -44,4 +44,5 @@
     <string name="personal_major">Major</string>
     <string name="personal_password">Password</string>
     <string name="personal_update">Update Info</string>
+    <string name="personal_update_success">Update Success</string>
 </resources>

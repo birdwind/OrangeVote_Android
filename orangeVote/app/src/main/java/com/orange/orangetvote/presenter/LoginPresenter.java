@@ -9,8 +9,6 @@ import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.response.login.LoginServerResponse;
 import com.orange.orangetvote.server.AuthApiServer;
 import com.orange.orangetvote.view.callback.LoginView;
-import java.io.IOException;
-import okhttp3.ResponseBody;
 
 public class LoginPresenter extends BasePresenter<LoginView> {
 
@@ -30,21 +28,21 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         addDisposable(apiServer.executePostFormUrlEncode(AuthApiServer.Login.valueOfName(), paramsMap, headerMap),
             new BaseObserver(baseView) {
                 @Override
-                public void onSuccess(ResponseBody responseBody) throws IOException {
+                protected void onSuccess(String responseJson) {
                     LoginServerResponse loginServerResponse =
-                        GsonUtils.parseJsonToBean(responseBody.string(), LoginServerResponse.class);
-                    if (loginServerResponse.getErrorCode() == 0) {
-                        SharedPreferencesUtils.put(Config.COOKIES,
-                            RetrofitManager.getInstance().getCookies().toString());
-                        baseView.onLoginSucc();
-                    } else {
-                        onError("帳號或密碼錯誤");
-                    }
+                        GsonUtils.parseJsonToBean(responseJson, LoginServerResponse.class);
+                    SharedPreferencesUtils.put(Config.COOKIES, RetrofitManager.getInstance().getCookies().toString());
+                    baseView.onLoginSucc();
                 }
 
                 @Override
-                public void onError(String msg) {
+                protected void onError(String msg) {
                     baseView.showError(msg);
+
+                }
+
+                @Override
+                protected void onFieldsError(String responseJson) {
 
                 }
             });

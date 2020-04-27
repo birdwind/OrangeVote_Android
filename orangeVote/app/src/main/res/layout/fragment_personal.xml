@@ -52,8 +52,7 @@
             <EditText
                 android:id="@+id/et_personal_username"
                 style="@style/ThemeEditText"
-                android:layout_weight="1"
-                android:enabled="false"/>
+                android:layout_weight="1"/>
 
         </TableRow>
 

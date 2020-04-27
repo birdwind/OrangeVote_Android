@@ -17,14 +17,20 @@ public class AppendVotePresenter extends BasePresenter<AppendVoteView> {
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
             new BaseObserver(baseView) {
                 @Override
-                public void onSuccess(ResponseBody responseBody) throws IOException {
+                protected void onSuccess(String responseJson){
 
                 }
 
                 @Override
-                public void onError(String msg) {
+                protected void onError(String msg) {
 
                 }
+
+                @Override
+                protected void onFieldsError(String responseJson) {
+
+                }
+
             });
     }
 }

@@ -1,19 +1,20 @@
 package com.orange.orangetvote.view.fragment;
 
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.presenter.PersonalPresenter;
+import com.orange.orangetvote.request.PersonalRequest;
 import com.orange.orangetvote.response.personal.PersonalResponse;
 import com.orange.orangetvote.view.callback.PersonalView;
 import java.util.List;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.TextView;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class PersonalFragment extends AbstractFragment<PersonalPresenter> implements PersonalView {
 
+    private static String memberUuid;
     @BindView(R.id.et_personal_orangeid)
     EditText etOrangeId;
 
@@ -31,6 +32,14 @@ public class PersonalFragment extends AbstractFragment<PersonalPresenter> implem
 
     @BindView(R.id.et_personal_major)
     EditText etMajor;
+
+    @OnClick(R.id.bt_personal_update)
+    void clickUpdate() {
+
+        PersonalRequest personalRequest = new PersonalRequest(memberUuid, etUsername.getText().toString(),
+            etNickname.getText().toString(), etSchool.getText().toString(), etMajor.getText().toString());
+        presenter.updatePersonalInfo(personalRequest);
+    }
 
     @Override
     public PersonalPresenter createPresenter() {
@@ -76,5 +85,19 @@ public class PersonalFragment extends AbstractFragment<PersonalPresenter> implem
         etNickname.setText(personalResponse.getNickname());
         etMajor.setText(personalResponse.getMajor());
         etSchool.setText(personalResponse.getSchool());
+        memberUuid = personalResponse.getMemberUuid();
+    }
+
+    @Override
+    public void updatePersonalSuccess(List<PersonalResponse> personalResponseList) {
+        showToast(getString(R.string.personal_update_success));
+        PersonalResponse personalResponse = personalResponseList.get(0);
+        etOrangeId.setText(personalResponse.getOrangeId());
+        etName.setText(personalResponse.getName());
+        etUsername.setText(personalResponse.getUsername());
+        etNickname.setText(personalResponse.getNickname());
+        etMajor.setText(personalResponse.getMajor());
+        etSchool.setText(personalResponse.getSchool());
+        memberUuid = personalResponse.getMemberUuid();
     }
 }

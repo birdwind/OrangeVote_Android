@@ -1,14 +1,20 @@
 package com.orange.orangetvote.basic.base;
 
+import com.orange.orangetvote.MainApplication;
+import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.utils.GsonUtils;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.rxHelper.RxException;
-
 import java.io.IOException;
+import android.content.Context;
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
 
 public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     protected BaseView view;
+
+    protected Context context = MainApplication.getAppContext();
 
     public BaseObserver(BaseView view) {
         this.view = view;
@@ -24,7 +30,40 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     @Override
     public void onNext(T o) {
         try {
-            onSuccess((ResponseBody) o);
+            String responseJson = ((ResponseBody) o).string();
+            ServerResponse serverResponse = GsonUtils.parseJsonToBean(responseJson, ServerResponse.class);
+            switch (serverResponse.getErrorCode()) {
+                case 0:
+                    // 成功
+                    onSuccess(responseJson);
+                    break;
+                case 1:
+                    onError(context.getString(R.string.error_server_permission));
+                    // 沒有權限
+                    break;
+                case 2:
+                    view.onLoginError();
+                    // 尚未登入
+                    break;
+                case 6:
+                    onFieldsError(responseJson);
+                    // 送出資料不正確
+                    break;
+                case 8:
+                    onError(context.getString(R.string.error_server_login));
+                    // 登入失敗
+                    break;
+                case 9:
+                    // 登入紀錄過期
+                    view.onLoginError();
+                    break;
+                default:
+                    // 3.沒找到資源 4.API找不到 5.伺服器錯誤 7.伺服器錯誤 10.少傳欄位
+                    onError(context.getString(R.string.error_server_backend));
+                    LogUtils.e("伺服器錯誤 : " + String.valueOf(serverResponse.getErrorCode()));
+                    break;
+
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,10 +72,10 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        if(view != null){
+        if (view != null) {
             view.hideLoading();
         }
-        if(e != null){
+        if (e != null) {
             onError(RxException.handleException(e).getMessage());
         } else {
             onError("未知錯誤");
@@ -45,12 +84,14 @@ public abstract class BaseObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onComplete() {
-        if(view != null){
+        if (view != null) {
             view.hideLoading();
         }
     }
 
-    public abstract void onSuccess(ResponseBody responseBody) throws IOException;
+    protected abstract void onSuccess(String responseJson);
 
-    public abstract void onError(String msg);
+    protected abstract void onError(String msg);
+
+    protected abstract void onFieldsError(String responseJson);
 }

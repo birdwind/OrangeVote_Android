@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--系統錯誤-->
+    <string name="error_server_permission">You don\'t have permission.\nPlease contact admin.</string>
+    <string name="error_server_backend">Server error. \nPlease try again later.</string>
+    <string name="error_server_login">Incorrect Username or Password.</string>
+
+    <!--個人資料-->
+    <string name="error_personal_0">Member NotFound</string>
+    <string name="error_personal_1">Member Suspended</string>
+    <string name="error_personal_2">Password Invalid</string>
+    <string name="error_personal_3">OrangeID Duplicate</string>
+    <string name="error_personal_4">Username Duplicate</string>
+
+</resources>
