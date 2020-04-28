@@ -54,7 +54,7 @@ public class LoginActivity extends AbstractActivity<LoginPresenter> implements L
 
     @Override
     public void onLoginSucc() {
-        startActivity(BottomNavigationActivity.class);
+        startActivityWithFinish(BottomNavigationActivity.class);
     }
 
     @Override

@@ -10,4 +10,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorPink">#e5979b</color>
+    <color name="colorGrey_text">#9B9B9B</color>
 </resources>

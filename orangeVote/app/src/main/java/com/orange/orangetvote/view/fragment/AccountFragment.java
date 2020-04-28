@@ -3,19 +3,28 @@ package com.orange.orangetvote.view.fragment;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.BasePresenter;
 import com.orange.orangetvote.basic.view.AbstractFragment;
+import com.orange.orangetvote.view.dialog.LogoutDialog;
+import com.orange.orangetvote.view.dialog.LogoutDialogListener;
 import android.os.Bundle;
 import butterknife.OnClick;
 
-public class AccountFragment extends AbstractFragment {
+public class AccountFragment extends AbstractFragment implements LogoutDialogListener {
+
+    private LogoutDialog logoutDialog;
 
     @OnClick(R.id.tv_account_personal)
-    void clickPersonal(){
+    void clickPersonal() {
         fragmentNavigationListener.pushFragment(new PersonalFragment());
     }
 
     @OnClick(R.id.tv_account_vote_record)
     void clickVoteRecord() {
         fragmentNavigationListener.pushFragment(new VoteRecordFragment());
+    }
+
+    @OnClick(R.id.tv_account_logout)
+    void clickLogout() {
+        logoutDialog.show();
     }
 
     @Override
@@ -35,7 +44,8 @@ public class AccountFragment extends AbstractFragment {
 
     @Override
     public void initView() {
-
+        logoutDialog =
+            new LogoutDialog(context, this, getString(R.string.logout_title), getString(R.string.logout_content));
     }
 
     @Override
@@ -56,5 +66,10 @@ public class AccountFragment extends AbstractFragment {
     @Override
     public Boolean isNeedShowBackOnToolBar() {
         return false;
+    }
+
+    @Override
+    public void confirmLogout() {
+        logout();
     }
 }

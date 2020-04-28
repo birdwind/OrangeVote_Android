@@ -7,6 +7,7 @@ import com.orange.orangetvote.basic.base.BaseView;
 import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
+import com.orange.orangetvote.basic.utils.ToastUtils;
 import com.orange.orangetvote.view.activity.LoginActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,7 +17,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -76,7 +76,7 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
      * @param s
      */
     public void showToast(String s) {
-        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+        ToastUtils.show(s);
     }
 
     public void showFileDialog() {
@@ -192,7 +192,7 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
      * activity跳轉至登入（）
      *
      */
-    public void startLoginActivityWithFinish() {
+    public void logout() {
         SharedPreferencesUtils.remove(Config.COOKIES);
         startActivity(LoginActivity.class);
         finish();
@@ -200,14 +200,15 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
 
     @Override
     public void onLoginError() {
-        startLoginActivityWithFinish();
+        logout();
     }
 
     public void switchFragment(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
         switchFrag(containerViewId, fragment, fragmentTransaction);
     }
 
-    public void switchFragmentWithBack(int containerViewId, Fragment fragment, FragmentTransaction fragmentTransaction) {
+    public void switchFragmentWithBack(int containerViewId, Fragment fragment,
+        FragmentTransaction fragmentTransaction) {
         String backStateName = fragment.getClass().getSimpleName();
         fragmentTransaction.addToBackStack(backStateName);
         switchFrag(containerViewId, fragment, fragmentTransaction);

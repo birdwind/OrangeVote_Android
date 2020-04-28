@@ -1,5 +1,10 @@
 package com.orange.orangetvote.basic.view;
 
+import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.BaseView;
+import com.orange.orangetvote.basic.utils.LogUtils;
+import com.orange.orangetvote.basic.utils.ToastUtils;
+import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,16 +12,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.orange.orangetvote.basic.base.BasePresenter;
-import com.orange.orangetvote.basic.base.BaseView;
-import com.orange.orangetvote.basic.config.Config;
-import com.orange.orangetvote.basic.utils.LogUtils;
-import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
-import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentNavigationListener;
-import com.orange.orangetvote.view.activity.LoginActivity;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -66,7 +61,8 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
     }
 
     public void showToast(String s) {
-        Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+        // Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+        ToastUtils.show(s);
     }
 
     public void showFileDialog() {
@@ -234,8 +230,12 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
 
     @Override
     public void onLoginError() {
-        ((AbstractActivity) context).startLoginActivityWithFinish();
+        logout();
     }
 
     protected abstract String setTitle();
+
+    protected void logout(){
+        ((AbstractActivity) context).logout();
+    }
 }

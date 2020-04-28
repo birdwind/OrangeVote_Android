@@ -3,6 +3,9 @@
     <string name="username">username</string>
     <string name="password">password</string>
 
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+
     <!--登入-->
     <string name="login">login</string>
 
@@ -45,4 +48,8 @@
     <string name="personal_password">Password</string>
     <string name="personal_update">Update Info</string>
     <string name="personal_update_success">Update Success</string>
+
+    <!--登出Dialog-->
+    <string name="logout_title">Logout</string>
+    <string name="logout_content">你確定要登出了嗎?</string>
 </resources>

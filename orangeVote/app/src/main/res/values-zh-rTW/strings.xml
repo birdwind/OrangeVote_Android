@@ -4,6 +4,9 @@
     <string name="username">帳號</string>
     <string name="password">密碼</string>
 
+    <string name="confirm">確認</string>
+    <string name="cancel">取消</string>
+
     <!--登入-->
     <string name="login">登入</string>
 
@@ -46,4 +49,8 @@
     <string name="personal_password">密碼</string>
     <string name="personal_update">更新個人資料</string>
     <string name="personal_update_success">更新成功</string>
+
+    <!--登出Dialog-->
+    <string name="logout_title">登出</string>
+    <string name="logout_content">你確定要登出了嗎?</string>
 </resources>
