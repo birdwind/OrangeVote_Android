@@ -14,12 +14,15 @@
 
     <EditText
         android:id="@+id/et_append_vote_content"
+        android:layout_height="wrap_content"
         android:hint="@string/append_vote_description"
         android:inputType="textMultiLine"
         android:lines="5"
         android:gravity="top|left"
         style="@style/ThemeEditText"
-        android:layout_marginBottom="@dimen/margin_small"/>
+        android:layout_marginBottom="@dimen/margin_small"
+        android:paddingTop="@dimen/padding_default"
+        android:paddingBottom="@dimen/padding_default"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

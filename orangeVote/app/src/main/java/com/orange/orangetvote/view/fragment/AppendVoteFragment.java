@@ -33,7 +33,7 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter> im
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        presenter.teamList();
     }
 
     @Override
