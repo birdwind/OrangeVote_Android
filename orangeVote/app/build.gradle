@@ -89,11 +89,28 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:${libs.rxjava}"
     implementation "io.reactivex.rxjava2:rxandroid:${libs.rxandroid}"
 
+
+    /**
+     *     RxBinding
+     */
+    implementation "com.jakewharton.rxbinding3:rxbinding:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-core:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-drawerlayout:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-leanback:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-recyclerview:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-viewpager:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-viewpager2:${libs.rxbinding}"
+    implementation "com.jakewharton.rxbinding3:rxbinding-material:${libs.rxbinding}"
+
     /**
      *   okhttp
      */
     implementation "com.squareup.okhttp3:okhttp:${libs.okhttp3}"
     implementation "com.squareup.okhttp3:logging-interceptor:${libs.logging}"
+    implementation "org.conscrypt:conscrypt-android:${libs.conscrypt}"
 
     /**
      *   android-async-http

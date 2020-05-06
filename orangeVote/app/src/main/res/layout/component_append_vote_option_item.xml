@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_small">
 
     <EditText
         android:id="@+id/et_append_vote_option"
-        style="@style/ThemeEditText"/>
+        style="@style/ThemeEditText"
+        android:hint="@string/append_vote_option_hint"
+        android:paddingEnd="@dimen/component_default_size"/>
 
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_append_vote_delete"
+        android:layout_width="@dimen/component_default_size"
+        android:layout_height="@dimen/component_default_size"
+        android:src="@drawable/outline_delete_black_24"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

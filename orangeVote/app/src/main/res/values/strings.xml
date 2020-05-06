@@ -32,6 +32,7 @@
     <string name="append_vote_open_voting">Open Voting</string>
     <string name="append_vote_sign">Sign</string>
     <string name="append_vote_multiply">Multiply</string>
+    <string name="append_vote_option_hint">Please input option</string>
 
     <!--帳戶-->
     <string name="account_personal">Personal Information</string>

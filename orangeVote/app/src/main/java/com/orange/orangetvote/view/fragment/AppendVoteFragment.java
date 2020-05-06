@@ -1,11 +1,15 @@
 package com.orange.orangetvote.view.fragment;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.jakewharton.rxbinding3.widget.RxTextView;
 import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.presenter.AppendVotePresenter;
 import com.orange.orangetvote.response.appendVote.TeamListResponse;
 import com.orange.orangetvote.view.adapter.AppendVoteOptionAdapter;
 import com.orange.orangetvote.view.callback.AppendVoteView;
+import com.orange.orangetvote.view.listener.AppendOptionListener;
 import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.takisoft.datetimepicker.DatePickerDialog;
@@ -16,14 +20,17 @@ import java.util.List;
 import java.util.TimeZone;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
-    implements AppendVoteView, OnSpinnerItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
+    implements AppendVoteView, OnSpinnerItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener,
+    BaseQuickAdapter.OnItemChildClickListener, AppendOptionListener {
 
     private List<String> teamList;
 
@@ -32,6 +39,8 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     private String currentDate;
 
     private AppendVoteOptionAdapter appendVoteOptionAdapter;
+
+    private AppendOptionListener appendOptionListener;
 
     private List<String> voteOptionList;
 
@@ -48,7 +57,7 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     RecyclerView rvOption;
 
     @OnClick(R.id.btv_append_vote_append_option)
-    void clickBTVAppendOption(){
+    void clickBTVAppendOption() {
         voteOptionList.add("");
         appendVoteOptionAdapter.notifyDataSetChanged();
     }
@@ -66,6 +75,7 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     @Override
     public void addListener() {
         psvDate.setOnClickListener(this);
+        appendVoteOptionAdapter.setOnItemChildClickListener(this);
     }
 
     @Override
@@ -82,6 +92,7 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
         presenter.teamList();
         teamList = new ArrayList<>();
         voteOptionList = new ArrayList<>();
+        appendOptionListener = this;
 
         appendVoteOptionAdapter =
             new AppendVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList);
@@ -131,5 +142,29 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         currentDate = year + "/" + (month + 1) + "/" + dayOfMonth;
         tvDate.setText(currentDate);
+    }
+
+    @Override
+    public void appendOptionListener(String optionValue) {
+
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        switch (view.getId()) {
+            case R.id.iv_append_vote_delete:
+                voteOptionList.remove(position);
+                appendVoteOptionAdapter.notifyDataSetChanged();
+                break;
+            case R.id.et_append_vote_option:
+                EditText editText = (EditText) view;
+                RxTextView.textChanges(editText).subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence charSequence) throws Exception {
+                        voteOptionList.set(position, charSequence.toString());
+                    }
+                });
+                break;
+        }
     }
 }
