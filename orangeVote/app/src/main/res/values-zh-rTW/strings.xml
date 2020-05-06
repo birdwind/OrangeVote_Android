@@ -34,6 +34,7 @@
     <string name="append_vote_sign">記名</string>
     <string name="append_vote_multiply">多選</string>
     <string name="append_vote_option_hint">請輸入選項</string>
+    <string name="append_vote_confirm">新增投票</string>
 
     <!--帳戶-->
     <string name="account_personal">個人資料</string>

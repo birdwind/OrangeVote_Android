@@ -1,20 +1,19 @@
 package com.orange.orangetvote.basic.utils;
 
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
-
+import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import android.text.TextUtils;
 
 /**
  * 封装的是使用Gson解析json的方法
@@ -55,12 +54,12 @@ public class GsonUtils {
 
             JsonArray array = new JsonParser().parse(json).getAsJsonArray();
             for (final JsonElement elem : array) {
-                if(elem.isJsonObject()){
+                if (elem.isJsonObject()) {
                     LogUtils.d("這是Object拉");
                 }
-                if( elem instanceof JsonObject){
+                if (elem instanceof JsonObject) {
                     lst.add(parseJsonToBean(elem.getAsJsonObject().getAsString(), clazz));
-                }else {
+                } else {
                     lst.add(parseJsonToBean(elem.getAsString(), clazz));
                 }
             }
@@ -72,7 +71,6 @@ public class GsonUtils {
         return lst;
     }
 
-
     /**
      * 對象轉為json字串
      *
@@ -83,7 +81,6 @@ public class GsonUtils {
         Gson gson = new Gson();
         return gson.toJson(target);
     }
-
 
     /**
      * 獲取json串中某個字段的值，注意，只能獲取同一層级的value
@@ -108,5 +105,9 @@ public class GsonUtils {
         }
 
         return value;
+    }
+
+    public static Map<String, Object> parseJsonToMap(String json) {
+        return new Gson().fromJson(json, new TypeToken<HashMap<String, Object>>() {}.getType());
     }
 }

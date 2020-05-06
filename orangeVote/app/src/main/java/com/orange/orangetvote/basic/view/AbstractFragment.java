@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public abstract class AbstractFragment<P extends BasePresenter> extends Fragment implements BaseView, BaseFragment<P> {
     public Context context;
@@ -28,6 +30,8 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
     protected P presenter;
 
     protected Unbinder unbinder;
+
+    public CompositeDisposable compositeDisposable;
 
     protected FragmentNavigationListener fragmentNavigationListener;
 
@@ -58,6 +62,19 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         LogUtils.e(className, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void clearDisposable() {
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
+    }
+
+    public void addDisposable(Disposable mDisposable){
+        if(compositeDisposable == null){
+            compositeDisposable = new CompositeDisposable();
+        }
+        compositeDisposable.add(mDisposable);
     }
 
     public void showToast(String s) {
@@ -219,6 +236,7 @@ public abstract class AbstractFragment<P extends BasePresenter> extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
+        clearDisposable();
         LogUtils.e(className, "onStop");
     }
 

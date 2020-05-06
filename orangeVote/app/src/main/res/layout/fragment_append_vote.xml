@@ -1,122 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/margin_default"
-    android:orientation="vertical">
+    android:padding="@dimen/padding_default">
 
-    <EditText
-        android:id="@+id/et_append_vote_title"
-        android:hint="@string/append_vote_title"
-        style="@style/ThemeEditText"
-        android:layout_marginBottom="@dimen/margin_small"/>
-
-    <EditText
-        android:id="@+id/et_append_vote_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/append_vote_description"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:gravity="top|left"
-        style="@style/ThemeEditText"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:paddingTop="@dimen/padding_default"
-        android:paddingBottom="@dimen/padding_default"/>
-
-    <com.skydoves.powerspinner.PowerSpinnerView
-        android:id="@+id/psv_append_vote_team"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/style_spinner_radius_theme"
-        android:hint="請選擇團隊"
-        android:textColorHint="@color/colorWhite"
-        android:padding="@dimen/padding_small"
-        app:spinner_popup_animation="fade"
-        app:spinner_popup_background="@color/colorTheme"
-        android:layout_marginBottom="@dimen/margin_small"
-        android:textColor="@color/colorWhite"/>
+        android:layout_height="match_parent"
+        android:layout_above="@id/bt_append_vote_confirm">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_small">
-
-        <com.skydoves.powerspinner.PowerSpinnerView
-            android:id="@+id/psv_append_vote_date"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/style_spinner_radius_theme"
-            android:textColorHint="@color/colorWhite"
-            android:padding="@dimen/padding_small"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_append_vote_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:layout_centerVertical="true"
-            android:padding="@dimen/padding_small"/>
+            <EditText
+                android:id="@+id/et_append_vote_title"
+                style="@style/ThemeEditText"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:hint="@string/append_vote_title" />
 
-    </RelativeLayout>
+            <EditText
+                android:id="@+id/et_append_vote_content"
+                style="@style/ThemeEditText"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:gravity="top|left"
+                android:hint="@string/append_vote_description"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:paddingTop="@dimen/padding_default"
+                android:paddingBottom="@dimen/padding_default" />
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/psv_append_vote_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:background="@drawable/style_spinner_radius_theme"
+                android:hint="請選擇團隊"
+                android:padding="@dimen/padding_small"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                app:spinner_popup_animation="fade"
+                app:spinner_popup_background="@color/colorTheme" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_small">
+
+                <com.skydoves.powerspinner.PowerSpinnerView
+                    android:id="@+id/psv_append_vote_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/style_spinner_radius_theme"
+                    android:padding="@dimen/padding_small"
+                    android:textColorHint="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/tv_append_vote_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/padding_small"
+                    android:textColor="@color/colorWhite" />
+
+            </RelativeLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_append_vote_option"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_append_vote_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/btv_append_vote_append_option"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/append_vote_add_option"
-        android:textColor="@color/colorTheme"
-        android:textSize="@dimen/textsize_default"
-        android:paddingTop="@dimen/padding_default"
-        android:paddingBottom="@dimen/padding_default"/>
+            <TextView
+                android:id="@+id/btv_append_vote_append_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/padding_default"
+                android:paddingBottom="@dimen/padding_default"
+                android:text="@string/append_vote_add_option"
+                android:textColor="@color/colorTheme"
+                android:textSize="@dimen/textsize_default" />
 
-    <CheckBox
-        android:id="@+id/cb_append_vote_allow_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/append_vote_is_allow_add"
-        android:textSize="@dimen/textsize_default"/>
+            <CheckBox
+                android:id="@+id/cb_append_vote_allow_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/append_vote_is_allow_add"
+                android:textSize="@dimen/textsize_default" />
 
-    <CheckBox
-        android:id="@+id/cb_append_vote_open_voting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/append_vote_open_voting"
-        android:textSize="@dimen/textsize_default"/>
+            <CheckBox
+                android:id="@+id/cb_append_vote_open_voting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/append_vote_open_voting"
+                android:textSize="@dimen/textsize_default" />
 
-    <CheckBox
-        android:id="@+id/cb_append_vote_sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/append_vote_sign"
-        android:textSize="@dimen/textsize_default"/>
+            <CheckBox
+                android:id="@+id/cb_append_vote_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/append_vote_sign"
+                android:textSize="@dimen/textsize_default" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/cb_append_vote_multiply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/append_vote_multiply"
-            android:textSize="@dimen/textsize_default"
-            android:layout_marginRight="@dimen/margin_small"/>
+                <CheckBox
+                    android:id="@+id/cb_append_vote_multiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_small"
+                    android:text="@string/append_vote_multiply"
+                    android:textSize="@dimen/textsize_default"
+                    android:checked="true"
+                    android:clickable="false"/>
 
-        <EditText
-            android:id="@+id/et_append_vote_multiply"
-            android:text="1"
-            style="@style/ThemeEditText"
-            android:layout_width="50dp"/>
+                <EditText
+                    android:id="@+id/et_append_vote_multiply"
+                    style="@style/ThemeEditText"
+                    android:layout_width="50dp"
+                    android:text="1" />
 
-    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/bt_append_vote_confirm"
+        style="@style/ThemeButton"
+        android:text="@string/append_vote_confirm"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

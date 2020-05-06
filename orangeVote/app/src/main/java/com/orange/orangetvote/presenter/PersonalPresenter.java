@@ -43,11 +43,10 @@ public class PersonalPresenter extends BasePresenter<PersonalView> {
 
     public void updatePersonalInfo(PersonalRequest personalRequest) {
         initParamAndHeader();
-        paramsMap.put("member", GsonUtils.toJson(personalRequest));
-        packageToRequestBody();
-        addDisposable(
-            apiServer.executePostMultipart(PersonalApiServer.PERSONAL_UPDATE.valueOfName(), requestBodyMap, headerMap),
-            new BaseObserver(baseView) {
+        packageToParamsMap(personalRequest);
+
+        addDisposable(apiServer.executePostFormUrlEncode(PersonalApiServer.PERSONAL_UPDATE.valueOfName(),
+            paramsMap, headerMap), new BaseObserver(baseView) {
                 @Override
                 public void onSuccess(String responseJson) {
                     PersonalServerResponse personalServerResponse =

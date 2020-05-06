@@ -1,11 +1,11 @@
 package com.orange.orangetvote.basic.base;
 
-import com.orange.orangetvote.basic.network.RetrofitManager;
 import com.orange.orangetvote.basic.network.ApiServer;
-
+import com.orange.orangetvote.basic.network.RetrofitManager;
+import com.orange.orangetvote.basic.utils.GsonUtils;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -44,8 +44,8 @@ public class BasePresenter<V extends BaseView> {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
-        compositeDisposable.add(flowable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(observer));
+        compositeDisposable.add(
+            flowable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(observer));
 
     }
 
@@ -53,8 +53,8 @@ public class BasePresenter<V extends BaseView> {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
-        compositeDisposable.add(flowable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribeWith(subscriber));
+        compositeDisposable.add(
+            flowable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(subscriber));
 
     }
 
@@ -64,7 +64,7 @@ public class BasePresenter<V extends BaseView> {
         }
     }
 
-    protected void removeCookie(){
+    protected void removeCookie() {
         RetrofitManager.getInstance().removeCookies();
     }
 
@@ -82,7 +82,7 @@ public class BasePresenter<V extends BaseView> {
         headerMap.clear();
     }
 
-    protected void initRequestBodyMap(){
+    protected void initRequestBodyMap() {
         requestBodyMap.clear();
     }
 
@@ -90,8 +90,13 @@ public class BasePresenter<V extends BaseView> {
         initRequestBodyMap();
         for (String key : paramsMap.keySet()) {
             RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"),
-                    paramsMap.get(key) == null ? "" : paramsMap.get(key).toString());
+                paramsMap.get(key) == null ? "" : paramsMap.get(key).toString());
             requestBodyMap.put(key, requestBody);
         }
+    }
+
+    protected void packageToParamsMap(Object obj) {
+        String json = GsonUtils.toJson(obj);
+        paramsMap.putAll(GsonUtils.parseJsonToMap(json));
     }
 }

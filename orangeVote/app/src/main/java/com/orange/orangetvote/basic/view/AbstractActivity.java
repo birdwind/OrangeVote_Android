@@ -23,6 +23,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 public abstract class AbstractActivity<P extends BasePresenter> extends AppCompatActivity
     implements BaseView, BaseActivity<P> {
@@ -35,6 +37,8 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
     protected P presenter;
 
     protected Unbinder unbinder;
+
+    public CompositeDisposable compositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +64,24 @@ public abstract class AbstractActivity<P extends BasePresenter> extends AppCompa
         }
     }
 
+    public void clearDisposable() {
+        if (compositeDisposable != null) {
+            compositeDisposable.clear();
+        }
+    }
+
+    public void addDisposable(Disposable mDisposable){
+        if(compositeDisposable == null){
+            compositeDisposable = new CompositeDisposable();
+        }
+        compositeDisposable.add(mDisposable);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         LogUtils.e(className, "onStop");
+        clearDisposable();
         if (presenter != null) {
             presenter.detachView();
         }

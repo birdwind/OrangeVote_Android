@@ -33,6 +33,7 @@
     <string name="append_vote_sign">Sign</string>
     <string name="append_vote_multiply">Multiply</string>
     <string name="append_vote_option_hint">Please input option</string>
+    <string name="append_vote_confirm">Create</string>
 
     <!--帳戶-->
     <string name="account_personal">Personal Information</string>

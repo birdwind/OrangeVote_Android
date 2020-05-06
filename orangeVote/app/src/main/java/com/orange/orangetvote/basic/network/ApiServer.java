@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
@@ -20,6 +21,11 @@ public interface ApiServer {
     @GET()
     Observable<ResponseBody> executeGet(@Url String url, @QueryMap Map<String, Object> paramMap,
         @HeaderMap Map<String, Object> headerMap);
+
+    @FormUrlEncoded
+    @PUT()
+    Observable<ResponseBody> executePutFormUrlEncode(@Url String url, @FieldMap Map<String, Object> fieldMap,
+                                                      @HeaderMap Map<String, Object> headerMap);
 
     @FormUrlEncoded
     @POST()
