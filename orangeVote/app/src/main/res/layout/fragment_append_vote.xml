@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="@dimen/margin_default"
     android:orientation="vertical">
 
@@ -24,48 +24,39 @@
         android:paddingTop="@dimen/padding_default"
         android:paddingBottom="@dimen/padding_default"/>
 
+    <com.skydoves.powerspinner.PowerSpinnerView
+        android:id="@+id/psv_append_vote_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_spinner_radius_theme"
+        android:hint="請選擇團隊"
+        android:textColorHint="@color/colorWhite"
+        android:padding="@dimen/padding_small"
+        app:spinner_popup_animation="fade"
+        app:spinner_popup_background="@color/colorTheme"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:textColor="@color/colorWhite"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small">
 
-        <Spinner
-            android:id="@+id/spinner_append_vote_team"
+        <com.skydoves.powerspinner.PowerSpinnerView
+            android:id="@+id/psv_append_vote_date"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/style_textview_radius_theme"
-            android:padding="@dimen/padding_default"
-            android:layout_marginBottom="@dimen/margin_small"/>
-
-        <ImageView
-            android:layout_width="@dimen/theme_spinner_down_arrow_size"
-            android:layout_height="@dimen/theme_spinner_down_arrow_size"
-            android:src="@drawable/icon_down_arrow"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/margin_default"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_spinner_radius_theme"
+            android:textColorHint="@color/colorWhite"
+            android:padding="@dimen/padding_small"/>
 
         <TextView
             android:id="@+id/tv_append_vote_date"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/component_default_size"
-            android:text="2020/03/25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
-            android:background="@drawable/style_textview_radius_theme"
-            android:padding="@dimen/padding_default"/>
-
-        <ImageView
-            android:layout_width="@dimen/theme_spinner_down_arrow_size"
-            android:layout_height="@dimen/theme_spinner_down_arrow_size"
-            android:src="@drawable/icon_down_arrow"
-            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/margin_default"/>
+            android:padding="@dimen/padding_small"/>
 
     </RelativeLayout>
 

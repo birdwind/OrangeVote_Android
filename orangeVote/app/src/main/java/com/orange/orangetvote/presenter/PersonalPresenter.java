@@ -69,7 +69,7 @@ public class PersonalPresenter extends BasePresenter<PersonalView> {
                     for (ResponseFieldError responseFieldError : responseFieldErrorList) {
                         try {
                             baseView.showError(error[Integer.parseInt(responseFieldError.getCode())]);
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             LogUtils.e(e.getMessage());
                         }
                     }

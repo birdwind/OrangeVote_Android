@@ -126,7 +126,17 @@ dependencies {
      */
     implementation "com.jaeger.statusbarutil:library:${libs.statusBarUtil}"
 
-    testImplementation 'junit:junit:4.12'
+    /**
+     * PowerSpinner
+     */
+    implementation "com.github.skydoves:powerspinner:${libs.powerSpinner}"
+
+    /**
+    * DateTimePicker
+    */
+    implementation "com.takisoft.datetimepicker:datetimepicker:${libs.dateTimePicker}"
+
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

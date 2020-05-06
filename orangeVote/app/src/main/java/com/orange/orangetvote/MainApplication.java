@@ -1,5 +1,6 @@
 package com.orange.orangetvote;
 
+import java.util.TimeZone;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;

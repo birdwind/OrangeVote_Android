@@ -1,12 +1,12 @@
 package com.orange.orangetvote.response.system;
 
-import com.orange.orangetvote.basic.response.AbstractResponse;
+import com.orange.orangetvote.basic.response.BaseResponse;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseFieldError extends AbstractResponse {
+public class ResponseFieldError implements BaseResponse {
 
     private String rejectedValue;
 
