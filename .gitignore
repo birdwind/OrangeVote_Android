@@ -84,6 +84,9 @@ lint/tmp/
 #project
 /orangeVote/base.gradle
 
+orangeVote/.idea/compiler.xml
 orangeVote/.idea/eclipseCodeFormatter.xml
-
+orangeVote/.idea/eclipseCodeFormatter.xml
+orangeVote/.idea/codeStyles/codeStyleConfig.xml
+orangeVote/.idea/eclipseCodeFormatter.xml
 orangeVote/.idea/codeStyles/codeStyleConfig.xml
