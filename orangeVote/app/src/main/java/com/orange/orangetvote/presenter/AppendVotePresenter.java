@@ -47,7 +47,7 @@ public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
             LogUtils.e(key + " : " + paramsMap.get(key));
         }
 
-        addDisposable(apiServer.executePutFormUrlEncode(VoteApiServer.APPEND.valueOfName(), paramsMap, headerMap),
+        addDisposable(apiServer.executePut(VoteApiServer.APPEND.valueOfName(), requestBody, headerMap),
             new AbstractObserver<ResponseBody, AppendVoteServerResponse, AppendVoteResponse, FieldErrorResponse>(
                 baseView, AppendVoteServerResponse.class) {
 

@@ -27,6 +27,8 @@ public class AbstractPresenter<V extends BaseView> {
 
     protected Map<String, RequestBody> requestBodyMap = new HashMap<>();
 
+    protected RequestBody requestBody;
+
     public V baseView;
 
     protected ApiServer apiServer = RetrofitManager.getInstance().getApiService();
@@ -118,6 +120,25 @@ public class AbstractPresenter<V extends BaseView> {
 //        }
 
         paramsMap.putAll(tempMap);
+
+        requestBody = getRequestBody(tempMap);
     }
 
+    public RequestBody getRequestBody(HashMap<String, Object> hashMap) {
+        StringBuffer data = new StringBuffer();
+        if (hashMap != null && hashMap.size() > 0) {
+            Iterator iter = hashMap.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+                Object key = entry.getKey();
+                Object val = entry.getValue();
+                data.append(key).append("=").append(val).append("&");
+            }
+        }
+        String jso = data.substring(0, data.length() - 1);
+        RequestBody requestBody =
+                RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"),jso);
+
+        return requestBody;
+    }
 }

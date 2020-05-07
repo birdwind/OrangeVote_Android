@@ -29,7 +29,7 @@ public interface ApiServer {
         @HeaderMap Map<String, Object> headerMap);
 
     @PUT()
-    Observable<ResponseBody> executePut(@Url String url, @Body Object object, @HeaderMap Map<String, Object> headerMap);
+    Observable<ResponseBody> executePut(@Url String url, @Body RequestBody requestBody, @HeaderMap Map<String, Object> headerMap);
 
     @FormUrlEncoded
     @POST()
