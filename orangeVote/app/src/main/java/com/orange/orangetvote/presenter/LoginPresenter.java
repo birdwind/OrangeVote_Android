@@ -1,16 +1,19 @@
 package com.orange.orangetvote.presenter;
 
-import com.orange.orangetvote.basic.base.BaseObserver;
-import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.AbstractObserver;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.network.RetrofitManager;
-import com.orange.orangetvote.basic.utils.GsonUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
+import com.orange.orangetvote.response.login.LoginResponse;
 import com.orange.orangetvote.response.login.LoginServerResponse;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.AuthApiServer;
 import com.orange.orangetvote.view.callback.LoginView;
+import java.util.List;
+import okhttp3.ResponseBody;
 
-public class LoginPresenter extends BasePresenter<LoginView> {
+public class LoginPresenter extends AbstractPresenter<LoginView> {
 
     public LoginPresenter(LoginView baseView) {
         super(baseView);
@@ -26,23 +29,17 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         removeCookie();
 
         addDisposable(apiServer.executePostFormUrlEncode(AuthApiServer.Login.valueOfName(), paramsMap, headerMap),
-            new BaseObserver(baseView) {
+            new AbstractObserver<ResponseBody, LoginServerResponse, LoginResponse, FieldErrorResponse>(baseView,
+                LoginServerResponse.class) {
+
                 @Override
-                protected void onSuccess(String responseJson) {
-                    LoginServerResponse loginServerResponse =
-                        GsonUtils.parseJsonToBean(responseJson, LoginServerResponse.class);
+                public void onSuccess(List<LoginResponse> responseList) {
                     SharedPreferencesUtils.put(Config.COOKIES, RetrofitManager.getInstance().getCookies().toString());
                     baseView.onLoginSucc();
                 }
 
                 @Override
-                protected void onError(String msg) {
-                    baseView.showError(msg);
-
-                }
-
-                @Override
-                protected void onFieldsError(String responseJson) {
+                public void onFieldsError(List<FieldErrorResponse> fieldErrorResponseList) {
 
                 }
             });

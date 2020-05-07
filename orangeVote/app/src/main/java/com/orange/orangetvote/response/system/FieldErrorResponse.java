@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ResponseFieldError implements BaseResponse {
+public class FieldErrorResponse implements BaseResponse {
 
     private String rejectedValue;
 

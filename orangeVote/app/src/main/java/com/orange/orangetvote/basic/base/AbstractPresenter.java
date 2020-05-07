@@ -1,10 +1,13 @@
 package com.orange.orangetvote.basic.base;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orange.orangetvote.basic.network.ApiServer;
 import com.orange.orangetvote.basic.network.RetrofitManager;
-import com.orange.orangetvote.basic.utils.GsonUtils;
-import java.lang.reflect.Field;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
@@ -14,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class BasePresenter<V extends BaseView> {
+public class AbstractPresenter<V extends BaseView> {
 
     public CompositeDisposable compositeDisposable;
 
@@ -28,7 +31,7 @@ public class BasePresenter<V extends BaseView> {
 
     protected ApiServer apiServer = RetrofitManager.getInstance().getApiService();
 
-    public BasePresenter(V baseView) {
+    public AbstractPresenter(V baseView) {
         this.baseView = baseView;
     }
 
@@ -40,7 +43,7 @@ public class BasePresenter<V extends BaseView> {
         removeDisposable();
     }
 
-    public void addDisposable(Observable<?> flowable, BaseObserver observer) {
+    public void addDisposable(Observable<?> flowable, AbstractObserver observer) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
@@ -49,7 +52,7 @@ public class BasePresenter<V extends BaseView> {
 
     }
 
-    public void addDisposable(Flowable<?> flowable, BaseSubscriber subscriber) {
+    public void addDisposable(Flowable<?> flowable, AbstractSubscriber subscriber) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
@@ -96,7 +99,25 @@ public class BasePresenter<V extends BaseView> {
     }
 
     protected void packageToParamsMap(Object obj) {
-        String json = GsonUtils.toJson(obj);
-        paramsMap.putAll(GsonUtils.parseJsonToMap(json));
+        ObjectMapper oMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        HashMap<String, Object> tempMap = oMapper.convertValue(obj, HashMap.class);
+
+//        try {
+//
+//            for (String key : tempMap.keySet()) {
+//                Object object = tempMap.get(key);
+//                if (object instanceof List) {
+//                    LogUtils.e("這是List");
+//                    String temp = oMapper.writeValueAsString(object).replace("{", "").replace("}", "").replace("[", "")
+//                        .replace("]", "").replace("\"", "");
+//                    tempMap.put(key, temp);
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        paramsMap.putAll(tempMap);
     }
+
 }

@@ -90,7 +90,7 @@ public class PersonalFragment extends AbstractFragment<PersonalPresenter> implem
 
     @Override
     public void updatePersonalSuccess(List<PersonalResponse> personalResponseList) {
-        showToast(getString(R.string.personal_update_success));
+        showToast(getString(R.string.success_personal_update));
         PersonalResponse personalResponse = personalResponseList.get(0);
         etOrangeId.setText(personalResponse.getOrangeId());
         etName.setText(personalResponse.getName());

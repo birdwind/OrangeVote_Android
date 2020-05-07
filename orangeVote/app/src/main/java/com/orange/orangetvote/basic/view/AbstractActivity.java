@@ -2,7 +2,7 @@ package com.orange.orangetvote.basic.view;
 
 import com.jaeger.library.StatusBarUtil;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.base.BaseView;
 import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.utils.LogUtils;
@@ -26,7 +26,7 @@ import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class AbstractActivity<P extends BasePresenter> extends AppCompatActivity
+public abstract class AbstractActivity<P extends AbstractPresenter> extends AppCompatActivity
     implements BaseView, BaseActivity<P> {
     public Context context;
 

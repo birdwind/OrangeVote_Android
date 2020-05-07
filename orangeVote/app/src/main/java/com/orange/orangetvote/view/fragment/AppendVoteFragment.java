@@ -1,10 +1,10 @@
 package com.orange.orangetvote.view.fragment;
 
 import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.view.AbstractActivity;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.presenter.AppendVotePresenter;
 import com.orange.orangetvote.request.AppendVoteRequest;
-import com.orange.orangetvote.request.VoteOptionRequest;
 import com.orange.orangetvote.response.appendVote.TeamListResponse;
 import com.orange.orangetvote.view.adapter.AppendVoteOptionAdapter;
 import com.orange.orangetvote.view.callback.AppendVoteView;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -81,18 +82,15 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     void clickBTConfirm() {
         String voteName = etTitle.getText().toString().trim();
         String content = etContent.getText().toString();
-        String teamUuid = teamUuidList.get(psvTeam.getSelectedIndex());
+        String teamUuid = psvTeam.getSelectedIndex() >= 0 ? teamUuidList.get(psvTeam.getSelectedIndex()) : null;
         String expiredDate = tvDate.getText().toString();
         Boolean isAllowAdd = cbAllowAdd.isChecked();
         Boolean isOpenVoting = cbOpenVoting.isChecked();
         Boolean isSign = cbSign.isChecked();
         int multiply = Integer.parseInt(etMultiply.getText().toString());
-        List<VoteOptionRequest> voteOptionRequestList = new ArrayList<>();
-        for (String voteOption : voteOptionList) {
-            voteOptionRequestList.add(new VoteOptionRequest(null, voteOption));
-        }
+        List<String> optionValueList = new ArrayList<>(voteOptionList);
         AppendVoteRequest appendVoteRequest = new AppendVoteRequest(null, voteName, content, multiply, expiredDate,
-            teamUuid, isAllowAdd, isOpenVoting, isSign, voteOptionRequestList);
+            teamUuid, isAllowAdd, isOpenVoting, isSign, optionValueList);
         presenter.appendVote(appendVoteRequest);
     }
 
@@ -166,6 +164,12 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
             teamUuidList.add(teamListResponse.getTeamUuid());
         }
         psvTeam.setItems(teamValueList);
+    }
+
+    @Override
+    public void onAppendSuccess() {
+//        showToast(getString(R.string.success_append_vote));
+        ((AbstractActivity)context).onBackPressed();
     }
 
     @Override

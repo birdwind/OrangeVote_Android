@@ -1,97 +1,13 @@
 package com.orange.orangetvote.basic.base;
 
-import com.orange.orangetvote.MainApplication;
-import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.utils.GsonUtils;
-import com.orange.orangetvote.basic.utils.LogUtils;
-import com.orange.orangetvote.basic.utils.rxHelper.RxException;
-import java.io.IOException;
-import android.content.Context;
-import io.reactivex.observers.DisposableObserver;
-import okhttp3.ResponseBody;
+import com.orange.orangetvote.basic.response.BaseResponse;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
+import java.util.List;
 
-public abstract class BaseObserver<T> extends DisposableObserver<T> {
+public interface BaseObserver<RD extends BaseResponse, FE extends FieldErrorResponse>{
+    void onSuccess(List<RD> responseList);
 
-    protected BaseView view;
+    void onError(String msg);
 
-    protected Context context = MainApplication.getAppContext();
-
-    public BaseObserver(BaseView view) {
-        this.view = view;
-    }
-
-    @Override
-    protected void onStart() {
-        if (view != null) {
-            view.showLoading();
-        }
-    }
-
-    @Override
-    public void onNext(T o) {
-        try {
-            String responseJson = ((ResponseBody) o).string();
-            ServerResponse serverResponse = GsonUtils.parseJsonToBean(responseJson, ServerResponse.class);
-            switch (serverResponse.getErrorCode()) {
-                case 0:
-                    // 成功
-                    onSuccess(responseJson);
-                    break;
-                case 1:
-                    onError(context.getString(R.string.error_server_permission));
-                    // 沒有權限
-                    break;
-                case 2:
-                    view.onLoginError();
-                    // 尚未登入
-                    break;
-                case 6:
-                    onFieldsError(responseJson);
-                    // 送出資料不正確
-                    break;
-                case 8:
-                    onError(context.getString(R.string.error_server_login));
-                    // 登入失敗
-                    break;
-                case 9:
-                    // 登入紀錄過期
-                    view.onLoginError();
-                    break;
-                default:
-                    // 3.沒找到資源 4.API找不到 5.伺服器錯誤 7.伺服器錯誤 10.少傳欄位
-                    onError(context.getString(R.string.error_server_backend));
-                    LogUtils.e("伺服器錯誤 : " + String.valueOf(serverResponse.getErrorCode()));
-                    break;
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onError(Throwable e) {
-        e.printStackTrace();
-        if (view != null) {
-            view.hideLoading();
-        }
-        if (e != null) {
-            onError(RxException.handleException(e).getMessage());
-        } else {
-            onError("未知錯誤");
-        }
-    }
-
-    @Override
-    public void onComplete() {
-        if (view != null) {
-            view.hideLoading();
-        }
-    }
-
-    protected abstract void onSuccess(String responseJson);
-
-    protected abstract void onError(String msg);
-
-    protected abstract void onFieldsError(String responseJson);
+    void onFieldsError(List<FE> responseFieldErrorList);
 }

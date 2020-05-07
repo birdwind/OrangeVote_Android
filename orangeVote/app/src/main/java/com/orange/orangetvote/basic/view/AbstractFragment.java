@@ -1,6 +1,6 @@
 package com.orange.orangetvote.basic.view;
 
-import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.base.BaseView;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.ToastUtils;
@@ -20,7 +20,7 @@ import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class AbstractFragment<P extends BasePresenter> extends Fragment implements BaseView, BaseFragment<P> {
+public abstract class AbstractFragment<P extends AbstractPresenter> extends Fragment implements BaseView, BaseFragment<P> {
     public Context context;
 
     private String className;

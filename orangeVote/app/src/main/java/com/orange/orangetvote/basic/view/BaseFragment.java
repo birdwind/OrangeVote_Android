@@ -1,9 +1,9 @@
 package com.orange.orangetvote.basic.view;
 
 
-import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
 
-public interface BaseFragment<P extends BasePresenter> extends BaseMVPView<P>{
+public interface BaseFragment<P extends AbstractPresenter> extends BaseMVPView<P>{
 
     default Boolean isNeedShowBackOnToolBar(){
         return true;

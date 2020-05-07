@@ -7,4 +7,6 @@ import java.util.List;
 public interface AppendVoteView extends BaseView {
 
     void loadTeamListSuccess(List<TeamListResponse> teamListResponseList);
+
+    void onAppendSuccess();
 }

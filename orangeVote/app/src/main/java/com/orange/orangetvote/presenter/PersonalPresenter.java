@@ -1,18 +1,18 @@
 package com.orange.orangetvote.presenter;
 
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.base.BaseObserver;
-import com.orange.orangetvote.basic.base.BasePresenter;
-import com.orange.orangetvote.basic.utils.GsonUtils;
-import com.orange.orangetvote.basic.utils.LogUtils;
+import com.orange.orangetvote.basic.base.AbstractObserver;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.request.PersonalRequest;
+import com.orange.orangetvote.response.personal.PersonalResponse;
 import com.orange.orangetvote.response.personal.PersonalServerResponse;
-import com.orange.orangetvote.response.system.ResponseFieldError;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.PersonalApiServer;
 import com.orange.orangetvote.view.callback.PersonalView;
 import java.util.List;
+import okhttp3.ResponseBody;
 
-public class PersonalPresenter extends BasePresenter<PersonalView> {
+public class PersonalPresenter extends AbstractPresenter<PersonalView> {
 
     public PersonalPresenter(PersonalView baseView) {
         super(baseView);
@@ -21,21 +21,15 @@ public class PersonalPresenter extends BasePresenter<PersonalView> {
     public void loadPersonalInfo() {
         initParamAndHeader();
         addDisposable(apiServer.executeGet(PersonalApiServer.PERSONAL_INFO.valueOfName(), paramsMap, headerMap),
-            new BaseObserver(baseView) {
+            new AbstractObserver<ResponseBody, PersonalServerResponse, PersonalResponse, FieldErrorResponse>(baseView,
+                PersonalServerResponse.class) {
                 @Override
-                public void onSuccess(String responseJson) {
-                    PersonalServerResponse personalServerResponse =
-                        GsonUtils.parseJsonToBean(responseJson, PersonalServerResponse.class);
-                    baseView.loadPersonalSuccess(personalServerResponse.getResponse());
+                public void onSuccess(List<PersonalResponse> responseList) {
+                    baseView.loadPersonalSuccess(responseList);
                 }
 
                 @Override
-                public void onError(String msg) {
-                    baseView.showError(msg);
-                }
-
-                @Override
-                protected void onFieldsError(String responseJson) {
+                public void onFieldsError(List<FieldErrorResponse> fieldErrorResponseList) {
 
                 }
             });
@@ -45,32 +39,21 @@ public class PersonalPresenter extends BasePresenter<PersonalView> {
         initParamAndHeader();
         packageToParamsMap(personalRequest);
 
-        addDisposable(apiServer.executePostFormUrlEncode(PersonalApiServer.PERSONAL_UPDATE.valueOfName(),
-            paramsMap, headerMap), new BaseObserver(baseView) {
+        addDisposable(
+            apiServer.executePostFormUrlEncode(PersonalApiServer.PERSONAL_UPDATE.valueOfName(), paramsMap, headerMap),
+            new AbstractObserver<ResponseBody, PersonalServerResponse, PersonalResponse, FieldErrorResponse>(baseView,
+                PersonalServerResponse.class) {
+
                 @Override
-                public void onSuccess(String responseJson) {
-                    PersonalServerResponse personalServerResponse =
-                        GsonUtils.parseJsonToBean(responseJson, PersonalServerResponse.class);
-                    baseView.updatePersonalSuccess(personalServerResponse.getResponse());
+                public void onSuccess(List<PersonalResponse> responseList) {
+                    baseView.updatePersonalSuccess(responseList);
                 }
 
                 @Override
-                public void onError(String msg) {
-                    baseView.showError(msg);
-                }
-
-                @Override
-                protected void onFieldsError(String responseJson) {
+                public void onFieldsError(List<FieldErrorResponse> fieldErrorResponseList) {
                     String[] error = context.getResources().getStringArray(R.array.error_personal);
-                    PersonalServerResponse personalServerResponse =
-                        GsonUtils.parseJsonToBean(responseJson, PersonalServerResponse.class);
-                    List<ResponseFieldError> responseFieldErrorList = personalServerResponse.getResponseFieldError();
-                    for (ResponseFieldError responseFieldError : responseFieldErrorList) {
-                        try {
-                            baseView.showError(error[Integer.parseInt(responseFieldError.getCode())]);
-                        } catch (Exception e) {
-                            LogUtils.e(e.getMessage());
-                        }
+                    for (FieldErrorResponse fieldErrorResponse : fieldErrorResponseList) {
+                        baseView.showError(error[Integer.parseInt(fieldErrorResponse.getCode())]);
                     }
                 }
             });

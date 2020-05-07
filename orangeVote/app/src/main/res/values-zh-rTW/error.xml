@@ -4,6 +4,9 @@
     <string name="error_server_permission">您沒有權限執行此操作，請聯繫管理員或隊長。</string>
     <string name="error_server_backend">伺服器錯誤，請聯繫管理員或隊長，亦或是稍後再試。</string>
     <string name="error_server_login">帳號或密碼錯誤</string>
+    <string name="error_server_error">伺服器錯誤 : </string>
+    <string name="error_undefined">未知錯誤</string>
+    <string name="success">成功</string>
 
     <!--個人資料-->
     <string name="error_personal_0">查無此帳號，請聯繫管理員或隊長。</string>
@@ -11,4 +14,8 @@
     <string name="error_personal_2">密碼格式錯誤</string>
     <string name="error_personal_3">椪柑證號重複</string>
     <string name="error_personal_4">使用者帳號名稱重複</string>
+    <string name="success_personal_update">更新成功</string>
+
+    <!--新增投票-->
+    <string name="success_append_vote">建立成功</string>
 </resources>

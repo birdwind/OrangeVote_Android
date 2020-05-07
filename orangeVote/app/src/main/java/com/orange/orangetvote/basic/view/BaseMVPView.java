@@ -1,10 +1,10 @@
 package com.orange.orangetvote.basic.view;
 
 
-import com.orange.orangetvote.basic.base.BasePresenter;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
 import android.os.Bundle;
 
-public interface BaseMVPView<P extends BasePresenter> {
+public interface BaseMVPView<P extends AbstractPresenter> {
 
     P createPresenter();
 

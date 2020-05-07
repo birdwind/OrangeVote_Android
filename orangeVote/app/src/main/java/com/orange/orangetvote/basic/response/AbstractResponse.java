@@ -1,6 +1,6 @@
 package com.orange.orangetvote.basic.response;
 
-import com.orange.orangetvote.response.system.ResponseFieldError;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +29,6 @@ public abstract class AbstractResponse<R extends BaseResponse> implements BaseRe
 
     private String responseError;
 
-    private List<ResponseFieldError> responseFieldError;
+    private List<FieldErrorResponse> fieldErrorResponse;
 
 }

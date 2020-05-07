@@ -10,6 +10,7 @@ import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cookie;
@@ -107,6 +108,9 @@ public class RetrofitManager {
             LogUtils.d(TAG, "| ResponseBody: " + responseBody);
             LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
 
+            if(request.body() != null) {
+                LogUtils.d(TAG, "| RequestBody: " + Objects.requireNonNull(request.body()).toString());
+            }
             return response.newBuilder()
                     .body(ResponseBody.create(mediaType, responseBody))
                     .build();

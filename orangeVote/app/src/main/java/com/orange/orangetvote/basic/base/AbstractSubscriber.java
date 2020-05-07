@@ -11,7 +11,7 @@ import android.content.Context;
 import io.reactivex.subscribers.DisposableSubscriber;
 import okhttp3.ResponseBody;
 
-public abstract class BaseSubscriber<T> extends DisposableSubscriber<T> {
+public abstract class AbstractSubscriber<T> extends DisposableSubscriber<T> {
 
 
     protected BaseView view;
@@ -20,11 +20,11 @@ public abstract class BaseSubscriber<T> extends DisposableSubscriber<T> {
 
     private boolean isShowDialog;
 
-    public BaseSubscriber(BaseView view) {
+    public AbstractSubscriber(BaseView view) {
         this.view = view;
     }
 
-    public BaseSubscriber(BaseView view, boolean isShowDialog) {
+    public AbstractSubscriber(BaseView view, boolean isShowDialog) {
         this.view = view;
         this.isShowDialog = isShowDialog;
     }

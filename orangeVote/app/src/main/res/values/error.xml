@@ -4,6 +4,9 @@
     <string name="error_server_permission">You don\'t have permission.\nPlease contact admin.</string>
     <string name="error_server_backend">Server error. \nPlease try again later.</string>
     <string name="error_server_login">Incorrect Username or Password.</string>
+    <string name="error_server_error">Server Error : </string>
+    <string name="error_undefined">Undefined Error</string>
+    <string name="success">Success</string>
 
     <!--個人資料-->
     <string name="error_personal_0">Member NotFound</string>
@@ -11,5 +14,8 @@
     <string name="error_personal_2">Password Invalid</string>
     <string name="error_personal_3">OrangeID Duplicate</string>
     <string name="error_personal_4">Username Duplicate</string>
+    <string name="success_personal_update">Update Success</string>
 
+<!--新增投票-->
+    <string name="success_append_vote">Success Created</string>
 </resources>

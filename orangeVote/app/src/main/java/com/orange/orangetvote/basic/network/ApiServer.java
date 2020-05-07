@@ -4,6 +4,7 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -25,7 +26,10 @@ public interface ApiServer {
     @FormUrlEncoded
     @PUT()
     Observable<ResponseBody> executePutFormUrlEncode(@Url String url, @FieldMap Map<String, Object> fieldMap,
-                                                      @HeaderMap Map<String, Object> headerMap);
+        @HeaderMap Map<String, Object> headerMap);
+
+    @PUT()
+    Observable<ResponseBody> executePut(@Url String url, @Body Object object, @HeaderMap Map<String, Object> headerMap);
 
     @FormUrlEncoded
     @POST()

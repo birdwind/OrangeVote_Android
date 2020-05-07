@@ -1,0 +1,106 @@
+package com.orange.orangetvote.basic.base;
+
+import com.orange.orangetvote.MainApplication;
+import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.response.AbstractResponse;
+import com.orange.orangetvote.basic.response.BaseResponse;
+import com.orange.orangetvote.basic.utils.GsonUtils;
+import com.orange.orangetvote.basic.utils.LogUtils;
+import com.orange.orangetvote.basic.utils.rxHelper.RxException;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
+import android.content.Context;
+import io.reactivex.observers.DisposableObserver;
+import okhttp3.ResponseBody;
+
+public abstract class AbstractObserver<T extends ResponseBody, RS extends AbstractResponse, RD extends BaseResponse, FE extends FieldErrorResponse>
+    extends DisposableObserver<T> implements BaseObserver<RD, FE> {
+
+    protected BaseView view;
+
+    protected Context context = MainApplication.getAppContext();
+
+    private Class<RS> clazz;
+
+    public AbstractObserver(BaseView view, Class<RS> clazz) {
+        this.view = view;
+        this.clazz = clazz;
+    }
+
+    @Override
+    protected void onStart() {
+        if (view != null) {
+            view.showLoading();
+        }
+    }
+
+    @Override
+    public void onNext(T o) {
+        try {
+            String responseJson = o.string();
+            ServerResponse serverResponse = GsonUtils.parseJsonToBean(responseJson, ServerResponse.class);
+            RS response = GsonUtils.parseJsonToBean(responseJson, clazz);
+            if (serverResponse != null && response != null) {
+                switch (serverResponse.getErrorCode()) {
+                    case 0:
+                        // 成功
+                        onSuccess(response.getResponse());
+                        break;
+                    case 1:
+                        onError(context.getString(R.string.error_server_permission));
+                        // 沒有權限
+                        break;
+                    case 2:
+                        // 尚未登入
+                    case 9:
+                        // 登入紀錄過期
+                        view.onLoginError();
+                        break;
+                    case 6:
+                        onFieldsError(response.getFieldErrorResponse());
+                        // 送出資料不正確
+                        break;
+                    case 8:
+                        onError(context.getString(R.string.error_server_login));
+                        // 登入失敗
+                        break;
+                    default:
+                        // 3.沒找到資源 4.API找不到 5.伺服器錯誤 7.伺服器錯誤 10.少傳欄位
+                        onError(context.getString(R.string.error_server_backend));
+                        LogUtils.e(context.getString(R.string.error_server_error) + serverResponse.getErrorCode());
+                        break;
+
+                }
+            } else {
+                onError(context.getString(R.string.error_undefined));
+                LogUtils.e(context.getString(R.string.error_undefined) + " ServerResponse is Null");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        e.printStackTrace();
+        if (view != null) {
+            view.hideLoading();
+        }
+        if (e != null) {
+            onError(RxException.handleException(e).getMessage());
+        } else {
+            onError(context.getString(R.string.error_undefined));
+        }
+    }
+
+    @Override
+    public void onComplete() {
+        if (view != null) {
+            view.hideLoading();
+        }
+    }
+
+    @Override
+    public void onError(String msg) {
+        view.showError(msg);
+    }
+}

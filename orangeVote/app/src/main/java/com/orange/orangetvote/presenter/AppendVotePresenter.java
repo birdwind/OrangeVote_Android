@@ -1,15 +1,21 @@
 package com.orange.orangetvote.presenter;
 
-import com.orange.orangetvote.basic.base.BaseObserver;
-import com.orange.orangetvote.basic.base.BasePresenter;
-import com.orange.orangetvote.basic.utils.GsonUtils;
+import com.orange.orangetvote.basic.base.AbstractObserver;
+import com.orange.orangetvote.basic.base.AbstractPresenter;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.request.AppendVoteRequest;
+import com.orange.orangetvote.response.appendVote.AppendVoteResponse;
+import com.orange.orangetvote.response.appendVote.AppendVoteServerResponse;
+import com.orange.orangetvote.response.appendVote.TeamListResponse;
 import com.orange.orangetvote.response.appendVote.TeamListServerResponse;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.TeamApiServer;
 import com.orange.orangetvote.server.VoteApiServer;
 import com.orange.orangetvote.view.callback.AppendVoteView;
+import java.util.List;
+import okhttp3.ResponseBody;
 
-public class AppendVotePresenter extends BasePresenter<AppendVoteView> {
+public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
     public AppendVotePresenter(AppendVoteView baseView) {
         super(baseView);
     }
@@ -17,21 +23,16 @@ public class AppendVotePresenter extends BasePresenter<AppendVoteView> {
     public void teamList() {
         initParamAndHeader();
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
-            new BaseObserver(baseView) {
+            new AbstractObserver<ResponseBody, TeamListServerResponse, TeamListResponse, FieldErrorResponse>(baseView,
+                TeamListServerResponse.class) {
+
                 @Override
-                protected void onSuccess(String responseJson) {
-                    TeamListServerResponse teamListResponse =
-                        GsonUtils.parseJsonToBean(responseJson, TeamListServerResponse.class);
-                    baseView.loadTeamListSuccess(teamListResponse.getResponse());
+                public void onSuccess(List<TeamListResponse> responseList) {
+                    baseView.loadTeamListSuccess(responseList);
                 }
 
                 @Override
-                protected void onError(String msg) {
-
-                }
-
-                @Override
-                protected void onFieldsError(String responseJson) {
+                public void onFieldsError(List<FieldErrorResponse> responseFieldErrorList) {
 
                 }
 
@@ -41,20 +42,22 @@ public class AppendVotePresenter extends BasePresenter<AppendVoteView> {
     public void appendVote(AppendVoteRequest appendVoteRequest) {
         initParamAndHeader();
         packageToParamsMap(appendVoteRequest);
+
+        for (String key : paramsMap.keySet()) {
+            LogUtils.e(key + " : " + paramsMap.get(key));
+        }
+
         addDisposable(apiServer.executePutFormUrlEncode(VoteApiServer.APPEND.valueOfName(), paramsMap, headerMap),
-            new BaseObserver(baseView) {
-                @Override
-                protected void onSuccess(String responseJson) {
+            new AbstractObserver<ResponseBody, AppendVoteServerResponse, AppendVoteResponse, FieldErrorResponse>(
+                baseView, AppendVoteServerResponse.class) {
 
+                @Override
+                public void onSuccess(List<AppendVoteResponse> responseList) {
+                    baseView.onAppendSuccess();
                 }
 
                 @Override
-                protected void onError(String msg) {
-
-                }
-
-                @Override
-                protected void onFieldsError(String responseJson) {
+                public void onFieldsError(List<FieldErrorResponse> responseFieldErrorList) {
 
                 }
             });
