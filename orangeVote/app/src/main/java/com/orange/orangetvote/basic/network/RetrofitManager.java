@@ -101,10 +101,6 @@ public class RetrofitManager {
             LogUtils.d(TAG, "| ResponseHeader: " + responseHeader);
             LogUtils.d(TAG, "| ResponseBody: " + responseBody);
             LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
-
-            if (request.body() != null) {
-                LogUtils.d(TAG, "| RequestBody: " + Objects.requireNonNull(request.body()).toString());
-            }
             return response.newBuilder().body(ResponseBody.create(mediaType, responseBody)).build();
         }
     };

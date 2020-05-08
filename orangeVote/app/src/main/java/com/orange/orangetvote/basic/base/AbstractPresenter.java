@@ -22,11 +22,11 @@ public class AbstractPresenter<V extends BaseView> {
 
     public CompositeDisposable compositeDisposable;
 
-    protected HashMap<String, Object> paramsMap = new HashMap<>();
-
     protected HashMap<String, Object> headerMap = new HashMap<>();
 
     protected HashMap<String, Object> fieldMap = new HashMap<>();
+
+    protected HashMap<String, Object> paramsMap = new HashMap<>();
 
     public V baseView;
 

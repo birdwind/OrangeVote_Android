@@ -211,7 +211,6 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         if (view.getId() == R.id.bt_vote) {
-            LogUtils.e("按鍵");
             String voteUuid = view.getTag().toString();
             VoteRequest voteRequest =
                 new VoteRequest(voteUuid, optionListMap.get(voteUuid), addOptionModelListMap.get(voteUuid));

@@ -80,7 +80,6 @@ public class AppendVoteOptionAdapter extends BaseQuickAdapter<String, BaseViewHo
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            LogUtils.e(position + " : EditText");
             data.set(position, charSequence.toString());
         }
 
@@ -99,7 +98,6 @@ public class AppendVoteOptionAdapter extends BaseQuickAdapter<String, BaseViewHo
 
         @Override
         public void onClick(View view) {
-            LogUtils.e(position + " : Button");
             data.remove(position);
             textListenerMap.remove(position);
             notifyDataSetChanged();

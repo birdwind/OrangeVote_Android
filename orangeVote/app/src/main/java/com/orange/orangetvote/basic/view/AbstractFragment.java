@@ -237,7 +237,7 @@ public abstract class AbstractFragment<P extends AbstractPresenter> extends Frag
     public void onDestroy() {
         super.onDestroy();
         clearDisposable();
-        LogUtils.e(className, "onStop");
+        LogUtils.e(className, "onDestroy");
     }
 
     @Override
