@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.orange.orangetvote.basic.network.ApiServer;
 import com.orange.orangetvote.basic.network.RetrofitManager;
 import com.orange.orangetvote.basic.utils.LogUtils;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import io.reactivex.Flowable;
@@ -16,18 +16,17 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class AbstractPresenter<V extends BaseView> {
 
     public CompositeDisposable compositeDisposable;
 
-    protected Map<String, Object> paramsMap = new HashMap<>();
+    protected HashMap<String, Object> paramsMap = new HashMap<>();
 
-    protected Map<String, Object> headerMap = new HashMap<>();
+    protected HashMap<String, Object> headerMap = new HashMap<>();
 
-    protected Map<String, RequestBody> requestBodyMap = new HashMap<>();
-
-    protected RequestBody requestBody;
+    protected HashMap<String, Object> fieldMap = new HashMap<>();
 
     public V baseView;
 
@@ -45,7 +44,7 @@ public class AbstractPresenter<V extends BaseView> {
         removeDisposable();
     }
 
-    public void addDisposable(Observable<?> flowable, AbstractObserver observer) {
+    public void addDisposable(Observable<ResponseBody> flowable, AbstractObserver observer) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
@@ -54,7 +53,7 @@ public class AbstractPresenter<V extends BaseView> {
 
     }
 
-    public void addDisposable(Flowable<?> flowable, AbstractSubscriber subscriber) {
+    public void addDisposable(Flowable<Object> flowable, AbstractSubscriber subscriber) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
@@ -73,72 +72,53 @@ public class AbstractPresenter<V extends BaseView> {
         RetrofitManager.getInstance().removeCookies();
     }
 
-    protected void initParamAndHeader() {
+    protected void initMap() {
         initParamMap();
         initHeaderMap();
-        initRequestBodyMap();
+        initFieldMap();
     }
 
-    protected void initParamMap() {
+    private void initParamMap() {
         paramsMap.clear();
     }
 
-    protected void initHeaderMap() {
+    private void initHeaderMap() {
         headerMap.clear();
     }
 
-    protected void initRequestBodyMap() {
-        requestBodyMap.clear();
+    private void initFieldMap() {
+        fieldMap.clear();
     }
 
-    protected void packageToRequestBody() {
-        initRequestBodyMap();
-        for (String key : paramsMap.keySet()) {
-            RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"),
-                paramsMap.get(key) == null ? "" : paramsMap.get(key).toString());
-            requestBodyMap.put(key, requestBody);
-        }
-    }
-
-    protected void packageToParamsMap(Object obj) {
+    protected RequestBody packageToRequestBody(Object obj) {
         ObjectMapper oMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
-        HashMap<String, Object> tempMap = oMapper.convertValue(obj, HashMap.class);
-
-//        try {
-//
-//            for (String key : tempMap.keySet()) {
-//                Object object = tempMap.get(key);
-//                if (object instanceof List) {
-//                    LogUtils.e("這是List");
-//                    String temp = oMapper.writeValueAsString(object).replace("{", "").replace("}", "").replace("[", "")
-//                        .replace("]", "").replace("\"", "");
-//                    tempMap.put(key, temp);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        paramsMap.putAll(tempMap);
-
-        requestBody = getRequestBody(tempMap);
+        String json = "";
+        try {
+            json = oMapper.writeValueAsString(obj);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return RequestBody.create(json, MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"));
     }
 
-    public RequestBody getRequestBody(HashMap<String, Object> hashMap) {
-        StringBuffer data = new StringBuffer();
-        if (hashMap != null && hashMap.size() > 0) {
-            Iterator iter = hashMap.entrySet().iterator();
-            while (iter.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter.next();
-                Object key = entry.getKey();
-                Object val = entry.getValue();
-                data.append(key).append("=").append(val).append("&");
+    protected HashMap<String, Object> parseObjectToHashMap(Object object) {
+        HashMap tempMap = new HashMap<>();
+        ObjectMapper oMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        tempMap = oMapper.convertValue(object, HashMap.class);
+        try {
+            for (Object key : tempMap.keySet()) {
+                Object obj = tempMap.get(key);
+                if (obj instanceof List) {
+                    LogUtils.e("這是List");
+                    String temp = oMapper.writeValueAsString(obj).replace("{", "").replace("}", "").replace("[", "")
+                            .replace("]", "").replace("\"", "");
+                    tempMap.put(key, temp);
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        String jso = data.substring(0, data.length() - 1);
-        RequestBody requestBody =
-                RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"),jso);
 
-        return requestBody;
+        return tempMap;
     }
 }

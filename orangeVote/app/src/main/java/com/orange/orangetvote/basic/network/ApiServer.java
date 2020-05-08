@@ -1,10 +1,11 @@
 package com.orange.orangetvote.basic.network;
 
-import java.util.Map;
+import java.util.HashMap;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -19,43 +20,48 @@ import retrofit2.http.Url;
 
 public interface ApiServer {
 
-    @GET()
-    Observable<ResponseBody> executeGet(@Url String url, @QueryMap Map<String, Object> paramMap,
-        @HeaderMap Map<String, Object> headerMap);
+    @GET
+    Observable<ResponseBody> executeGet(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @HeaderMap HashMap<String, Object> headerMap);
+
+    @POST
+    Observable<ResponseBody> executePost(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @Body RequestBody requestBody, @HeaderMap HashMap<String, Object> headerMap);
 
     @FormUrlEncoded
-    @PUT()
-    Observable<ResponseBody> executePutFormUrlEncode(@Url String url, @FieldMap Map<String, Object> fieldMap,
-        @HeaderMap Map<String, Object> headerMap);
+    @POST
+    Observable<ResponseBody> executePostFormUrlEncode(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @FieldMap HashMap<String, Object> fieldMap, @HeaderMap HashMap<String, Object> headerMap);
 
-    @PUT()
-    Observable<ResponseBody> executePut(@Url String url, @Body RequestBody requestBody, @HeaderMap Map<String, Object> headerMap);
+    @PUT
+    Observable<ResponseBody> executePut(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @Body RequestBody requestBody, @HeaderMap HashMap<String, Object> headerMap);
 
     @FormUrlEncoded
-    @POST()
-    Observable<ResponseBody> executePostFormUrlEncode(@Url String url, @FieldMap Map<String, Object> fieldMap,
-        @HeaderMap Map<String, Object> headerMap);
+    @PUT
+    Observable<ResponseBody> executePutFormUrlEncode(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @FieldMap HashMap<String, Object> fieldMap, @HeaderMap HashMap<String, Object> headerMap);
 
-    @POST()
-    Observable<ResponseBody> executePostWithGet(@Url String url, @QueryMap Map<String, Object> paramMap,
-        @HeaderMap Map<String, Object> headerMap);
+    @DELETE
+    Observable<RequestBody> executeDelete(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @Body RequestBody requestBody, @HeaderMap HashMap<String, Object> headerMap);
+
+    @FormUrlEncoded
+    @DELETE
+    Observable<RequestBody> executeDeleteFormUrlEncode(@Url String url, @QueryMap HashMap<String, Object> paramMap,
+        @FieldMap HashMap<String, Object> fieldMap, @HeaderMap HashMap<String, Object> headerMap);
 
     // @Multipart
-    // @POST()
-    // Observable<ResponseBody> executePost(@Url String url,
-    // @Part() List<MultipartBody.Part> parts,
-    // @HeaderMap Map<String, Object> headerMap);
-    @Multipart
-    @POST()
-    Observable<ResponseBody> executePostMultipart(@Url String url, @PartMap Map<String, RequestBody> partMap,
-        @HeaderMap Map<String, Object> headerMap);
+    // @POST
+    // Observable<ResponseBody> executePostMultipart(@Url String url, @PartMap HashMap<String, Object> partMap,
+    // @HeaderMap HashMap<String, Object> headerMap);
 
     @Multipart
-    @POST()
+    @POST
     Observable<ResponseBody> upLoadFile(@Url String url, @Part("image\"; filename=\"image.jpg") RequestBody avatar,
-        @HeaderMap Map<String, Object> headerMap);
+        @HeaderMap HashMap<String, Object> headerMap);
 
-    @POST()
+    @POST
     Observable<ResponseBody> uploadFiles(@Url String url, @Part("filename") String description,
-        @PartMap() Map<String, RequestBody> maps, @HeaderMap Map<String, Object> headerMap);
+        @PartMap HashMap<String, Object> maps, @HeaderMap HashMap<String, Object> headerMap);
 }

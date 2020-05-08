@@ -20,15 +20,15 @@ public class LoginPresenter extends AbstractPresenter<LoginView> {
     }
 
     public void login(String username, String pwd) {
-        paramsMap.clear();
-        paramsMap.put("username", username);
-        paramsMap.put("password", pwd);
+        initMap();
 
-        headerMap.clear();
+        fieldMap.put("username", username);
+        fieldMap.put("password", pwd);
 
         removeCookie();
 
-        addDisposable(apiServer.executePostFormUrlEncode(AuthApiServer.Login.valueOfName(), paramsMap, headerMap),
+        addDisposable(
+            apiServer.executePostFormUrlEncode(AuthApiServer.Login.valueOfName(), paramsMap, fieldMap, headerMap),
             new AbstractObserver<ResponseBody, LoginServerResponse, LoginResponse, FieldErrorResponse>(baseView,
                 LoginServerResponse.class) {
 

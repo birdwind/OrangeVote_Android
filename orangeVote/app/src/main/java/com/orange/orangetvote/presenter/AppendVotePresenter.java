@@ -13,6 +13,7 @@ import com.orange.orangetvote.server.TeamApiServer;
 import com.orange.orangetvote.server.VoteApiServer;
 import com.orange.orangetvote.view.callback.AppendVoteView;
 import java.util.List;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
@@ -21,7 +22,7 @@ public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
     }
 
     public void teamList() {
-        initParamAndHeader();
+        initMap();
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
             new AbstractObserver<ResponseBody, TeamListServerResponse, TeamListResponse, FieldErrorResponse>(baseView,
                 TeamListServerResponse.class) {
@@ -40,14 +41,11 @@ public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
     }
 
     public void appendVote(AppendVoteRequest appendVoteRequest) {
-        initParamAndHeader();
-        packageToParamsMap(appendVoteRequest);
+        initMap();
 
-        for (String key : paramsMap.keySet()) {
-            LogUtils.e(key + " : " + paramsMap.get(key));
-        }
+        fieldMap = parseObjectToHashMap(appendVoteRequest);
 
-        addDisposable(apiServer.executePut(VoteApiServer.APPEND.valueOfName(), requestBody, headerMap),
+        addDisposable(apiServer.executePutFormUrlEncode(VoteApiServer.APPEND.valueOfName(), paramsMap, fieldMap, headerMap),
             new AbstractObserver<ResponseBody, AppendVoteServerResponse, AppendVoteResponse, FieldErrorResponse>(
                 baseView, AppendVoteServerResponse.class) {
 

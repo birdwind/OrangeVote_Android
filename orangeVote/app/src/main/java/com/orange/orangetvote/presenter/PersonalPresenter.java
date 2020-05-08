@@ -19,7 +19,7 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
     }
 
     public void loadPersonalInfo() {
-        initParamAndHeader();
+        initMap();
         addDisposable(apiServer.executeGet(PersonalApiServer.PERSONAL_INFO.valueOfName(), paramsMap, headerMap),
             new AbstractObserver<ResponseBody, PersonalServerResponse, PersonalResponse, FieldErrorResponse>(baseView,
                 PersonalServerResponse.class) {
@@ -36,11 +36,12 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
     }
 
     public void updatePersonalInfo(PersonalRequest personalRequest) {
-        initParamAndHeader();
-        packageToParamsMap(personalRequest);
+        initMap();
+        fieldMap = parseObjectToHashMap(personalRequest);
 
         addDisposable(
-            apiServer.executePostFormUrlEncode(PersonalApiServer.PERSONAL_UPDATE.valueOfName(), paramsMap, headerMap),
+            apiServer.executePostFormUrlEncode(PersonalApiServer.PERSONAL_UPDATE.valueOfName(), paramsMap, fieldMap,
+                headerMap),
             new AbstractObserver<ResponseBody, PersonalServerResponse, PersonalResponse, FieldErrorResponse>(baseView,
                 PersonalServerResponse.class) {
 

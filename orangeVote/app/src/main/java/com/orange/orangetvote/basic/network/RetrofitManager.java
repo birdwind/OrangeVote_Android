@@ -1,18 +1,14 @@
 package com.orange.orangetvote.basic.network;
 
-import android.content.Context;
-import android.text.TextUtils;
-
 import com.orange.orangetvote.MainApplication;
 import com.orange.orangetvote.basic.config.Config;
 import com.orange.orangetvote.basic.utils.LogUtils;
-import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
+import android.content.Context;
+import android.text.TextUtils;
 import okhttp3.Cookie;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -29,11 +25,17 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RetrofitManager {
 
     private String TAG = "ApiRetrofit";
+
     private static final int DEFAULT_TIMEOUT = 10;
+
     private static RetrofitManager sNewInstance;
+
     private String baseUrl = Config.BASE_URL;
+
     private ApiServer apiServer;
+
     private Context context = MainApplication.getAppContext();
+
     private static CookieManger cookieManger;
 
     private static class SingletonHolder {
@@ -57,27 +59,19 @@ public class RetrofitManager {
         if (TextUtils.isEmpty(baseUrl)) {
             baseUrl = this.baseUrl;
         }
-        if(cookieManger == null) {
+        if (cookieManger == null) {
             cookieManger = new CookieManger(context);
         }
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addNetworkInterceptor(
-                        new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
-                .cookieJar(new CookieManger(context))
-                .addInterceptor(interceptor)
-                //.addInterceptor(new HeaderInterceptor(Map<String, String> headers)
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+            .addNetworkInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
+            .cookieJar(new CookieManger(context)).addInterceptor(interceptor)
+            // .addInterceptor(new HeaderInterceptor(Map<String, String> headers)
+            .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).build();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl(baseUrl)
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create()).addConverterFactory(ScalarsConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).baseUrl(baseUrl).build();
         apiServer = retrofit.create(ApiServer.class);
     }
 
@@ -108,20 +102,18 @@ public class RetrofitManager {
             LogUtils.d(TAG, "| ResponseBody: " + responseBody);
             LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
 
-            if(request.body() != null) {
+            if (request.body() != null) {
                 LogUtils.d(TAG, "| RequestBody: " + Objects.requireNonNull(request.body()).toString());
             }
-            return response.newBuilder()
-                    .body(ResponseBody.create(mediaType, responseBody))
-                    .build();
+            return response.newBuilder().body(ResponseBody.create(mediaType, responseBody)).build();
         }
     };
 
-    public void removeCookies(){
+    public void removeCookies() {
         cookieManger.removeCookies();
     }
 
-    public List<Cookie> getCookies(){
+    public List<Cookie> getCookies() {
         return cookieManger.getCookies();
     }
 }

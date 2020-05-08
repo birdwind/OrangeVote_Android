@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -89,6 +88,7 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
         Boolean isSign = cbSign.isChecked();
         int multiply = Integer.parseInt(etMultiply.getText().toString());
         List<String> optionValueList = new ArrayList<>(voteOptionList);
+
         AppendVoteRequest appendVoteRequest = new AppendVoteRequest(null, voteName, content, multiply, expiredDate,
             teamUuid, isAllowAdd, isOpenVoting, isSign, optionValueList);
         presenter.appendVote(appendVoteRequest);
@@ -168,8 +168,8 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     @Override
     public void onAppendSuccess() {
-//        showToast(getString(R.string.success_append_vote));
-        ((AbstractActivity)context).onBackPressed();
+        // showToast(getString(R.string.success_append_vote));
+        ((AbstractActivity) context).onBackPressed();
     }
 
     @Override
