@@ -53,4 +53,8 @@
     <!--登出Dialog-->
     <string name="logout_title">Logout</string>
     <string name="logout_content">你確定要登出了嗎?</string>
+
+    <!--投票紀錄-->
+    <string name="vote_record_my_vote">My Vote</string>
+    <string name="vote_record_my_voted">Voted</string>
 </resources>

@@ -8,12 +8,14 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_vote_record"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         app:tabMode="fixed"
-        app:tabGravity="center"
-        app:tabIndicatorColor="@color/colorTheme"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorWhite"
         app:tabIndicatorHeight="1dp"
-        android:background="@color/colorTheme"/>
+        app:tabTextColor="@color/colorWhite"
+        app:tabMaxWidth="0dp"
+        android:background="@color/colorTheme" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpager_vote_record"

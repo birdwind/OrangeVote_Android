@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_small">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_default"
+        android:orientation="vertical"
+        android:background="@color/colorThemeGrey">
+
+        <TextView
+            android:id="@+id/tv_vote_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/tv_vote_team"
+            android:text="隊長選舉"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_large" />
+
+        <TextView
+            android:id="@+id/tv_vote_team"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="全部"
+            android:textColor="@color/colorTheme"
+            android:textSize="@dimen/textsize_default" />
+
+
+        <TextView
+            android:id="@+id/tv_vote_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_vote_title"
+            android:layout_marginLeft="@dimen/margin_default"
+            android:text="這是對長選舉"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_min" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_vote_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_vote_description" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_vote_option"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_vote_multiply"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/theme_text_view_height"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:background="@drawable/style_button_radius_theme"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/theme_text_view_padding"
+                android:paddingEnd="@dimen/theme_text_view_padding"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/ThemeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vote_multiply"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/tv_vote_multiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/padding_2dp"
+                    android:text="2"
+                    android:textColor="@color/colorWhite" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_vote_sign"
+                style="@style/ThemeTextView"
+                android:text="@string/vote_sign"
+                android:paddingStart="@dimen/theme_text_view_padding"
+                android:paddingEnd="@dimen/theme_text_view_padding"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

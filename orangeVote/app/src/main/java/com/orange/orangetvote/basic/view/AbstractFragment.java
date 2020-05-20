@@ -78,7 +78,6 @@ public abstract class AbstractFragment<P extends AbstractPresenter> extends Frag
     }
 
     public void showToast(String s) {
-        // Toast.makeText(context, s, Toast.LENGTH_LONG).show();
         ToastUtils.show(s);
     }
 

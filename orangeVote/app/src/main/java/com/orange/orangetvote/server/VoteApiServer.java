@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public enum VoteApiServer implements BaseEnums {
 
-    VOTE_LIST("/list"), VOTE("/option"), APPEND("");
+    VOTE_LIST("/list"), VOTE("/option"), APPEND(""), MY_VOTE_LIST("/create/list");
 
     private String Url;
 

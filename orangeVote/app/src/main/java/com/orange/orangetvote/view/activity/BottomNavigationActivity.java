@@ -212,7 +212,9 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @Override
     public void updateToolbar(String title, Boolean isShowBack, Boolean isShowClose, Boolean isShowMenu) {
-        tvTitle.setText(title);
+        if(title != null){
+            tvTitle.setText(title);
+        }
         showBackButton(isShowBack);
         showCloseButton(isShowClose);
         showMenuButton(isShowMenu);
