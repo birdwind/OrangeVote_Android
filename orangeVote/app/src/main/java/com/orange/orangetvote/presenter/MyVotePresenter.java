@@ -33,4 +33,22 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
                 }
             });
     }
+
+    public void myVotedList() {
+        initMap();
+
+        addDisposable(apiServer.executeGet(VoteApiServer.MY_VOTED_LIST.valueOfName(), paramsMap, headerMap),
+            new AbstractObserver<RealResponseBody, MyVoteServerResponse, MyVoteResponse, FieldErrorResponse>(baseView,
+                MyVoteServerResponse.class) {
+                @Override
+                public void onSuccess(List responseList) {
+
+                }
+
+                @Override
+                public void onFieldsError(List responseFieldErrorList) {
+
+                }
+            });
+    }
 }

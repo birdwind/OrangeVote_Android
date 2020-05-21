@@ -6,6 +6,7 @@ import com.orange.orangetvote.basic.response.AbstractResponse;
 import com.orange.orangetvote.basic.response.BaseResponse;
 import com.orange.orangetvote.basic.utils.GsonUtils;
 import com.orange.orangetvote.basic.utils.LogUtils;
+import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.basic.utils.rxHelper.RxException;
 import com.orange.orangetvote.response.system.FieldErrorResponse;
 import android.content.Context;
@@ -38,6 +39,13 @@ public abstract class AbstractObserver<T extends ResponseBody, RS extends Abstra
         try {
             String responseJson = o.string();
             ServerResponse serverResponse = GsonUtils.parseJsonToBean(responseJson, ServerResponse.class);
+            String localVersion = SharedPreferencesUtils.get("version", "0");
+            String version = serverResponse.getApiVersion();
+            if (localVersion.equals("0")) {
+                SharedPreferencesUtils.put("version", version);
+            } else if (!version.equals(localVersion)) {
+                onError(context.getString(R.string.error_version_not_match));
+            }
             RS response = GsonUtils.parseJsonToBean(responseJson, clazz);
             if (serverResponse != null && response != null) {
                 switch (serverResponse.getErrorCode()) {
@@ -75,21 +83,20 @@ public abstract class AbstractObserver<T extends ResponseBody, RS extends Abstra
                 LogUtils.e(context.getString(R.string.error_undefined) + " ServerResponse is Null");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            onError(context.getString(R.string.error_undefined));
+            LogUtils.exception(e);
+            // e.printStackTrace();
         }
     }
 
     @Override
     public void onError(Throwable e) {
-        e.printStackTrace();
+        LogUtils.exception(e);
+        // e.printStackTrace();
         if (view != null) {
             view.hideLoading();
         }
-        if (e != null) {
-            onError(RxException.handleException(e).getMessage());
-        } else {
-            onError(context.getString(R.string.error_undefined));
-        }
+        onError(RxException.handleException(e).getMessage());
     }
 
     @Override

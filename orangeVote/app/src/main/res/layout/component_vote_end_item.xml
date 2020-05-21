@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_small">
+    android:layout_margin="@dimen/margin_default">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,7 +45,9 @@
             android:id="@+id/rv_vote_option"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_vote_description" />
+            android:layout_below="@id/tv_vote_description"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingTop="@dimen/padding_small"/>
 
         <LinearLayout
             android:layout_width="match_parent"

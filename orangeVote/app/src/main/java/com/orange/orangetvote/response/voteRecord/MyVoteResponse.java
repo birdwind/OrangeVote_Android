@@ -2,6 +2,8 @@ package com.orange.orangetvote.response.voteRecord;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.orange.orangetvote.basic.response.BaseResponse;
+import com.orange.orangetvote.response.vote.VoteOptionResponse;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,8 +31,9 @@ public class MyVoteResponse implements BaseResponse, MultiItemEntity {
 
     private boolean isVoted;
 
-    // private String options;
-    // private String optionsDetail;
+     private List<VoteOptionResponse> options;
+
+     private List<VoteOptionDetailResponse> optionsDetail;
 
     @Override
     public int getItemType() {
@@ -38,9 +41,9 @@ public class MyVoteResponse implements BaseResponse, MultiItemEntity {
             return 2;
         }else{
             if (isVoted) {
-                return 0;
-            } else {
                 return 1;
+            } else {
+                return 0;
             }
         }
     }

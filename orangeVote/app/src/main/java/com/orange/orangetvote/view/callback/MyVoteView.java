@@ -7,4 +7,6 @@ import java.util.List;
 public interface MyVoteView extends BaseView {
 
     void loadMyVoteList(List<MyVoteResponse> myVoteResponseList);
+
+    void loadMyVotedList(List<MyVoteResponse> myVoteResponseList);
 }

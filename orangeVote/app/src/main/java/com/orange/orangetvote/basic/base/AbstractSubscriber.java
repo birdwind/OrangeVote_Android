@@ -83,7 +83,8 @@ public abstract class AbstractSubscriber<T extends ResponseBody, RS extends Abst
                 LogUtils.e(context.getString(R.string.error_undefined) + " ServerResponse is Null");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
         }
     }
 

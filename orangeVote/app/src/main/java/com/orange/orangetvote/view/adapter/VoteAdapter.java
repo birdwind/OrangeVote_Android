@@ -13,9 +13,9 @@ import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-//TODO: 設定已投票樣式
-public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> implements
-    BaseQuickAdapter.OnItemChildClickListener, View.OnFocusChangeListener{
+// TODO: 設定已投票樣式
+public class VoteAdapter extends BaseQuickAdapter<VoteResponse, BaseViewHolder>
+    implements BaseQuickAdapter.OnItemChildClickListener, View.OnFocusChangeListener {
 
     private VoteListener voteListener;
 
@@ -23,7 +23,7 @@ public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> i
 
     private EditText etAddOption;
 
-    public VoteAdapte(int layoutResId, List<VoteResponse> data, VoteListener voteListener) {
+    public VoteAdapter(int layoutResId, List<VoteResponse> data, VoteListener voteListener) {
         super(layoutResId, data);
         this.voteListener = voteListener;
     }
@@ -31,8 +31,8 @@ public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> i
     @Override
     protected void convert(BaseViewHolder helper, VoteResponse item) {
         final RecyclerView recyclerView = helper.getView(R.id.rv_vote_option);
-        final VoteOptionAdapte voteOptionAdapte =
-            new VoteOptionAdapte(R.layout.component_vote_option_item, item.getVoteOptions(), item.getVoteUuid());
+        final VoteOptionAdapter voteOptionAdapter = new VoteOptionAdapter(R.layout.component_vote_option_item,
+            item.getVoteOptions(), item.getVoteUuid(), item.getIsVoted());
         recyclerView.setLayoutManager(
             new LinearLayoutManager(helper.itemView.getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
@@ -59,12 +59,11 @@ public class VoteAdapte extends BaseQuickAdapter<VoteResponse, BaseViewHolder> i
             helper.setGone(R.id.ll_vote_addOption, false);
         }
 
-        recyclerView.setAdapter(voteOptionAdapte);
-        voteOptionAdapte.setOnItemChildClickListener(this);
+        recyclerView.setAdapter(voteOptionAdapter);
+        voteOptionAdapter.setOnItemChildClickListener(this);
         cbAddOption = helper.getView(R.id.cb_vote_addOption);
         etAddOption = helper.getView(R.id.et_vote_addOption);
         etAddOption.setOnFocusChangeListener(this);
-
 
         helper.setTag(R.id.et_vote_addOption, item.getVoteUuid());
         helper.setTag(R.id.bt_vote, item.getVoteUuid());

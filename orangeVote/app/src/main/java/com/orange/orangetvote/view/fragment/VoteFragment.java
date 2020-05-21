@@ -2,13 +2,12 @@ package com.orange.orangetvote.view.fragment;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.model.AddVoteOptionModel;
 import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.request.VoteRequest;
 import com.orange.orangetvote.response.vote.VoteResponse;
-import com.orange.orangetvote.view.adapter.VoteAdapte;
+import com.orange.orangetvote.view.adapter.VoteAdapter;
 import com.orange.orangetvote.view.adapter.callback.VoteListener;
 import com.orange.orangetvote.view.callback.VoteView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -30,7 +29,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
 
     private List<VoteResponse> voteResponseList;
 
-    private VoteAdapte voteAdapte;
+    private VoteAdapter voteAdapter;
 
     private Map<String, List<String>> optionListMap;
 
@@ -54,7 +53,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
 
     @Override
     public void addListener() {
-        voteAdapte.setOnItemChildClickListener(this);
+        voteAdapter.setOnItemChildClickListener(this);
         smartRefreshLayout.setOnRefreshListener(this);
     }
 
@@ -62,14 +61,14 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     public void initView() {
         rvVote.setHasFixedSize(true);
         rvVote.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvVote.setAdapter(voteAdapte);
+        rvVote.setAdapter(voteAdapter);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         voteResponseList = new ArrayList<>();
         initLocalTempData();
-        voteAdapte = new VoteAdapte(R.layout.component_vote_item, voteResponseList, this);
+        voteAdapter = new VoteAdapter(R.layout.component_vote_item, voteResponseList, this);
     }
 
     @Override
@@ -81,7 +80,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     public void loadVoteListApiSuccess(List<VoteResponse> voteResponseList) {
         this.voteResponseList.clear();
         this.voteResponseList.addAll(voteResponseList);
-        voteAdapte.notifyDataSetChanged();
+        voteAdapter.notifyDataSetChanged();
     }
 
     @Override

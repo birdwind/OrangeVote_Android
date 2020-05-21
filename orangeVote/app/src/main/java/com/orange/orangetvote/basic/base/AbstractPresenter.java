@@ -96,7 +96,8 @@ public class AbstractPresenter<V extends BaseView> {
         try {
             json = oMapper.writeValueAsString(obj);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
         }
         return RequestBody.create(json, MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"));
     }
@@ -116,7 +117,8 @@ public class AbstractPresenter<V extends BaseView> {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
         }
 
         return tempMap;

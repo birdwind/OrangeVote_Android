@@ -134,7 +134,7 @@ public class BottomNavigationActivity extends AbstractActivity
 
     private boolean onNavigationItemClicked(int tab){
         if(currentNavigationPosition == tab && !mNavController.isRootFragment()){
-            mNavController.popFragment(popFragNavTransactionOptions);
+            mNavController.clearStack(popFragNavTransactionOptions);
         }
         switchTab(tab);
         fragmentHistory.push(tab);
