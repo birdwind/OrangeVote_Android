@@ -6,6 +6,7 @@
     <string name="error_server_login">帳號或密碼錯誤</string>
     <string name="error_server_error">伺服器錯誤 : </string>
     <string name="error_undefined">未知錯誤</string>
+    <string name="error_version_not_match">您的版本過舊，請至Google Play更新，以防錯誤發生。</string>
     <string name="success">成功</string>
 
     <!--個人資料-->

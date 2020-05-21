@@ -178,7 +178,8 @@ public class SharedPreferencesUtils {
         try {
             return (T) get(key, clazz.newInstance());
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
         }
         return null;
     }

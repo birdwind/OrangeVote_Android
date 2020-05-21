@@ -75,6 +75,10 @@ public class LogUtils {
         }
     }
 
+    public static void exception(Throwable e){
+        log(ERROR_LEVEL, getClassName(), e.getMessage());
+    }
+
     /**
      * Log.d輸出
      *

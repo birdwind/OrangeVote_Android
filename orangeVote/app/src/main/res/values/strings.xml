@@ -40,6 +40,7 @@
     <string name="account_vote_record">Vote Record</string>
     <string name="account_authority">Authority Management</string>
     <string name="account_logout">Logout</string>
+    <string name="account_version">Ver.{version}</string>
 
     <!--個人資料-->
     <string name="personal_orangeId">Orange ID</string>

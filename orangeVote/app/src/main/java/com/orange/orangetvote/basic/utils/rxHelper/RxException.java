@@ -4,6 +4,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializer;
 import com.google.gson.JsonSyntaxException;
 import com.orange.orangetvote.basic.enums.ErrorCodeEnums;
+import com.orange.orangetvote.basic.utils.LogUtils;
 
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
@@ -53,7 +54,8 @@ public class RxException extends Exception {
             try {
                 rxException.message = httpException.response().errorBody().string();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                LogUtils.exception(ex);
+//                ex.printStackTrace();
                 rxException.message = ex.getMessage();
             }
             return rxException;

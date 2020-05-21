@@ -2,15 +2,23 @@ package com.orange.orangetvote.view.fragment;
 
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
+import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.view.dialog.LogoutDialog;
 import com.orange.orangetvote.view.dialog.LogoutDialogListener;
 import android.os.Bundle;
+import android.widget.TextView;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class AccountFragment extends AbstractFragment implements LogoutDialogListener {
 
     private LogoutDialog logoutDialog;
+
+    private String version;
+
+    @BindView(R.id.tv_account_version)
+    TextView tvVersion;
 
     @OnClick(R.id.tv_account_personal)
     void clickPersonal() {
@@ -50,7 +58,8 @@ public class AccountFragment extends AbstractFragment implements LogoutDialogLis
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        version = SharedPreferencesUtils.get("version", "error");
+        tvVersion.setText(getString(R.string.account_version).replace("{version}", version));
     }
 
     @Override

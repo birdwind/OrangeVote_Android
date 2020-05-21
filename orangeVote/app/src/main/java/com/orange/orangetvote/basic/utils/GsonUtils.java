@@ -34,7 +34,8 @@ public class GsonUtils {
         try {
             t = gson.fromJson(json, clazz);
         } catch (Exception e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
             return null;
         }
         return t;
@@ -64,7 +65,8 @@ public class GsonUtils {
                 }
             }
         } catch (JsonSyntaxException e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
             return null;
         }
 
@@ -100,7 +102,8 @@ public class GsonUtils {
             jsonObject = new JSONObject(json);
             value = jsonObject.getString(key);
         } catch (JSONException e) {
-            e.printStackTrace();
+            LogUtils.exception(e);
+//            e.printStackTrace();
             return "";
         }
 

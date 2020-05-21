@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class ServerResponse implements BaseResponse {
 
+    private String apiVersion;
+
     private boolean status;
 
     private int errorCode;

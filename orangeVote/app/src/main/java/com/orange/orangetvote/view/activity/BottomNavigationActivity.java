@@ -3,6 +3,7 @@ package com.orange.orangetvote.view.activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.orange.orangetvote.R;
+import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavController;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavTransactionOptions;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentHistory;
@@ -120,20 +121,23 @@ public class BottomNavigationActivity extends AbstractActivity
                 return true;
             case R.id.i_home:
                 item.setIcon(R.drawable.icon_home_selected);
-                switchTab(0);
-                fragmentHistory.push(0);
-                return true;
+                return onNavigationItemClicked(0);
             case R.id.i_add:
-                switchTab(1);
-                fragmentHistory.push(1);
-                return true;
+                return onNavigationItemClicked(1);
             case R.id.i_account:
-                switchTab(2);
-                fragmentHistory.push(2);
-                return true;
+                return onNavigationItemClicked(2);
         }
 
         fragmentHistory.push(item.getItemId());
+        return true;
+    }
+
+    private boolean onNavigationItemClicked(int tab){
+        if(currentNavigationPosition == tab && !mNavController.isRootFragment()){
+            mNavController.popFragment(popFragNavTransactionOptions);
+        }
+        switchTab(tab);
+        fragmentHistory.push(tab);
         return true;
     }
 
@@ -183,7 +187,7 @@ public class BottomNavigationActivity extends AbstractActivity
         resetDefaultIcon();
         Menu menu = bottomNavigationViewEx.getMenu();
 
-        // 依靠tab煥頁
+        // 依靠tab換頁
         switch (index) {
             case 0:
                 menu.getItem(0).setIcon(R.drawable.icon_home_selected);
@@ -198,7 +202,7 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @Override
     public void onFragmentTransaction(Fragment fragment, FragNavController.TransactionType transactionType) {
-        // fragment煥頁
+        // fragment換頁
         if (getSupportActionBar() != null && mNavController != null) {
         }
     }
