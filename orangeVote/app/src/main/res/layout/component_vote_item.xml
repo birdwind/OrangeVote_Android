@@ -8,8 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_default"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/padding_default">
 
         <TextView
             android:id="@+id/tv_vote_title"
@@ -52,40 +52,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_vote_option"
+            android:layout_marginBottom="@dimen/margin_small"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/margin_small">
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/cb_vote_addOption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="false"/>
+                android:clickable="false" />
 
             <EditText
                 android:id="@+id/et_vote_addOption"
                 style="@style/ThemeEditText"
-                android:hint="新增選項"/>
+                android:hint="新增選項" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <com.orange.orangetvote.customerView.AutoBreakViewGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/ll_vote_addOption"
-            android:layout_toStartOf="@id/bt_vote"
-            android:orientation="horizontal">
+            android:layout_toStartOf="@id/bt_vote">
 
             <LinearLayout
                 android:id="@+id/ll_vote_multiply"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/theme_text_view_height"
-                android:layout_marginEnd="@dimen/margin_small"
                 android:background="@drawable/style_button_radius_theme"
+                android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingStart="@dimen/theme_text_view_padding"
-                android:paddingEnd="@dimen/theme_text_view_padding"
-                android:gravity="center">
+                android:paddingEnd="@dimen/theme_text_view_padding">
 
                 <TextView
                     style="@style/ThemeTextView"
@@ -107,18 +105,18 @@
             <TextView
                 android:id="@+id/tv_vote_sign"
                 style="@style/ThemeTextView"
-                android:text="@string/vote_sign"
                 android:paddingStart="@dimen/theme_text_view_padding"
-                android:paddingEnd="@dimen/theme_text_view_padding"/>
+                android:paddingEnd="@dimen/theme_text_view_padding"
+                android:text="@string/vote_sign" />
 
-        </LinearLayout>
+        </com.orange.orangetvote.customerView.AutoBreakViewGroup>
 
         <Button
             android:id="@+id/bt_vote"
             style="@style/ThemeButton"
             android:layout_below="@id/ll_vote_addOption"
             android:layout_alignParentEnd="true"
-            android:text="投票"/>
+            android:text="投票" />
 
     </RelativeLayout>
 

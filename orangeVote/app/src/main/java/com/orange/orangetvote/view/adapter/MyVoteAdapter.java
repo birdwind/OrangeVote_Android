@@ -4,7 +4,7 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.response.voteRecord.MyVoteResponse;
+import com.orange.orangetvote.response.vote.MyVoteResponse;
 import java.util.List;
 import android.view.View;
 import android.widget.CheckBox;

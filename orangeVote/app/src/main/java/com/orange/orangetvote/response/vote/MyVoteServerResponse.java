@@ -1,4 +1,4 @@
-package com.orange.orangetvote.response.voteRecord;
+package com.orange.orangetvote.response.vote;
 
 import com.orange.orangetvote.basic.response.AbstractResponse;
 

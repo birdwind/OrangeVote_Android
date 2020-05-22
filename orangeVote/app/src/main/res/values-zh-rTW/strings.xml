@@ -35,6 +35,7 @@
     <string name="append_vote_multiply">多選</string>
     <string name="append_vote_option_hint">請輸入選項</string>
     <string name="append_vote_confirm">新增投票</string>
+    <string name="update_vote_update">更新投票</string>
 
     <!--帳戶-->
     <string name="account_personal">個人資料</string>
@@ -59,4 +60,12 @@
     <!--投票紀錄-->
     <string name="vote_record_my_vote">我的投票</string>
     <string name="vote_record_my_voted">已投票</string>
+
+    <!--椪柑證-->
+    <string name="orange_credentials_orange_id">椪柑證號 : </string>
+    <string name="orange_credentials_name">姓名 : </string>
+    <string name="orange_credentials_school">學校 : </string>
+    <string name="orange_credentials_major">系所 : </string>
+    <string name="orange_credentials_identity">身分 : </string>
+    <string name="orange_credentials_graduation">屆數 : </string>
 </resources>

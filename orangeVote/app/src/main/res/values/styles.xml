@@ -17,6 +17,7 @@
         <item name="android:inputType">text</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <style name="ThemeButton" parent="TextAppearance.AppCompat.Button">
@@ -32,7 +33,7 @@
     <style name="ThemeTextView" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">@dimen/theme_text_view_height</item>
-        <item name="android:background">@drawable/style_button_radius_theme</item>
+        <item name="android:background">@drawable/style_button_radius_theme_disable</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center</item>
     </style>

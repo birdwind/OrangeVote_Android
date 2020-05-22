@@ -23,7 +23,7 @@
     <string name="vote_error_multiply">Select up to {multiply} item</string>
     <string name="vote_success">Success</string>
 
-    <!--新增投票-->
+    <!--新增/更新投票-->
     <string name="append_vote_title">Title</string>
     <string name="append_vote_description">Description</string>
     <string name="append_vote_option">Option</string>
@@ -34,6 +34,7 @@
     <string name="append_vote_multiply">Multiply</string>
     <string name="append_vote_option_hint">Please input option</string>
     <string name="append_vote_confirm">Create</string>
+    <string name="update_vote_update">Update</string>
 
     <!--帳戶-->
     <string name="account_personal">Personal Information</string>
@@ -58,4 +59,15 @@
     <!--投票紀錄-->
     <string name="vote_record_my_vote">My Vote</string>
     <string name="vote_record_my_voted">Voted</string>
+
+    <!--椪柑證-->
+    <string name="orange_credentials_title_zh" translatable="false">小椪柑志工服務隊</string>
+    <string name="orange_credentials_title_eng" translatable="false">SPG Volunteer</string>
+    <string name="orange_credentials_orange_id">OrangeID : </string>
+    <string name="orange_credentials_name">Name : </string>
+    <string name="orange_credentials_school">School : </string>
+    <string name="orange_credentials_major">Major : </string>
+    <string name="orange_credentials_identity">Identity : </string>
+    <string name="orange_credentials_graduation">Graduation : </string>
+
 </resources>

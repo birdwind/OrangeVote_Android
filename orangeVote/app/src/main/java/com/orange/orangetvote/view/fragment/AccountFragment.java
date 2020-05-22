@@ -30,6 +30,11 @@ public class AccountFragment extends AbstractFragment implements LogoutDialogLis
         fragmentNavigationListener.pushFragment(new VoteRecordFragment());
     }
 
+    @OnClick(R.id.tv_account_authority)
+    void clickAuthority(){
+        showToast("尚未開放");
+    }
+
     @OnClick(R.id.tv_account_logout)
     void clickLogout() {
         logoutDialog.show();

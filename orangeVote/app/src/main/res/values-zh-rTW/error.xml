@@ -7,6 +7,7 @@
     <string name="error_server_error">伺服器錯誤 : </string>
     <string name="error_undefined">未知錯誤</string>
     <string name="error_version_not_match">您的版本過舊，請至Google Play更新，以防錯誤發生。</string>
+    <string name="error_not_found">查無資料</string>
     <string name="success">成功</string>
 
     <!--個人資料-->
@@ -19,4 +20,5 @@
 
     <!--新增投票-->
     <string name="success_append_vote">建立成功</string>
+
 </resources>

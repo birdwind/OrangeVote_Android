@@ -3,7 +3,7 @@ package com.orange.orangetvote.view.fragment;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.presenter.MyVotePresenter;
-import com.orange.orangetvote.response.voteRecord.MyVoteResponse;
+import com.orange.orangetvote.response.vote.MyVoteResponse;
 import com.orange.orangetvote.view.callback.MyVoteView;
 import java.util.List;
 import android.os.Bundle;

@@ -7,6 +7,7 @@
     <string name="error_server_error">Server Error : </string>
     <string name="error_undefined">Undefined Error</string>
     <string name="error_version_not_match">Your APP version was too old. Please update APP to the latest.</string>
+    <string name="error_not_found">Not Found!</string>
     <string name="success">Success</string>
 
     <!--個人資料-->

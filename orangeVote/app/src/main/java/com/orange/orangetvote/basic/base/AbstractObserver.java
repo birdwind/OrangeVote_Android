@@ -84,8 +84,8 @@ public abstract class AbstractObserver<T extends ResponseBody, RS extends Abstra
             }
         } catch (Exception e) {
             onError(context.getString(R.string.error_undefined));
-            LogUtils.exception(e);
-            // e.printStackTrace();
+//            LogUtils.exception(e);
+             e.printStackTrace();
         }
     }
 

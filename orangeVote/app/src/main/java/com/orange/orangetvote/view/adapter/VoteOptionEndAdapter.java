@@ -3,8 +3,7 @@ package com.orange.orangetvote.view.adapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.response.vote.VoteOptionResponse;
-import com.orange.orangetvote.response.voteRecord.VoteOptionDetailResponse;
+import com.orange.orangetvote.response.vote.VoteOptionDetailResponse;
 import java.util.List;
 import android.widget.ProgressBar;
 

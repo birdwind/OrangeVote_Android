@@ -1,8 +1,7 @@
-package com.orange.orangetvote.response.voteRecord;
+package com.orange.orangetvote.response.vote;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.orange.orangetvote.basic.response.BaseResponse;
-import com.orange.orangetvote.response.vote.VoteOptionResponse;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;

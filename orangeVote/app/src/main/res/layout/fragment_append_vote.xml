@@ -69,11 +69,16 @@
 
             </RelativeLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_append_vote_option"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_vote_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/btv_append_vote_append_option"
@@ -117,10 +122,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_small"
-                    android:text="@string/append_vote_multiply"
-                    android:textSize="@dimen/textsize_default"
                     android:checked="true"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:text="@string/append_vote_multiply"
+                    android:textSize="@dimen/textsize_default" />
 
                 <EditText
                     android:id="@+id/et_append_vote_multiply"
@@ -135,7 +140,7 @@
     <Button
         android:id="@+id/bt_append_vote_confirm"
         style="@style/ThemeButton"
-        android:text="@string/append_vote_confirm"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:text="@string/append_vote_confirm" />
 </RelativeLayout>
