@@ -10,12 +10,12 @@ public class AutoBreakViewGroup extends ViewGroup {
     /**
      * 兩個子控件的水平間距
      */
-    protected float horizontalSpace = 10;
+    protected float horizontalSpace = 0;
 
     /**
      * 兩個子控件的垂直間距
      */
-    protected float vertivalSpace = 10;
+    protected float vertivalSpace = 0;
 
     public AutoBreakViewGroup(Context context) {
         this(context, null, 0);

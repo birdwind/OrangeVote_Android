@@ -8,6 +8,7 @@ import com.orange.orangetvote.response.vote.VoteResponse;
 import com.orange.orangetvote.view.adapter.callback.VoteListener;
 import java.util.List;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +40,17 @@ public class VoteAdapter extends BaseQuickAdapter<VoteResponse, BaseViewHolder>
         helper.setText(R.id.tv_vote_title, item.getVoteName());
         helper.setText(R.id.tv_vote_description, item.getContent());
         helper.setText(R.id.tv_vote_team, item.getTeam());
+
+        //已投過票
+        Button BTVote = helper.getView(R.id.bt_vote);
+        EditText ETAddVoteOption = helper.getView(R.id.et_vote_addOption);
+        if(item.getIsVoted()){
+            ETAddVoteOption.setEnabled(false);
+            BTVote.setEnabled(false);
+        }else{
+            ETAddVoteOption.setEnabled(true);
+            BTVote.setEnabled(true);
+        }
 
         if (item.getIsSign()) {
             helper.setGone(R.id.tv_vote_sign, true);

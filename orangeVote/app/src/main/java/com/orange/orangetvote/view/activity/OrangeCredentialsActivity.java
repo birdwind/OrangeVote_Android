@@ -1,5 +1,6 @@
 package com.orange.orangetvote.view.activity;
 
+import com.jaeger.library.StatusBarUtil;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.view.AbstractActivity;
@@ -28,7 +29,7 @@ public class OrangeCredentialsActivity extends AbstractActivity {
 
     @Override
     public void initView() {
-
+        StatusBarUtil.setTransparent(this);
     }
 
     @Override

@@ -76,6 +76,9 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     @BindView(R.id.rv_vote_option)
     RecyclerView rvEndOption;
 
+    @BindView(R.id.btv_append_vote_append_option)
+    TextView btvAppendOption;
+
     @BindView(R.id.cb_append_vote_allow_add)
     CheckBox cbAllowAdd;
 
@@ -99,7 +102,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
     @OnClick(R.id.bt_append_vote_confirm)
     void clickBTConfirm() {
-        //更新
+        // 更新
     }
 
     @Override
@@ -131,7 +134,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
         rvEndOption.setHasFixedSize(true);
         rvEndOption.setLayoutManager(new LinearLayoutManager(getContext()));
-        // rvEndOption.setAdapter(endVoteOptionAdapter);
+        rvEndOption.setAdapter(endVoteOptionAdapter);
     }
 
     @Override
@@ -153,7 +156,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
         updateVoteOptionAdapter =
             new UpdateVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList);
-        // endVoteOptionAdapter = new EndVoteOptionAdapter();
+         endVoteOptionAdapter = new EndVoteOptionAdapter(R.layout.component_vote_option_end_item, voteOptionDetailResponseList);
     }
 
     @Override
@@ -195,7 +198,6 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
             for (VoteOptionDetailResponse voteOption : voteOptionDetailResponseList) {
                 voteOptionList.add(voteOption.getText());
             }
-            updateVoteOptionAdapter.notifyDataSetChanged();
 
             isEnd = voteDetailResponse.getIsEnd();
             psvTeam.selectItemByIndex(teamValueIndex);
@@ -206,6 +208,18 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
             cbOpenVoting.setChecked(voteDetailResponse.getIsOpen());
             cbSign.setChecked(voteDetailResponse.getIsSign());
             etMultiply.setText(String.valueOf(voteDetailResponse.getMultiSelection()));
+
+            if(isEnd){
+                rvEndOption.setVisibility(View.VISIBLE);
+                rvOption.setVisibility(View.GONE);
+                btvAppendOption.setVisibility(View.GONE);
+                endVoteOptionAdapter.notifyDataSetChanged();
+            }else{
+                rvEndOption.setVisibility(View.GONE);
+                rvOption.setVisibility(View.VISIBLE);
+                btvAppendOption.setVisibility(View.VISIBLE);
+                updateVoteOptionAdapter.notifyDataSetChanged();
+            }
         }
     }
 

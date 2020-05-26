@@ -4,6 +4,7 @@ import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.basic.view.AbstractFragment;
+import com.orange.orangetvote.view.activity.OrangeCredentialsActivity;
 import com.orange.orangetvote.view.dialog.LogoutDialog;
 import com.orange.orangetvote.view.dialog.LogoutDialogListener;
 import android.os.Bundle;
@@ -33,6 +34,11 @@ public class AccountFragment extends AbstractFragment implements LogoutDialogLis
     @OnClick(R.id.tv_account_authority)
     void clickAuthority(){
         showToast("尚未開放");
+    }
+
+    @OnClick(R.id.tv_account_credential)
+    void clickCredential(){
+        startActivity(OrangeCredentialsActivity.class);
     }
 
     @OnClick(R.id.tv_account_logout)
