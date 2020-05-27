@@ -3,7 +3,7 @@ package com.orange.orangetvote.view.fragment;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractFragment;
-import com.orange.orangetvote.model.AddVoteOptionModel;
+import com.orange.orangetvote.model.AddUpdateVoteOptionModel;
 import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.request.VoteRequest;
 import com.orange.orangetvote.response.vote.VoteResponse;
@@ -33,7 +33,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
 
     private Map<String, List<String>> optionListMap;
 
-    private Map<String, List<AddVoteOptionModel>> addOptionModelListMap;
+    private Map<String, List<AddUpdateVoteOptionModel>> addOptionModelListMap;
 
     @BindView(R.id.rv_vote)
     RecyclerView rvVote;
@@ -86,6 +86,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     @Override
     public void onVotedApiSuccess() {
         showToast(getString(R.string.vote_success));
+        smartRefreshLayout.autoRefresh();
     }
 
     @Override
@@ -101,15 +102,15 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     }
 
     private int getVoteSelectedOption(String voteUuid) {
-        List<AddVoteOptionModel> addVoteOptionModelList = addOptionModelListMap.get(voteUuid);
+        List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList = addOptionModelListMap.get(voteUuid);
         List<String> voteList = optionListMap.get(voteUuid);
-        if (addVoteOptionModelList == null) {
-            addVoteOptionModelList = new ArrayList<>();
+        if (addUpdateVoteOptionModelList == null) {
+            addUpdateVoteOptionModelList = new ArrayList<>();
         }
         if (voteList == null) {
             voteList = new ArrayList<>();
         }
-        return addVoteOptionModelList.size() + voteList.size();
+        return addUpdateVoteOptionModelList.size() + voteList.size();
     }
 
     private int getVoteMultiply(String voteUuid) {
@@ -167,24 +168,24 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     @Override
     public Boolean onAddOption(String voteUuid, String option) {
         int multiply = getVoteMultiply(voteUuid);
-        AddVoteOptionModel addVoteOptionModel = new AddVoteOptionModel(option);
+        AddUpdateVoteOptionModel addUpdateVoteOptionModel = new AddUpdateVoteOptionModel(option);
 
         if (getVoteSelectedOption(voteUuid) < multiply) {
-            List<AddVoteOptionModel> addVoteOptionModelList = addOptionModelListMap.get(voteUuid);
-            if (addVoteOptionModelList == null) {
-                addVoteOptionModelList = new ArrayList<>();
-                addVoteOptionModelList.add(addVoteOptionModel);
-                addOptionModelListMap.put(voteUuid, addVoteOptionModelList);
+            List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList = addOptionModelListMap.get(voteUuid);
+            if (addUpdateVoteOptionModelList == null) {
+                addUpdateVoteOptionModelList = new ArrayList<>();
+                addUpdateVoteOptionModelList.add(addUpdateVoteOptionModel);
+                addOptionModelListMap.put(voteUuid, addUpdateVoteOptionModelList);
             } else {
                 boolean isOptionExist = false;
-                for (int i = 0; i < addVoteOptionModelList.size(); i++) {
-                    if (addVoteOptionModelList.get(i).getValue().equals(option)) {
+                for (int i = 0; i < addUpdateVoteOptionModelList.size(); i++) {
+                    if (addUpdateVoteOptionModelList.get(i).getValue().equals(option)) {
                         isOptionExist = true;
                         break;
                     }
                 }
                 if (!isOptionExist) {
-                    addVoteOptionModelList.add(addVoteOptionModel);
+                    addUpdateVoteOptionModelList.add(addUpdateVoteOptionModel);
                 }
             }
             return true;
@@ -196,11 +197,11 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
 
     @Override
     public void onCancelAddOption(String voteUuid, String option) {
-        List<AddVoteOptionModel> addVoteOptionModelList = addOptionModelListMap.get(voteUuid);
-        if (addVoteOptionModelList != null) {
-            for (int i = 0; i < addVoteOptionModelList.size(); i++) {
-                if (addVoteOptionModelList.get(i).getValue().equals(option)) {
-                    addVoteOptionModelList.remove(i);
+        List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList = addOptionModelListMap.get(voteUuid);
+        if (addUpdateVoteOptionModelList != null) {
+            for (int i = 0; i < addUpdateVoteOptionModelList.size(); i++) {
+                if (addUpdateVoteOptionModelList.get(i).getValue().equals(option)) {
+                    addUpdateVoteOptionModelList.remove(i);
                     break;
                 }
             }

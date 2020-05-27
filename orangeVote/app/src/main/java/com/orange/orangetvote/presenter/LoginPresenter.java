@@ -34,7 +34,7 @@ public class LoginPresenter extends AbstractPresenter<LoginView> {
 
                 @Override
                 public void onSuccess(List<LoginResponse> responseList) {
-                    SharedPreferencesUtils.put(Config.COOKIES, RetrofitManager.getInstance().getCookies().toString());
+                    SharedPreferencesUtils.put(Config.COOKIES, retrofitManager.getCookies().toString());
                     baseView.onLoginSucc();
                 }
 

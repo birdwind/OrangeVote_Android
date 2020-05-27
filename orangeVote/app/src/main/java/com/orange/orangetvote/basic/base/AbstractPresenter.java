@@ -30,7 +30,9 @@ public class AbstractPresenter<V extends BaseView> {
 
     public V baseView;
 
-    protected ApiServer apiServer = RetrofitManager.getInstance().getApiService();
+    protected RetrofitManager retrofitManager = RetrofitManager.getInstance(getClass().getSimpleName());
+
+    protected ApiServer apiServer = retrofitManager.getApiService();
 
     public AbstractPresenter(V baseView) {
         this.baseView = baseView;
@@ -69,7 +71,7 @@ public class AbstractPresenter<V extends BaseView> {
     }
 
     protected void removeCookie() {
-        RetrofitManager.getInstance().removeCookies();
+        retrofitManager.removeCookies();
     }
 
     protected void initMap() {

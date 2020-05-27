@@ -39,10 +39,10 @@ public class VotePresenter extends AbstractPresenter<VoteView> {
 
     public void vote(VoteRequest voteRequest) {
         initMap();
-//        paramsMap.put("vote", GsonUtils.toJson(voteRequest));
 
-        RequestBody requestBody = packageToRequestBody(voteRequest);
-        addDisposable(apiServer.executePost(VoteApiServer.VOTE.valueOfName(), paramsMap, requestBody, headerMap),
+        fieldMap = parseObjectToHashMap(voteRequest);
+        addDisposable(
+            apiServer.executePostFormUrlEncode(VoteApiServer.VOTE.valueOfName(), paramsMap, fieldMap, headerMap),
             new AbstractObserver<RealResponseBody, VoteServerResponse, VoteResponse, FieldErrorResponse>(baseView,
                 VoteServerResponse.class) {
 

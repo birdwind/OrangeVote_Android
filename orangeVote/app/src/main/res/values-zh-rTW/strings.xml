@@ -23,6 +23,7 @@
     <!--投票-->
     <string name="vote_error_multiply">最多選擇{multiply}項</string>
     <string name="vote_success">投票成功</string>
+    <string name="vote">投票</string>
 
     <!--新增投票-->
     <string name="append_vote_title">標題</string>

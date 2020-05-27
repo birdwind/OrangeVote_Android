@@ -3,12 +3,16 @@ package com.orange.orangetvote.view.fragment;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.utils.DateTimeFormatUtils;
 import com.orange.orangetvote.basic.view.AbstractFragment;
+import com.orange.orangetvote.model.AddUpdateVoteOptionModel;
+import com.orange.orangetvote.model.TeamModel;
 import com.orange.orangetvote.presenter.UpdateVotePresenter;
+import com.orange.orangetvote.request.UpdateVoteRequest;
 import com.orange.orangetvote.response.appendVote.TeamListResponse;
 import com.orange.orangetvote.response.vote.VoteDetailResponse;
 import com.orange.orangetvote.response.vote.VoteOptionDetailResponse;
 import com.orange.orangetvote.view.activity.BottomNavigationActivity;
 import com.orange.orangetvote.view.adapter.EndVoteOptionAdapter;
+import com.orange.orangetvote.view.adapter.TeamSpinnerAdapter;
 import com.orange.orangetvote.view.adapter.UpdateVoteOptionAdapter;
 import com.orange.orangetvote.view.callback.UpdateVoteView;
 import com.skydoves.powerspinner.PowerSpinnerView;
@@ -16,6 +20,7 @@ import com.takisoft.datetimepicker.DatePickerDialog;
 import com.takisoft.datetimepicker.widget.DatePicker;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 import android.os.Bundle;
@@ -24,6 +29,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -41,15 +47,19 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
     private String currentDate;
 
-    private boolean isEnd;
+    private int currentYear;
 
-    private List<String> teamValueList;
+    private int currentMonth;
 
-    private List<String> teamUuidList;
+    private int currentDay;
+
+    private List<TeamModel> teamModelList;
 
     private List<VoteOptionDetailResponse> voteOptionDetailResponseList;
 
-    private List<String> voteOptionList;
+    private List<AddUpdateVoteOptionModel> voteOptionList;
+
+    private List<String> deleteOptionUuidList;
 
     private UpdateVoteOptionAdapter updateVoteOptionAdapter;
 
@@ -96,13 +106,17 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
     @OnClick(R.id.btv_append_vote_append_option)
     void clickBTVAppendOption() {
-        voteOptionList.add("");
+        voteOptionList.add(new AddUpdateVoteOptionModel(""));
         updateVoteOptionAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.bt_append_vote_confirm)
     void clickBTConfirm() {
         // 更新
+        for(String teamPosition : teamValueList){
+
+        }
+        UpdateVoteRequest updateVoteRequest = new UpdateVoteRequest(voteUuid, voteDetailResponse.getVoteName(), voteDetailResponse.getContent());
     }
 
     @Override
@@ -135,15 +149,18 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         rvEndOption.setHasFixedSize(true);
         rvEndOption.setLayoutManager(new LinearLayoutManager(getContext()));
         rvEndOption.setAdapter(endVoteOptionAdapter);
+
+//        psvTeam.setSpinnerAdapter(new TeamSpinnerAdapter(psvTeam, teamModelList));
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        isEnd = false;
-        teamValueList = new ArrayList<>();
-        teamUuidList = new ArrayList<>();
+        teamModelList = new ArrayList<>();
         voteOptionList = new ArrayList<>();
         voteOptionDetailResponseList = new ArrayList<>();
+        deleteOptionUuidList = new ArrayList<>();
+        voteDetailResponse = null;
+
         if (getArguments() != null) {
             voteUuid = getArguments().getString("voteUuid");
         }
@@ -151,12 +168,16 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         presenter.voteDetail(voteUuid);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        datePickerDialog = new DatePickerDialog(context, this, calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        setCurrentDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH) + 1);
+
+        datePickerDialog = new DatePickerDialog(context, this, currentYear, currentMonth, currentDay);
 
         updateVoteOptionAdapter =
-            new UpdateVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList);
-         endVoteOptionAdapter = new EndVoteOptionAdapter(R.layout.component_vote_option_end_item, voteOptionDetailResponseList);
+            new UpdateVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList, deleteOptionUuidList);
+        endVoteOptionAdapter =
+            new EndVoteOptionAdapter(R.layout.component_vote_option_end_item, voteOptionDetailResponseList);
     }
 
     @Override
@@ -166,41 +187,33 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
     @Override
     public void loadTeamListSuccess(List<TeamListResponse> teamListResponseList) {
-        teamValueList.clear();
-        teamUuidList.clear();
+        teamModelList.clear();
         for (TeamListResponse teamListResponse : teamListResponseList) {
-            teamValueList.add(teamListResponse.getTeamValue());
-            teamUuidList.add(teamListResponse.getTeamUuid());
+            teamModelList.add(new TeamModel(teamListResponse.getTeamUuid(), teamListResponse.getTeamValue()));
         }
-        psvTeam.setItems(teamValueList);
+        psvTeam.setItems(teamModelList);
     }
 
     @Override
     public void loadVoteDetailSuccess(VoteDetailResponse voteDetailResponse) {
+        this.voteDetailResponse = voteDetailResponse;
         voteOptionDetailResponseList.clear();
         if (voteDetailResponse == null) {
             showToast(getString(R.string.error_not_found));
             ((BottomNavigationActivity) context).onBackPressed();
         } else {
-            int teamValueIndex = -1;
-            for (int i = 0; i < teamValueList.size(); i++) {
-                if (teamValueList.get(i).equals(voteDetailResponse.getTeam())) {
-                    teamValueIndex = i;
-                    break;
-                }
-            }
-
             fragmentNavigationListener.updateToolbar(voteDetailResponse.getVoteName(), isNeedShowBackOnToolBar(),
                 isNeedShowCloseOnToolBar(), isNeedShowMenuOnToolBar());
 
-            currentDate = DateTimeFormatUtils.dateFormat(voteDetailResponse.getExpiredDate());
+            setSelectedTeam(voteDetailResponse);
+
+            setCurrentDate(voteDetailResponse.getExpiredDate());
+
             voteOptionDetailResponseList.addAll(voteDetailResponse.getOptions());
             for (VoteOptionDetailResponse voteOption : voteOptionDetailResponseList) {
-                voteOptionList.add(voteOption.getText());
+                voteOptionList.add(new AddUpdateVoteOptionModel(voteOption.getValue(), voteOption.getText()));
             }
 
-            isEnd = voteDetailResponse.getIsEnd();
-            psvTeam.selectItemByIndex(teamValueIndex);
             etTitle.setText(voteDetailResponse.getVoteName());
             etContent.setText(voteDetailResponse.getContent());
             tvDate.setText(currentDate);
@@ -209,12 +222,20 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
             cbSign.setChecked(voteDetailResponse.getIsSign());
             etMultiply.setText(String.valueOf(voteDetailResponse.getMultiSelection()));
 
-            if(isEnd){
+            // 根據是否已結束來設定顯示頁面
+            if (voteDetailResponse.getIsEnd()) {
+                etTitle.setEnabled(false);
+                etContent.setEnabled(false);
+                psvTeam.setEnabled(false);
+                psvDate.setEnabled(false);
+                psvTeam.setTextColor(ContextCompat.getColor(context, R.color.colorGrey_text));
+                tvDate.setTextColor(ContextCompat.getColor(context, R.color.colorGrey_text));
                 rvEndOption.setVisibility(View.VISIBLE);
                 rvOption.setVisibility(View.GONE);
                 btvAppendOption.setVisibility(View.GONE);
+                btConfirm.setVisibility(View.GONE);
                 endVoteOptionAdapter.notifyDataSetChanged();
-            }else{
+            } else {
                 rvEndOption.setVisibility(View.GONE);
                 rvOption.setVisibility(View.VISIBLE);
                 btvAppendOption.setVisibility(View.VISIBLE);
@@ -232,5 +253,41 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         currentDate = year + "/" + (month + 1) + "/" + dayOfMonth;
         tvDate.setText(currentDate);
+    }
+
+    private void setCurrentDate(int year, int month, int dayOfMonth) {
+        currentYear = year;
+        currentMonth = month;
+        currentDay = dayOfMonth;
+        currentDate = currentYear + "/" + (currentMonth + 1) + "/" + currentDay;
+    }
+
+    private void setCurrentDate(Date selectedDate) {
+        String tempCurrentDate = DateTimeFormatUtils.dateFormat(selectedDate);
+        String[] tempDate = tempCurrentDate.split("/");
+        setCurrentDate(Integer.parseInt(tempDate[0]), Integer.parseInt(tempDate[1]) - 1, Integer.parseInt(tempDate[2]));
+        datePickerDialog.getDatePicker().updateDate(currentYear, currentMonth, currentDay);
+    }
+
+    private void setSelectedTeam(VoteDetailResponse voteDetailResponse) {
+        int teamValueIndex = -1;
+        for (int i = 0; i < teamValueList.size(); i++) {
+            if (teamValueList.get(i).equals(voteDetailResponse.getTeam())) {
+                teamValueIndex = i;
+                psvTeam.selectItemByIndex(teamValueIndex);
+                break;
+            }
+        }
+    }
+
+    private int getSelectedTeamPosition(String teamValue){
+        int teamValueIndex = -1;
+        for (int i = 0; i < teamValueList.size(); i++) {
+            if (teamValueList.get(i).equals(teamValue)) {
+                teamValueIndex = i;
+                psvTeam.selectItemByIndex(teamValueIndex);
+                break;
+            }
+        }
     }
 }

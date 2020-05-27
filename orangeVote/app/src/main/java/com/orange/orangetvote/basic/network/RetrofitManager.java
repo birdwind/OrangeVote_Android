@@ -24,7 +24,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitManager {
 
-    private String TAG = "ApiRetrofit";
+    private static String TAG = "ApiRetrofit";
 
     private static final int DEFAULT_TIMEOUT = 10;
 
@@ -42,13 +42,14 @@ public class RetrofitManager {
         private static RetrofitManager INSTANCE = new RetrofitManager();
     }
 
-    public static RetrofitManager getInstance() {
+    public static RetrofitManager getInstance(String tag) {
+        TAG = tag;
         return SingletonHolder.INSTANCE;
     }
 
-    public static RetrofitManager getInstance(String url) {
-        sNewInstance = new RetrofitManager(url);
-        return sNewInstance;
+    public static RetrofitManager getInstanceWithUrl(String tag, String url) {
+        TAG = tag;
+        return new RetrofitManager(url);
     }
 
     private RetrofitManager() {

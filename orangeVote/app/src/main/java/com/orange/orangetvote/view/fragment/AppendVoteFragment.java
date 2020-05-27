@@ -37,6 +37,12 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     private String currentDate;
 
+    private int currentYear;
+
+    private int currentMonth;
+
+    private int currentDay;
+
     private AppendVoteOptionAdapter appendVoteOptionAdapter;
 
     private List<String> voteOptionList;
@@ -129,10 +135,11 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
             new AppendVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        currentDate = calendar.get(Calendar.YEAR) + "/" + (calendar.get(Calendar.MONTH) + 1) + "/"
-            + calendar.get(Calendar.DAY_OF_MONTH);
-        datePickerDialog = new DatePickerDialog(context, this, calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        setCurrentDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH) + 1);
+
+        datePickerDialog = new DatePickerDialog(context, this, currentYear, currentMonth, currentDay);
     }
 
     @Override
@@ -179,8 +186,15 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        currentDate = year + "/" + (month + 1) + "/" + dayOfMonth;
+        setCurrentDate(year, month, dayOfMonth);
         tvDate.setText(currentDate);
+    }
+
+    private void setCurrentDate(int year, int month, int dayOfMonth) {
+        currentYear = year;
+        currentMonth = month;
+        currentDay = dayOfMonth;
+        currentDate = currentYear + "/" + (currentMonth + 1) + "/" + currentDay;
     }
 
 }

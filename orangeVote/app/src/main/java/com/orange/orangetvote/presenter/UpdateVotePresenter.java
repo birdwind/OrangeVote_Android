@@ -2,6 +2,7 @@ package com.orange.orangetvote.presenter;
 
 import com.orange.orangetvote.basic.base.AbstractObserver;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
+import com.orange.orangetvote.request.UpdateVoteRequest;
 import com.orange.orangetvote.response.appendVote.TeamListResponse;
 import com.orange.orangetvote.response.appendVote.TeamListServerResponse;
 import com.orange.orangetvote.response.system.FieldErrorResponse;
@@ -52,6 +53,13 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
 
                 }
             });
+    }
+
+    public void updateVote(UpdateVoteRequest updateVoteRequest){
+        initMap();
+        fieldMap = parseObjectToHashMap(updateVoteRequest);
+
+
     }
 
 }

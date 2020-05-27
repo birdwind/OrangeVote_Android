@@ -22,6 +22,7 @@
     <!--投票-->
     <string name="vote_error_multiply">Select up to {multiply} item</string>
     <string name="vote_success">Success</string>
+    <string name="vote">Vote</string>
 
     <!--新增/更新投票-->
     <string name="append_vote_title">Title</string>

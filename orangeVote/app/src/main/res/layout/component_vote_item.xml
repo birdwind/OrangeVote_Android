@@ -69,54 +69,64 @@
 
         </LinearLayout>
 
-        <com.orange.orangetvote.customerView.AutoBreakViewGroup
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_below="@id/ll_vote_addOption"
-            android:layout_toStartOf="@id/bt_vote">
+            android:weightSum="4">
 
-            <LinearLayout
-                android:id="@+id/ll_vote_multiply"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/theme_text_view_height"
-                android:background="@drawable/style_button_radius_theme"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/theme_text_view_padding"
-                android:paddingEnd="@dimen/theme_text_view_padding">
+            <com.orange.orangetvote.customerView.AutoBreakViewGroup
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
+
+                <LinearLayout
+                    android:id="@+id/ll_vote_multiply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/theme_text_view_height"
+                    android:background="@drawable/style_button_radius_theme"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/theme_text_view_padding"
+                    android:paddingEnd="@dimen/theme_text_view_padding"
+                    android:layout_marginEnd="@dimen/margin_small">
+                    <TextView
+                        style="@style/ThemeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vote_multiply"
+                        android:textColor="@color/colorWhite" />
+
+                    <TextView
+                        android:id="@+id/tv_vote_multiply"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="@dimen/padding_2dp"
+                        android:text="2"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_vote_sign"
                     style="@style/ThemeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/vote_multiply"
-                    android:textColor="@color/colorWhite" />
+                    android:paddingStart="@dimen/theme_text_view_padding"
+                    android:paddingEnd="@dimen/theme_text_view_padding"
+                    android:text="@string/vote_sign"
+                    android:layout_marginEnd="@dimen/margin_small"/>
 
-                <TextView
-                    android:id="@+id/tv_vote_multiply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/padding_2dp"
-                    android:text="2"
-                    android:textColor="@color/colorWhite" />
+            </com.orange.orangetvote.customerView.AutoBreakViewGroup>
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/bt_vote"
+                style="@style/ThemeButton"
+                android:text="@string/vote"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"/>
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_vote_sign"
-                style="@style/ThemeTextView"
-                android:paddingStart="@dimen/theme_text_view_padding"
-                android:paddingEnd="@dimen/theme_text_view_padding"
-                android:text="@string/vote_sign" />
 
-        </com.orange.orangetvote.customerView.AutoBreakViewGroup>
-
-        <Button
-            android:id="@+id/bt_vote"
-            style="@style/ThemeButton"
-            android:layout_below="@id/ll_vote_addOption"
-            android:layout_alignParentEnd="true"
-            android:text="投票" />
 
     </RelativeLayout>
 
