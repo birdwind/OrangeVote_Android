@@ -16,7 +16,7 @@ public class AddUpdateVoteOptionModel {
         this.optionUuid = optionUuid;
     }
 
-    private String optionUuid;
+    private String optionUuid = null;
 
     private String value;
 

@@ -12,7 +12,6 @@ import com.orange.orangetvote.response.vote.VoteDetailResponse;
 import com.orange.orangetvote.response.vote.VoteOptionDetailResponse;
 import com.orange.orangetvote.view.activity.BottomNavigationActivity;
 import com.orange.orangetvote.view.adapter.EndVoteOptionAdapter;
-import com.orange.orangetvote.view.adapter.TeamSpinnerAdapter;
 import com.orange.orangetvote.view.adapter.UpdateVoteOptionAdapter;
 import com.orange.orangetvote.view.callback.UpdateVoteView;
 import com.skydoves.powerspinner.PowerSpinnerView;
@@ -52,6 +51,8 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     private int currentMonth;
 
     private int currentDay;
+
+    private List<String> teamValueList;
 
     private List<TeamModel> teamModelList;
 
@@ -113,10 +114,32 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     @OnClick(R.id.bt_append_vote_confirm)
     void clickBTConfirm() {
         // 更新
-        for(String teamPosition : teamValueList){
+        List<String> updateOptionValueList = new ArrayList<>();
+        List<String> updateOptionUuidList = new ArrayList<>();
+        List<String> addOptionValueList = new ArrayList<>();
+        String voteName = etTitle.getText().toString();
+        String voteContent = etContent.getText().toString();
+        boolean isAllowAdd = cbAllowAdd.isChecked();
+        boolean isOpen = cbOpenVoting.isChecked();
+        boolean isSign = cbSign.isChecked();
+        int multiSelection = Integer.parseInt(etMultiply.getText().toString());
 
+        for (AddUpdateVoteOptionModel addUpdateVoteOptionModel : voteOptionList) {
+            if (addUpdateVoteOptionModel.getOptionUuid() == null) {
+                addOptionValueList.add(addUpdateVoteOptionModel.getValue());
+            } else if (addUpdateVoteOptionModel.isUpdate()) {
+                if (!addUpdateVoteOptionModel.getValue().equals("")) {
+                    updateOptionUuidList.add(addUpdateVoteOptionModel.getOptionUuid());
+                    updateOptionValueList.add(addUpdateVoteOptionModel.getValue());
+                }
+            }
         }
-        UpdateVoteRequest updateVoteRequest = new UpdateVoteRequest(voteUuid, voteDetailResponse.getVoteName(), voteDetailResponse.getContent());
+
+        UpdateVoteRequest updateVoteRequest = new UpdateVoteRequest(voteUuid, voteName, voteContent,
+            getSelectedTeamUuid(psvTeam.getSelectedIndex()), currentDate, updateOptionUuidList, updateOptionValueList,
+            deleteOptionUuidList, addOptionValueList, isAllowAdd, isOpen, isSign, multiSelection);
+
+        presenter.updateVote(updateVoteRequest);
     }
 
     @Override
@@ -149,12 +172,11 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         rvEndOption.setHasFixedSize(true);
         rvEndOption.setLayoutManager(new LinearLayoutManager(getContext()));
         rvEndOption.setAdapter(endVoteOptionAdapter);
-
-//        psvTeam.setSpinnerAdapter(new TeamSpinnerAdapter(psvTeam, teamModelList));
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        teamValueList = new ArrayList<>();
         teamModelList = new ArrayList<>();
         voteOptionList = new ArrayList<>();
         voteOptionDetailResponseList = new ArrayList<>();
@@ -174,8 +196,8 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
         datePickerDialog = new DatePickerDialog(context, this, currentYear, currentMonth, currentDay);
 
-        updateVoteOptionAdapter =
-            new UpdateVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList, deleteOptionUuidList);
+        updateVoteOptionAdapter = new UpdateVoteOptionAdapter(R.layout.component_append_vote_option_item,
+            voteOptionList, deleteOptionUuidList);
         endVoteOptionAdapter =
             new EndVoteOptionAdapter(R.layout.component_vote_option_end_item, voteOptionDetailResponseList);
     }
@@ -190,8 +212,9 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         teamModelList.clear();
         for (TeamListResponse teamListResponse : teamListResponseList) {
             teamModelList.add(new TeamModel(teamListResponse.getTeamUuid(), teamListResponse.getTeamValue()));
+            teamValueList.add(teamListResponse.getTeamValue());
         }
-        psvTeam.setItems(teamModelList);
+        psvTeam.setItems(teamValueList);
     }
 
     @Override
@@ -205,7 +228,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
             fragmentNavigationListener.updateToolbar(voteDetailResponse.getVoteName(), isNeedShowBackOnToolBar(),
                 isNeedShowCloseOnToolBar(), isNeedShowMenuOnToolBar());
 
-            setSelectedTeam(voteDetailResponse);
+            setSelectedTeam(voteDetailResponse.getTeam());
 
             setCurrentDate(voteDetailResponse.getExpiredDate());
 
@@ -269,18 +292,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         datePickerDialog.getDatePicker().updateDate(currentYear, currentMonth, currentDay);
     }
 
-    private void setSelectedTeam(VoteDetailResponse voteDetailResponse) {
-        int teamValueIndex = -1;
-        for (int i = 0; i < teamValueList.size(); i++) {
-            if (teamValueList.get(i).equals(voteDetailResponse.getTeam())) {
-                teamValueIndex = i;
-                psvTeam.selectItemByIndex(teamValueIndex);
-                break;
-            }
-        }
-    }
-
-    private int getSelectedTeamPosition(String teamValue){
+    private void setSelectedTeam(String teamValue) {
         int teamValueIndex = -1;
         for (int i = 0; i < teamValueList.size(); i++) {
             if (teamValueList.get(i).equals(teamValue)) {
@@ -289,5 +301,10 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
                 break;
             }
         }
+    }
+
+    private String getSelectedTeamUuid(int teamPosition) {
+        TeamModel teamModel = teamModelList.get(teamPosition);
+        return teamModel.getTeamUuid();
     }
 }

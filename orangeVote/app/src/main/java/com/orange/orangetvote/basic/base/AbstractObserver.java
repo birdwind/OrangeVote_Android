@@ -109,5 +109,6 @@ public abstract class AbstractObserver<T extends ResponseBody, RS extends Abstra
     @Override
     public void onError(String msg) {
         view.showError(msg);
+        LogUtils.e(msg);
     }
 }
