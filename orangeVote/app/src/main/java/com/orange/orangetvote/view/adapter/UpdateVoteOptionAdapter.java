@@ -4,9 +4,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.model.AddUpdateVoteOptionModel;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -14,21 +12,19 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 
 public class UpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptionModel, BaseViewHolder>
-    implements View.OnClickListener{
+    implements View.OnClickListener {
 
     private List<String> deleteUuidList;
 
     private List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList;
+
+    private CustomerEditTextListener customerEditTextListener;
 
     public UpdateVoteOptionAdapter(int layoutResId,
         @Nullable List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList, List<String> deleteUuidList) {
         super(layoutResId, addUpdateVoteOptionModelList);
         this.addUpdateVoteOptionModelList = addUpdateVoteOptionModelList;
         this.deleteUuidList = deleteUuidList;
-    }
-
-    @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
     }
 
     @Override
@@ -41,21 +37,20 @@ public class UpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptio
         delete.setTag(item.getValue());
         delete.setOnClickListener(this);
 
-         EditText editText = helper.getView(R.id.et_append_vote_option);
-        // if (editText.getTag() == null) {
-        // CustomerEditTextListener customerEditTextListener = new CustomerEditTextListener(position);
-        // textListenerMap.put(position, customerEditTextListener);
-        // editText.addTextChangedListener(customerEditTextListener);
-        // editText.setTag(position);
-        // } else if (!editText.getTag().equals(position)) {
-        // int currentPosition = (int) editText.getTag();
-        // CustomerEditTextListener currentCustomerEditTextListener = textListenerMap.get(currentPosition);
-        // editText.removeTextChangedListener(currentCustomerEditTextListener);
-        // CustomerEditTextListener customerEditTextListener = new CustomerEditTextListener(position);
-        // editText.addTextChangedListener(customerEditTextListener);
-        // textListenerMap.put(position, customerEditTextListener);
-        // editText.setTag(position);
-        // }
+        // 因為recycleView複用的關係，利用關注與否新增TextWatcher，解決滑動資料誤植
+        EditText editText = helper.getView(R.id.et_append_vote_option);
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    customerEditTextListener = new CustomerEditTextListener(position);
+                    editText.addTextChangedListener(customerEditTextListener);
+                } else {
+                    editText.removeTextChangedListener(customerEditTextListener);
+                    customerEditTextListener = null;
+                }
+            }
+        });
     }
 
     @Override
