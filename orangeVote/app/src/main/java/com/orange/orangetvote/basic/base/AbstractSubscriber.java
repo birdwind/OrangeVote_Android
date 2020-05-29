@@ -64,7 +64,7 @@ public abstract class AbstractSubscriber<T extends ResponseBody, RS extends Abst
                         view.onLoginError();
                         break;
                     case 6:
-                        onFieldsError(response.getFieldErrorResponse());
+                        onFieldsError(response.getResponseFieldError());
                         // 送出資料不正確
                         break;
                     case 8:

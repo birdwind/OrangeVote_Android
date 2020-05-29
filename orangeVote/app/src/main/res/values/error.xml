@@ -18,6 +18,13 @@
     <string name="error_personal_4">Username Duplicate</string>
     <string name="success_personal_update">Update Success</string>
 
-<!--新增投票-->
+    <!--投票-->
+    <string name="error_vote_0">Can\'t find this poll.</string>
+    <string name="error_vote_1">You have already voted!</string>
+    <string name="error_vote_2">Can\'t found vote option.</string>
+    <string name="error_vote_3">Maximum choice option</string>
+    <string name="error_vote_4">This vote does not allow adding options.</string>
+    <string name="error_vote_5">Option content is empty.</string>
+    <string name="error_vote_6">The option has been selected and cannot be changed.</string>
     <string name="success_append_vote">Success Created</string>
 </resources>

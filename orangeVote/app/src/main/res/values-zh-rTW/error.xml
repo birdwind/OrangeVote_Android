@@ -18,7 +18,14 @@
     <string name="error_personal_4">使用者帳號名稱重複</string>
     <string name="success_personal_update">更新成功</string>
 
-    <!--新增投票-->
+    <!--投票-->
+    <string name="error_vote_0">找不到此投票</string>
+    <string name="error_vote_1">你已經投過票了</string>
+    <string name="error_vote_2">找不到投票選項</string>
+    <string name="error_vote_3">超過最大選擇</string>
+    <string name="error_vote_4">此投票不允許添加選項</string>
+    <string name="error_vote_5">選項內容為空</string>
+    <string name="error_vote_6">選項已被人選擇，無法進行更動</string>
     <string name="success_append_vote">建立成功</string>
 
 </resources>

@@ -47,5 +47,4 @@ public interface BaseView {
 
     void onLoginError();
 
-
 }

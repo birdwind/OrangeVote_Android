@@ -9,6 +9,7 @@ import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
 import com.orange.orangetvote.basic.utils.rxHelper.RxException;
 import com.orange.orangetvote.response.system.FieldErrorResponse;
+import java.util.List;
 import android.content.Context;
 import io.reactivex.observers.DisposableObserver;
 import okhttp3.ResponseBody;
@@ -64,7 +65,7 @@ public abstract class AbstractObserver<T extends ResponseBody, RS extends Abstra
                         view.onLoginError();
                         break;
                     case 6:
-                        onFieldsError(response.getFieldErrorResponse());
+                        onFieldsError(response.getResponseFieldError());
                         // 送出資料不正確
                         break;
                     case 8:
@@ -84,8 +85,8 @@ public abstract class AbstractObserver<T extends ResponseBody, RS extends Abstra
             }
         } catch (Exception e) {
             onError(context.getString(R.string.error_undefined));
-//            LogUtils.exception(e);
-             e.printStackTrace();
+            // LogUtils.exception(e);
+            e.printStackTrace();
         }
     }
 

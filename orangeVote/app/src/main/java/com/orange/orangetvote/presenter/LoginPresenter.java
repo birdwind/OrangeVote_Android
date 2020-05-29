@@ -44,4 +44,9 @@ public class LoginPresenter extends AbstractPresenter<LoginView> {
                 }
             });
     }
+
+    @Override
+    public void fieldsErrorHandler(List<FieldErrorResponse> fieldErrorResponseList) {
+
+    }
 }

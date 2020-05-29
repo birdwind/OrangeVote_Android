@@ -2,13 +2,14 @@ package com.orange.orangetvote.basic.base;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.orange.orangetvote.MainApplication;
 import com.orange.orangetvote.basic.network.ApiServer;
 import com.orange.orangetvote.basic.network.RetrofitManager;
 import com.orange.orangetvote.basic.utils.LogUtils;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import android.content.Context;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,7 +19,7 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
-public class AbstractPresenter<V extends BaseView> {
+public abstract class AbstractPresenter<V extends BaseView> implements BasePresenter {
 
     public CompositeDisposable compositeDisposable;
 
@@ -33,6 +34,8 @@ public class AbstractPresenter<V extends BaseView> {
     protected RetrofitManager retrofitManager = RetrofitManager.getInstance(getClass().getSimpleName());
 
     protected ApiServer apiServer = retrofitManager.getApiService();
+
+    protected Context context = MainApplication.getAppContext();
 
     public AbstractPresenter(V baseView) {
         this.baseView = baseView;
@@ -99,7 +102,7 @@ public class AbstractPresenter<V extends BaseView> {
             json = oMapper.writeValueAsString(obj);
         } catch (IOException e) {
             LogUtils.exception(e);
-//            e.printStackTrace();
+            // e.printStackTrace();
         }
         return RequestBody.create(json, MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"));
     }
@@ -112,15 +115,14 @@ public class AbstractPresenter<V extends BaseView> {
             for (Object key : tempMap.keySet()) {
                 Object obj = tempMap.get(key);
                 if (obj instanceof List) {
-                    LogUtils.e("這是List");
                     String temp = oMapper.writeValueAsString(obj).replace("{", "").replace("}", "").replace("[", "")
-                            .replace("]", "").replace("\"", "");
+                        .replace("]", "").replace("\"", "");
                     tempMap.put(key, temp);
                 }
             }
         } catch (Exception e) {
             LogUtils.exception(e);
-//            e.printStackTrace();
+            // e.printStackTrace();
         }
 
         return tempMap;

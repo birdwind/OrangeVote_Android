@@ -70,4 +70,10 @@
     <string name="orange_credentials_major">系所 : </string>
     <string name="orange_credentials_identity">身分 : </string>
     <string name="orange_credentials_graduation">屆數 : </string>
+
+    <!--權限管理-->
+    <string name="authority_team">加入團隊</string>
+
+    <!--加入團隊-->
+    <string name="add_team_passcode_hint">請輸入團隊代碼</string>
 </resources>

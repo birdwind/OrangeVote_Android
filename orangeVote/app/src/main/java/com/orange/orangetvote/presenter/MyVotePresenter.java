@@ -42,7 +42,7 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
                 MyVoteServerResponse.class) {
                 @Override
                 public void onSuccess(List responseList) {
-
+                    baseView.loadMyVotedList(responseList);
                 }
 
                 @Override
@@ -50,5 +50,10 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
 
                 }
             });
+    }
+
+    @Override
+    public void fieldsErrorHandler(List<FieldErrorResponse> fieldErrorResponseList) {
+
     }
 }

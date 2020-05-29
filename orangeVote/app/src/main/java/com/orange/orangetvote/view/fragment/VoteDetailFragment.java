@@ -11,8 +11,8 @@ import com.orange.orangetvote.response.appendVote.TeamListResponse;
 import com.orange.orangetvote.response.vote.VoteDetailResponse;
 import com.orange.orangetvote.response.vote.VoteOptionDetailResponse;
 import com.orange.orangetvote.view.activity.BottomNavigationActivity;
+import com.orange.orangetvote.view.adapter.AppendUpdateVoteOptionAdapter;
 import com.orange.orangetvote.view.adapter.EndVoteOptionAdapter;
-import com.orange.orangetvote.view.adapter.UpdateVoteOptionAdapter;
 import com.orange.orangetvote.view.callback.UpdateVoteView;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.takisoft.datetimepicker.DatePickerDialog;
@@ -34,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-// TODO: 完善投票詳情
 public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     implements UpdateVoteView, View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -62,7 +61,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
 
     private List<String> deleteOptionUuidList;
 
-    private UpdateVoteOptionAdapter updateVoteOptionAdapter;
+    private AppendUpdateVoteOptionAdapter appendUpdateVoteOptionAdapter;
 
     private EndVoteOptionAdapter endVoteOptionAdapter;
 
@@ -108,7 +107,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     @OnClick(R.id.btv_append_vote_append_option)
     void clickBTVAppendOption() {
         voteOptionList.add(new AddUpdateVoteOptionModel(""));
-        updateVoteOptionAdapter.notifyDataSetChanged();
+        appendUpdateVoteOptionAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.bt_append_vote_confirm)
@@ -127,7 +126,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         for (AddUpdateVoteOptionModel addUpdateVoteOptionModel : voteOptionList) {
             if (addUpdateVoteOptionModel.getOptionUuid() == null) {
                 addOptionValueList.add(addUpdateVoteOptionModel.getValue());
-            } else if (addUpdateVoteOptionModel.isUpdate()) {
+            } else if (addUpdateVoteOptionModel.getIsUpdate()) {
                 if (!addUpdateVoteOptionModel.getValue().equals("")) {
                     updateOptionUuidList.add(addUpdateVoteOptionModel.getOptionUuid());
                     updateOptionValueList.add(addUpdateVoteOptionModel.getValue());
@@ -167,7 +166,7 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         btConfirm.setText(getString(R.string.update_vote_update));
         rvOption.setHasFixedSize(true);
         rvOption.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvOption.setAdapter(updateVoteOptionAdapter);
+        rvOption.setAdapter(appendUpdateVoteOptionAdapter);
 
         rvEndOption.setHasFixedSize(true);
         rvEndOption.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -190,13 +189,12 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
         presenter.voteDetail(voteUuid);
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-
-        setCurrentDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH) + 1);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        setCurrentDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog = new DatePickerDialog(context, this, currentYear, currentMonth, currentDay);
 
-        updateVoteOptionAdapter = new UpdateVoteOptionAdapter(R.layout.component_append_vote_option_item,
+        appendUpdateVoteOptionAdapter = new AppendUpdateVoteOptionAdapter(R.layout.component_append_vote_option_item,
             voteOptionList, deleteOptionUuidList);
         endVoteOptionAdapter =
             new EndVoteOptionAdapter(R.layout.component_vote_option_end_item, voteOptionDetailResponseList);
@@ -233,8 +231,9 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
             setCurrentDate(voteDetailResponse.getExpiredDate());
 
             voteOptionDetailResponseList.addAll(voteDetailResponse.getOptions());
+            voteOptionList.clear();
             for (VoteOptionDetailResponse voteOption : voteOptionDetailResponseList) {
-                voteOptionList.add(new AddUpdateVoteOptionModel(voteOption.getValue(), voteOption.getText()));
+                voteOptionList.add(new AddUpdateVoteOptionModel(voteOption.getValue(), voteOption.getText(), voteDetailResponse.getIsOwner()));
             }
 
             etTitle.setText(voteDetailResponse.getVoteName());
@@ -246,23 +245,52 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
             etMultiply.setText(String.valueOf(voteDetailResponse.getMultiSelection()));
 
             // 根據是否已結束來設定顯示頁面
-            if (voteDetailResponse.getIsEnd()) {
+            if(voteDetailResponse.getIsOwner()) {
+                if (voteDetailResponse.getIsEnd()) {
+                    etTitle.setEnabled(false);
+                    etContent.setEnabled(false);
+                    psvTeam.setEnabled(false);
+                    psvDate.setEnabled(false);
+                    cbSign.setClickable(false);
+                    cbOpenVoting.setClickable(false);
+                    cbAllowAdd.setClickable(false);
+                    etMultiply.setEnabled(false);
+
+                    psvTeam.setTextColor(ContextCompat.getColor(context, R.color.colorGrey_text));
+                    tvDate.setTextColor(ContextCompat.getColor(context, R.color.colorGrey_text));
+                    rvEndOption.setVisibility(View.VISIBLE);
+                    rvOption.setVisibility(View.GONE);
+                    btvAppendOption.setVisibility(View.GONE);
+                    btConfirm.setVisibility(View.GONE);
+                    endVoteOptionAdapter.notifyDataSetChanged();
+                } else {
+                    rvEndOption.setVisibility(View.GONE);
+                    rvOption.setVisibility(View.VISIBLE);
+                    btvAppendOption.setVisibility(View.VISIBLE);
+                    appendUpdateVoteOptionAdapter.notifyDataSetChanged();
+                }
+            }else{
                 etTitle.setEnabled(false);
                 etContent.setEnabled(false);
                 psvTeam.setEnabled(false);
                 psvDate.setEnabled(false);
+                cbSign.setClickable(false);
+                cbOpenVoting.setClickable(false);
+                cbAllowAdd.setClickable(false);
+                etMultiply.setEnabled(false);
                 psvTeam.setTextColor(ContextCompat.getColor(context, R.color.colorGrey_text));
                 tvDate.setTextColor(ContextCompat.getColor(context, R.color.colorGrey_text));
-                rvEndOption.setVisibility(View.VISIBLE);
-                rvOption.setVisibility(View.GONE);
                 btvAppendOption.setVisibility(View.GONE);
                 btConfirm.setVisibility(View.GONE);
                 endVoteOptionAdapter.notifyDataSetChanged();
-            } else {
-                rvEndOption.setVisibility(View.GONE);
-                rvOption.setVisibility(View.VISIBLE);
-                btvAppendOption.setVisibility(View.VISIBLE);
-                updateVoteOptionAdapter.notifyDataSetChanged();
+                appendUpdateVoteOptionAdapter.notifyDataSetChanged();
+                if(voteDetailResponse.getIsEnd()){
+                    rvEndOption.setVisibility(View.VISIBLE);
+                    rvOption.setVisibility(View.GONE);
+                }else{
+                    rvEndOption.setVisibility(View.GONE);
+                    rvOption.setVisibility(View.VISIBLE);
+                }
             }
         }
     }

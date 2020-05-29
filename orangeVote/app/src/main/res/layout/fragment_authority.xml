@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_authority_add_team"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_authority_add_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/authority_team"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/textsize_default"
+            android:paddingTop="@dimen/padding_default"
+            android:paddingBottom="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_default"
+            android:paddingEnd="@dimen/padding_default"/>
+
+        <ImageView
+            android:layout_width="@dimen/theme_spinner_down_arrow_size"
+            android:layout_height="@dimen/theme_spinner_down_arrow_size"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:src="@drawable/icon_right_arrow" />
+
+        <View
+            style="@style/UnderLine"
+            android:layout_below="@id/tv_authority_add_team"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:background="@color/colorThemeGrey" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

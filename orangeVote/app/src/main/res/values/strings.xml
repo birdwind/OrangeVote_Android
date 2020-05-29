@@ -72,4 +72,10 @@
     <string name="orange_credentials_identity">Identity : </string>
     <string name="orange_credentials_graduation">Graduation : </string>
 
+    <!--權限管理-->
+    <string name="authority_team">Join Team</string>
+
+    <!--加入團隊-->
+    <string name="add_team_passcode_hint">Team Pass Code</string>
+
 </resources>

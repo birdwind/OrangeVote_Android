@@ -60,4 +60,9 @@ public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
                 }
             });
     }
+
+    @Override
+    public void fieldsErrorHandler(List<FieldErrorResponse> fieldErrorResponseList) {
+
+    }
 }

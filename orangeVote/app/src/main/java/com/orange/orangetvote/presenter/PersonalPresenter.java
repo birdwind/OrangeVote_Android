@@ -60,4 +60,8 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
             });
     }
 
+    @Override
+    public void fieldsErrorHandler(List<FieldErrorResponse> fieldErrorResponseList) {
+
+    }
 }

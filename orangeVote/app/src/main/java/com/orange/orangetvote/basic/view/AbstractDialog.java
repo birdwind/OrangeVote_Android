@@ -15,6 +15,7 @@ public abstract class AbstractDialog<C extends BaseDialogListener> extends Dialo
 
     public AbstractDialog(@NonNull Context context, C dialogListener) {
         super(context);
+        this.context = context;
         this.dialogListener = dialogListener;
     }
 

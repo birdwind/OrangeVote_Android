@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/padding_large"
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:paddingBottom="@dimen/padding_large">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_background_radius_board_theme">
+
+        <EditText
+            android:id="@+id/et_dialog_add_team_pass_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:padding="@dimen/padding_small"
+            android:hint="@string/add_team_passcode_hint"
+            android:layout_toStartOf="@id/bt_dialog_add_team_confirm"
+            android:textColor="@color/colorBlack"/>
+
+        <Button
+            android:id="@+id/bt_dialog_add_team_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            android:textColor="@color/colorGrey_text"
+            android:background="@drawable/style_background_radius_board_theme"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

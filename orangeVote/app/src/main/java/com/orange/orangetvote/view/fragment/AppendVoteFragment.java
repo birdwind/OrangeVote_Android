@@ -3,12 +3,12 @@ package com.orange.orangetvote.view.fragment;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractActivity;
 import com.orange.orangetvote.basic.view.AbstractFragment;
+import com.orange.orangetvote.model.AddUpdateVoteOptionModel;
 import com.orange.orangetvote.presenter.AppendVotePresenter;
 import com.orange.orangetvote.request.AppendVoteRequest;
 import com.orange.orangetvote.response.appendVote.TeamListResponse;
-import com.orange.orangetvote.view.adapter.AppendVoteOptionAdapter;
+import com.orange.orangetvote.view.adapter.AppendUpdateVoteOptionAdapter;
 import com.orange.orangetvote.view.callback.AppendVoteView;
-import com.skydoves.powerspinner.OnSpinnerItemSelectedListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.takisoft.datetimepicker.DatePickerDialog;
 import com.takisoft.datetimepicker.widget.DatePicker;
@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
-    implements AppendVoteView, OnSpinnerItemSelectedListener, View.OnClickListener, DatePickerDialog.OnDateSetListener {
+    implements AppendVoteView, View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private List<String> teamValueList;
 
@@ -43,9 +43,9 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     private int currentDay;
 
-    private AppendVoteOptionAdapter appendVoteOptionAdapter;
+    private AppendUpdateVoteOptionAdapter appendUpdateVoteOptionAdapter;
 
-    private List<String> voteOptionList;
+    private List<AddUpdateVoteOptionModel> voteOptionList;
 
     @BindView(R.id.et_append_vote_title)
     EditText etTitle;
@@ -79,8 +79,8 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     @OnClick(R.id.btv_append_vote_append_option)
     void clickBTVAppendOption() {
-        voteOptionList.add("");
-        appendVoteOptionAdapter.notifyDataSetChanged();
+        voteOptionList.add(new AddUpdateVoteOptionModel(""));
+        appendUpdateVoteOptionAdapter.notifyDataSetChanged();
     }
 
     @OnClick(R.id.bt_append_vote_confirm)
@@ -93,7 +93,10 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
         Boolean isOpenVoting = cbOpenVoting.isChecked();
         Boolean isSign = cbSign.isChecked();
         int multiply = Integer.parseInt(etMultiply.getText().toString());
-        List<String> optionValueList = new ArrayList<>(voteOptionList);
+        List<String> optionValueList = new ArrayList<>();
+        for (AddUpdateVoteOptionModel addUpdateVoteOptionModel : voteOptionList) {
+            optionValueList.add(addUpdateVoteOptionModel.getValue());
+        }
 
         AppendVoteRequest appendVoteRequest = new AppendVoteRequest(null, voteName, content, multiply, expiredDate,
             teamUuid, isAllowAdd, isOpenVoting, isSign, optionValueList);
@@ -117,11 +120,10 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     @Override
     public void initView() {
-        psvTeam.setOnSpinnerItemSelectedListener(this);
         tvDate.setText(currentDate);
         rvOption.setHasFixedSize(true);
         rvOption.setLayoutManager(new LinearLayoutManager(getContext()));
-        rvOption.setAdapter(appendVoteOptionAdapter);
+        rvOption.setAdapter(appendUpdateVoteOptionAdapter);
     }
 
     @Override
@@ -131,13 +133,12 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
         teamUuidList = new ArrayList<>();
         voteOptionList = new ArrayList<>();
 
-        appendVoteOptionAdapter =
-            new AppendVoteOptionAdapter(R.layout.component_append_vote_option_item, voteOptionList);
+        appendUpdateVoteOptionAdapter = new AppendUpdateVoteOptionAdapter(R.layout.component_append_vote_option_item,
+            voteOptionList, new ArrayList<>());
 
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-
-        setCurrentDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH) + 1);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        setCurrentDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog = new DatePickerDialog(context, this, currentYear, currentMonth, currentDay);
     }
@@ -158,11 +159,6 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     }
 
     @Override
-    public void onItemSelected(int i, Object o) {
-
-    }
-
-    @Override
     public void loadTeamListSuccess(List<TeamListResponse> teamListResponseList) {
         teamValueList.clear();
         teamUuidList.clear();
@@ -175,7 +171,6 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
 
     @Override
     public void onAppendSuccess() {
-        // showToast(getString(R.string.success_append_vote));
         ((AbstractActivity) context).onBackPressed();
     }
 
@@ -196,5 +191,4 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
         currentDay = dayOfMonth;
         currentDate = currentYear + "/" + (currentMonth + 1) + "/" + currentDay;
     }
-
 }

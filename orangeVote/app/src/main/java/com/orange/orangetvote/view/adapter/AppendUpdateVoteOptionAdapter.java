@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import androidx.annotation.Nullable;
 
-public class UpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptionModel, BaseViewHolder>
+public class AppendUpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptionModel, BaseViewHolder>
     implements View.OnClickListener {
 
     private List<String> deleteUuidList;
@@ -20,8 +20,8 @@ public class UpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptio
 
     private CustomerEditTextListener customerEditTextListener;
 
-    public UpdateVoteOptionAdapter(int layoutResId,
-        @Nullable List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList, List<String> deleteUuidList) {
+    public AppendUpdateVoteOptionAdapter(int layoutResId,
+                                         @Nullable List<AddUpdateVoteOptionModel> addUpdateVoteOptionModelList, List<String> deleteUuidList) {
         super(layoutResId, addUpdateVoteOptionModelList);
         this.addUpdateVoteOptionModelList = addUpdateVoteOptionModelList;
         this.deleteUuidList = deleteUuidList;
@@ -33,12 +33,14 @@ public class UpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptio
 
         int position = helper.getLayoutPosition();
 
+        helper.setGone(R.id.iv_append_vote_delete, item.getIsOwner());
         View delete = helper.getView(R.id.iv_append_vote_delete);
         delete.setTag(item.getValue());
         delete.setOnClickListener(this);
 
         // 因為recycleView複用的關係，利用關注與否新增TextWatcher，解決滑動資料誤植
         EditText editText = helper.getView(R.id.et_append_vote_option);
+        editText.setEnabled(item.getIsOwner());
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -85,7 +87,7 @@ public class UpdateVoteOptionAdapter extends BaseQuickAdapter<AddUpdateVoteOptio
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             AddUpdateVoteOptionModel addUpdateVoteOptionModel = addUpdateVoteOptionModelList.get(position);
             addUpdateVoteOptionModel.setValue(charSequence.toString().trim());
-            addUpdateVoteOptionModel.setUpdate(true);
+            addUpdateVoteOptionModel.setIsUpdate(true);
             addUpdateVoteOptionModelList.set(position, addUpdateVoteOptionModel);
         }
 

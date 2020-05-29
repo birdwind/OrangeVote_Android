@@ -29,6 +29,6 @@ public abstract class AbstractResponse<R extends BaseResponse> implements BaseRe
 
     private String responseError;
 
-    private List<FieldErrorResponse> fieldErrorResponse;
+    private List<FieldErrorResponse> responseFieldError;
 
 }

@@ -2,6 +2,7 @@ package com.orange.orangetvote.view.dialog;
 
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractDialog;
+import com.orange.orangetvote.view.dialog.callback.LogoutDialogListener;
 import android.content.Context;
 import android.widget.TextView;
 import androidx.annotation.NonNull;

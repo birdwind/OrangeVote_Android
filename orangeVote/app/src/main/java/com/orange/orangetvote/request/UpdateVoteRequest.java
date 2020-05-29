@@ -47,11 +47,11 @@ public class UpdateVoteRequest extends AbstractRequest {
 
     private List<String> addOptionValues;
 
-    private boolean isAllowAdd;
+    private Boolean isAllowAdd;
 
-    private boolean isOpen;
+    private Boolean isOpen;
 
-    private boolean isSign;
+    private Boolean isSign;
 
     private int multiSelection;
 }

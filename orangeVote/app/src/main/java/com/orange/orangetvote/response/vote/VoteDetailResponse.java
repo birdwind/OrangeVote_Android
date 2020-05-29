@@ -32,5 +32,7 @@ public class VoteDetailResponse implements BaseResponse {
 
     private Boolean isEnd;
 
+    private Boolean isOwner;
+
     private List<VoteOptionDetailResponse> options;
 }

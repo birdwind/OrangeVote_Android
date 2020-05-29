@@ -14,7 +14,6 @@ import android.widget.EditText;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-// TODO: 設定已投票樣式
 public class VoteAdapter extends BaseQuickAdapter<VoteResponse, BaseViewHolder>
     implements BaseQuickAdapter.OnItemChildClickListener, View.OnFocusChangeListener {
 
