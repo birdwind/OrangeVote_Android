@@ -4,7 +4,7 @@ import com.orange.orangetvote.basic.enums.BaseEnums;
 import java.io.Serializable;
 
 public enum TeamApiServer implements BaseEnums {
-    TEAM_LIST("/list");
+    TEAM_LIST("/list"), JOIN_TEAM("/{teamUuid}");
 
     TeamApiServer(String url){
         this.url = "api/team" + url;

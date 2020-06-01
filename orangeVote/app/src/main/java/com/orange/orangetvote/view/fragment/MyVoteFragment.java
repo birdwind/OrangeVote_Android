@@ -6,7 +6,7 @@ import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.presenter.MyVotePresenter;
 import com.orange.orangetvote.response.vote.MyVoteResponse;
 import com.orange.orangetvote.view.adapter.MyVoteAdapter;
-import com.orange.orangetvote.view.callback.MyVoteView;
+import com.orange.orangetvote.view.viewCallback.MyVoteView;
 import java.util.ArrayList;
 import java.util.List;
 import android.os.Bundle;

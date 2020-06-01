@@ -64,13 +64,16 @@ public abstract class AbstractSubscriber<T extends ResponseBody, RS extends Abst
                         view.onLoginError();
                         break;
                     case 6:
-                        onFieldsError(response.getResponseFieldError());
+                        onResponseFieldError(response.getResponseFieldError());
                         // 送出資料不正確
                         break;
                     case 8:
                         onError(context.getString(R.string.error_server_login));
                         // 登入失敗
                         break;
+
+                    case 11:
+                        onResponseError(response.getResponseError());
                     default:
                         // 3.沒找到資源 4.API找不到 5.伺服器錯誤 7.伺服器錯誤 10.少傳欄位
                         onError(context.getString(R.string.error_server_backend));

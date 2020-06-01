@@ -9,5 +9,7 @@ public interface BaseSubscriber<RD extends BaseResponse, FE extends FieldErrorRe
 
     void onError(String msg);
 
-    void onFieldsError(List<FE> responseFieldErrorList);
+    void onResponseError(String responseError);
+
+    void onResponseFieldError(List<FE> responseFieldErrorList);
 }

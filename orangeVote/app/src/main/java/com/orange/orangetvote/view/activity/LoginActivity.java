@@ -3,7 +3,7 @@ package com.orange.orangetvote.view.activity;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.view.AbstractActivity;
 import com.orange.orangetvote.presenter.LoginPresenter;
-import com.orange.orangetvote.view.callback.LoginView;
+import com.orange.orangetvote.view.viewCallback.LoginView;
 import android.os.Bundle;
 import android.widget.EditText;
 import butterknife.BindView;

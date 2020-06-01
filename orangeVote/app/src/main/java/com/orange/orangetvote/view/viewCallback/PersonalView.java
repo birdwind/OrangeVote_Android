@@ -1,4 +1,4 @@
-package com.orange.orangetvote.view.callback;
+package com.orange.orangetvote.view.viewCallback;
 
 import com.orange.orangetvote.basic.base.BaseView;
 import com.orange.orangetvote.response.personal.PersonalResponse;

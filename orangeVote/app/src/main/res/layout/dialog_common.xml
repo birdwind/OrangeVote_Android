@@ -7,7 +7,8 @@
     android:paddingTop="@dimen/padding_large"
     android:paddingStart="40dp"
     android:paddingEnd="40dp"
-    android:paddingBottom="@dimen/padding_large">
+    android:paddingBottom="@dimen/padding_large"
+    android:background="@drawable/style_dialog_radius_board">
 
     <TextView
         android:id="@+id/tv_dialog_common_title"

@@ -5,14 +5,14 @@ import com.orange.orangetvote.basic.base.AbstractObserver;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.utils.ToastUtils;
 import com.orange.orangetvote.request.UpdateVoteRequest;
-import com.orange.orangetvote.response.appendVote.TeamListResponse;
-import com.orange.orangetvote.response.appendVote.TeamListServerResponse;
+import com.orange.orangetvote.response.team.TeamResponse;
+import com.orange.orangetvote.response.team.TeamServerResponse;
 import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.response.vote.VoteDetailResponse;
 import com.orange.orangetvote.response.vote.VoteDetailServerResponse;
 import com.orange.orangetvote.server.TeamApiServer;
 import com.orange.orangetvote.server.VoteApiServer;
-import com.orange.orangetvote.view.callback.UpdateVoteView;
+import com.orange.orangetvote.view.viewCallback.UpdateVoteView;
 import java.util.List;
 import okhttp3.ResponseBody;
 
@@ -27,16 +27,21 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
     public void teamList() {
         initMap();
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
-            new AbstractObserver<ResponseBody, TeamListServerResponse, TeamListResponse, FieldErrorResponse>(baseView,
-                TeamListServerResponse.class) {
+            new AbstractObserver<ResponseBody, TeamServerResponse, TeamResponse, FieldErrorResponse>(baseView,
+                TeamServerResponse.class) {
 
                 @Override
-                public void onSuccess(List<TeamListResponse> responseList) {
+                public void onSuccess(List<TeamResponse> responseList) {
                     baseView.loadTeamListSuccess(responseList);
                 }
 
                 @Override
-                public void onFieldsError(List<FieldErrorResponse> responseFieldErrorList) {
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
+                public void onResponseFieldError(List<FieldErrorResponse> responseFieldErrorList) {
 
                 }
             });
@@ -54,7 +59,12 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
                 }
 
                 @Override
-                public void onFieldsError(List<FieldErrorResponse> responseFieldErrorList) {
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
+                public void onResponseFieldError(List<FieldErrorResponse> responseFieldErrorList) {
                     fieldsErrorHandler(responseFieldErrorList);
                 }
             });
@@ -74,7 +84,12 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
                 }
 
                 @Override
-                public void onFieldsError(List<FieldErrorResponse> responseFieldErrorList) {
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
+                public void onResponseFieldError(List<FieldErrorResponse> responseFieldErrorList) {
                     fieldsErrorHandler(responseFieldErrorList);
                 }
             });

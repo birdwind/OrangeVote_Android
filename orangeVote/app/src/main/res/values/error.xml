@@ -27,4 +27,8 @@
     <string name="error_vote_5">Option content is empty.</string>
     <string name="error_vote_6">The option has been selected and cannot be changed.</string>
     <string name="success_append_vote">Success Created</string>
+
+    <!--加入團隊-->
+    <string name="success_join_team">Joined {team} Success</string>
+    <string name="error_join_team_joined">Joined Already</string>
 </resources>

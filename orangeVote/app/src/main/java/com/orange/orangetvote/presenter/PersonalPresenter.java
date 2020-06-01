@@ -8,7 +8,7 @@ import com.orange.orangetvote.response.personal.PersonalResponse;
 import com.orange.orangetvote.response.personal.PersonalServerResponse;
 import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.PersonalApiServer;
-import com.orange.orangetvote.view.callback.PersonalView;
+import com.orange.orangetvote.view.viewCallback.PersonalView;
 import java.util.List;
 import okhttp3.ResponseBody;
 
@@ -29,7 +29,12 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
                 }
 
                 @Override
-                public void onFieldsError(List<FieldErrorResponse> fieldErrorResponseList) {
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
+                public void onResponseFieldError(List<FieldErrorResponse> fieldErrorResponseList) {
 
                 }
             });
@@ -51,7 +56,12 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
                 }
 
                 @Override
-                public void onFieldsError(List<FieldErrorResponse> fieldErrorResponseList) {
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
+                public void onResponseFieldError(List<FieldErrorResponse> fieldErrorResponseList) {
                     String[] error = context.getResources().getStringArray(R.array.error_personal);
                     for (FieldErrorResponse fieldErrorResponse : fieldErrorResponseList) {
                         baseView.showError(error[Integer.parseInt(fieldErrorResponse.getCode())]);

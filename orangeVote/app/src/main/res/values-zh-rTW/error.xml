@@ -28,4 +28,7 @@
     <string name="error_vote_6">選項已被人選擇，無法進行更動</string>
     <string name="success_append_vote">建立成功</string>
 
+    <!--加入團隊-->
+    <string name="success_join_team">成功加入 {team}</string>
+    <string name="error_join_team_joined">已經加入過此團隊</string>
 </resources>

@@ -43,6 +43,7 @@
                 android:padding="@dimen/padding_small"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
+                android:gravity="center_vertical"
                 app:spinner_popup_animation="fade"
                 app:spinner_popup_background="@color/colorTheme" />
 
@@ -56,6 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/style_spinner_radius_theme"
+                    android:gravity="center_vertical"
                     android:padding="@dimen/padding_small"
                     android:textColorHint="@color/colorWhite" />
 

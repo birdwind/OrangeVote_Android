@@ -6,9 +6,9 @@ import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.model.AddUpdateVoteOptionModel;
 import com.orange.orangetvote.presenter.AppendVotePresenter;
 import com.orange.orangetvote.request.AppendVoteRequest;
-import com.orange.orangetvote.response.appendVote.TeamListResponse;
+import com.orange.orangetvote.response.team.TeamResponse;
 import com.orange.orangetvote.view.adapter.AppendUpdateVoteOptionAdapter;
-import com.orange.orangetvote.view.callback.AppendVoteView;
+import com.orange.orangetvote.view.viewCallback.AppendVoteView;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.takisoft.datetimepicker.DatePickerDialog;
 import com.takisoft.datetimepicker.widget.DatePicker;
@@ -159,12 +159,12 @@ public class AppendVoteFragment extends AbstractFragment<AppendVotePresenter>
     }
 
     @Override
-    public void loadTeamListSuccess(List<TeamListResponse> teamListResponseList) {
+    public void loadTeamListSuccess(List<TeamResponse> teamListResponseList) {
         teamValueList.clear();
         teamUuidList.clear();
-        for (TeamListResponse teamListResponse : teamListResponseList) {
-            teamValueList.add(teamListResponse.getTeamValue());
-            teamUuidList.add(teamListResponse.getTeamUuid());
+        for (TeamResponse teamResponse : teamListResponseList) {
+            teamValueList.add(teamResponse.getTeamValue());
+            teamUuidList.add(teamResponse.getTeamUuid());
         }
         psvTeam.setItems(teamValueList);
     }

@@ -1,33 +1,36 @@
 package com.orange.orangetvote.presenter;
 
+import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.AbstractObserver;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
-import com.orange.orangetvote.request.AppendVoteRequest;
-import com.orange.orangetvote.response.appendVote.AppendVoteResponse;
-import com.orange.orangetvote.response.appendVote.AppendVoteServerResponse;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.response.team.TeamResponse;
 import com.orange.orangetvote.response.team.TeamServerResponse;
-import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.TeamApiServer;
-import com.orange.orangetvote.server.VoteApiServer;
-import com.orange.orangetvote.view.viewCallback.AppendVoteView;
+import com.orange.orangetvote.view.viewCallback.JoinTeamView;
 import java.util.List;
 import okhttp3.ResponseBody;
 
-public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
-    public AppendVotePresenter(AppendVoteView baseView) {
+public class JoinTeamViewPresenter extends AbstractPresenter<JoinTeamView> {
+    public JoinTeamViewPresenter(JoinTeamView baseView) {
         super(baseView);
     }
 
-    public void teamList() {
+    @Override
+    public void fieldsErrorHandler(List<FieldErrorResponse> fieldErrorResponseList) {
+
+    }
+
+    public void loadTeam() {
         initMap();
+
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
             new AbstractObserver<ResponseBody, TeamServerResponse, TeamResponse, FieldErrorResponse>(baseView,
                 TeamServerResponse.class) {
 
                 @Override
                 public void onSuccess(List<TeamResponse> responseList) {
-                    baseView.loadTeamListSuccess(responseList);
+                    baseView.loadTeam(responseList);
                 }
 
                 @Override
@@ -39,38 +42,33 @@ public class AppendVotePresenter extends AbstractPresenter<AppendVoteView> {
                 public void onResponseFieldError(List<FieldErrorResponse> responseFieldErrorList) {
 
                 }
-
             });
     }
 
-    public void appendVote(AppendVoteRequest appendVoteRequest) {
+    public void joinTeam(String teamUuid, String passCode) {
         initMap();
-
-        fieldMap = parseObjectToHashMap(appendVoteRequest);
-
-        addDisposable(apiServer.executePutFormUrlEncode(VoteApiServer.APPEND.valueOfName(), paramsMap, fieldMap, headerMap),
-            new AbstractObserver<ResponseBody, AppendVoteServerResponse, AppendVoteResponse, FieldErrorResponse>(
-                baseView, AppendVoteServerResponse.class) {
-
+        paramsMap.put("pass_code", passCode);
+        addDisposable(
+            apiServer.executeGet(TeamApiServer.JOIN_TEAM.valueOfName().replace("{teamUuid}", teamUuid), paramsMap,
+                headerMap),
+            new AbstractObserver<ResponseBody, TeamServerResponse, TeamResponse, FieldErrorResponse>(baseView,
+                TeamServerResponse.class) {
                 @Override
-                public void onSuccess(List<AppendVoteResponse> responseList) {
-                    baseView.onAppendSuccess();
+                public void onSuccess(List<TeamResponse> responseList) {
+                    baseView.onJoinTeamSucc(responseList.get(0));
                 }
 
                 @Override
                 public void onResponseError(String responseError) {
-
+                    if (responseError.equals("Error.Team.Joined")) {
+                        baseView.showError(context.getString(R.string.error_join_team_joined));
+                    }
                 }
 
                 @Override
                 public void onResponseFieldError(List<FieldErrorResponse> responseFieldErrorList) {
-
+                    fieldsErrorHandler(responseFieldErrorList);
                 }
             });
-    }
-
-    @Override
-    public void fieldsErrorHandler(List<FieldErrorResponse> fieldErrorResponseList) {
-
     }
 }

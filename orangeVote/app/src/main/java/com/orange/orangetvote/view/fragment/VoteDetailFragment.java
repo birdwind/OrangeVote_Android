@@ -7,13 +7,13 @@ import com.orange.orangetvote.model.AddUpdateVoteOptionModel;
 import com.orange.orangetvote.model.TeamModel;
 import com.orange.orangetvote.presenter.UpdateVotePresenter;
 import com.orange.orangetvote.request.UpdateVoteRequest;
-import com.orange.orangetvote.response.appendVote.TeamListResponse;
+import com.orange.orangetvote.response.team.TeamResponse;
 import com.orange.orangetvote.response.vote.VoteDetailResponse;
 import com.orange.orangetvote.response.vote.VoteOptionDetailResponse;
 import com.orange.orangetvote.view.activity.BottomNavigationActivity;
 import com.orange.orangetvote.view.adapter.AppendUpdateVoteOptionAdapter;
 import com.orange.orangetvote.view.adapter.EndVoteOptionAdapter;
-import com.orange.orangetvote.view.callback.UpdateVoteView;
+import com.orange.orangetvote.view.viewCallback.UpdateVoteView;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.takisoft.datetimepicker.DatePickerDialog;
 import com.takisoft.datetimepicker.widget.DatePicker;
@@ -206,11 +206,11 @@ public class VoteDetailFragment extends AbstractFragment<UpdateVotePresenter>
     }
 
     @Override
-    public void loadTeamListSuccess(List<TeamListResponse> teamListResponseList) {
+    public void loadTeamListSuccess(List<TeamResponse> teamListResponseList) {
         teamModelList.clear();
-        for (TeamListResponse teamListResponse : teamListResponseList) {
-            teamModelList.add(new TeamModel(teamListResponse.getTeamUuid(), teamListResponse.getTeamValue()));
-            teamValueList.add(teamListResponse.getTeamValue());
+        for (TeamResponse teamResponse : teamListResponseList) {
+            teamModelList.add(new TeamModel(teamResponse.getTeamUuid(), teamResponse.getTeamValue()));
+            teamValueList.add(teamResponse.getTeamValue());
         }
         psvTeam.setItems(teamValueList);
     }

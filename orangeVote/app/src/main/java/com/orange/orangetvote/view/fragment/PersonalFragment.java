@@ -5,7 +5,7 @@ import com.orange.orangetvote.basic.view.AbstractFragment;
 import com.orange.orangetvote.presenter.PersonalPresenter;
 import com.orange.orangetvote.request.PersonalRequest;
 import com.orange.orangetvote.response.personal.PersonalResponse;
-import com.orange.orangetvote.view.callback.PersonalView;
+import com.orange.orangetvote.view.viewCallback.PersonalView;
 import java.util.List;
 import android.os.Bundle;
 import android.widget.EditText;

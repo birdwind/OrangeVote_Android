@@ -6,7 +6,7 @@ import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.response.vote.MyVoteResponse;
 import com.orange.orangetvote.response.vote.MyVoteServerResponse;
 import com.orange.orangetvote.server.VoteApiServer;
-import com.orange.orangetvote.view.callback.MyVoteView;
+import com.orange.orangetvote.view.viewCallback.MyVoteView;
 import java.util.List;
 import okhttp3.internal.http.RealResponseBody;
 
@@ -28,7 +28,12 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
                 }
 
                 @Override
-                public void onFieldsError(List<FieldErrorResponse> fieldErrorResponseList) {
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
+                public void onResponseFieldError(List<FieldErrorResponse> fieldErrorResponseList) {
 
                 }
             });
@@ -41,12 +46,17 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
             new AbstractObserver<RealResponseBody, MyVoteServerResponse, MyVoteResponse, FieldErrorResponse>(baseView,
                 MyVoteServerResponse.class) {
                 @Override
+                public void onResponseError(String responseError) {
+
+                }
+
+                @Override
                 public void onSuccess(List responseList) {
                     baseView.loadMyVotedList(responseList);
                 }
 
                 @Override
-                public void onFieldsError(List responseFieldErrorList) {
+                public void onResponseFieldError(List responseFieldErrorList) {
 
                 }
             });

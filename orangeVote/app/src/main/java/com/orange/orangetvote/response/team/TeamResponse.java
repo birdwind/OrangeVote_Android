@@ -1,4 +1,4 @@
-package com.orange.orangetvote.response.appendVote;
+package com.orange.orangetvote.response.team;
 
 import com.orange.orangetvote.basic.response.AbstractResponse;
 import com.orange.orangetvote.basic.response.BaseResponse;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TeamListResponse implements BaseResponse {
+public class TeamResponse implements BaseResponse {
 
     private String teamUuid;
 

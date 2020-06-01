@@ -9,7 +9,7 @@ import com.orange.orangetvote.request.VoteRequest;
 import com.orange.orangetvote.response.vote.VoteResponse;
 import com.orange.orangetvote.view.adapter.VoteAdapter;
 import com.orange.orangetvote.view.adapter.callback.VoteListener;
-import com.orange.orangetvote.view.callback.VoteView;
+import com.orange.orangetvote.view.viewCallback.VoteView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
