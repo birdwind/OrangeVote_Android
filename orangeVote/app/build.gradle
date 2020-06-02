@@ -55,7 +55,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.4'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.5'
 
     implementation "androidx.appcompat:appcompat:${libs.androidx}"
     implementation "androidx.constraintlayout:constraintlayout:${libs.constraintlayout}"

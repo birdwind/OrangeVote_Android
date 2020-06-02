@@ -1,6 +1,5 @@
 package com.orange.orangetvote;
 
-import java.util.TimeZone;
 import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,11 +8,11 @@ public class MainApplication extends Application {
 
     private static MainApplication mainApplication;
 
-    public static Context getAppContext(){
+    public static Context getAppContext() {
         return mainApplication;
     }
 
-    public static Resources getAppResources(){
+    public static Resources getAppResources() {
         return mainApplication.getResources();
     }
 

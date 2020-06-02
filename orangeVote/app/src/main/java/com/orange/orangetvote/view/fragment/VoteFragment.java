@@ -61,6 +61,7 @@ public class VoteFragment extends AbstractFragment<VotePresenter>
     public void initView() {
         rvVote.setHasFixedSize(true);
         rvVote.setLayoutManager(new LinearLayoutManager(getContext()));
+        voteAdapter.setEmptyView(getLayoutInflater().inflate(R.layout.component_empty, rvVote,false));
         rvVote.setAdapter(voteAdapter);
     }
 
