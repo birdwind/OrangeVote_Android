@@ -78,4 +78,14 @@
     <!--加入團隊-->
     <string name="add_team_passcode_hint">Team Pass Code</string>
 
+    <!--椪柑證身分-->
+    <string name="orange_identity_admin">SPG</string>
+    <string name="orange_identity_captain">Captain</string>
+    <string name="orange_identity_captain2">Vice Captain</string>
+    <string name="orange_identity_member1">Member</string>
+    <string name="orange_identity_member2">Member</string>
+    <string name="orange_identity_member3">Member</string>
+    <string name="orange_identity_member4">Member</string>
+    <string name="orange_identity_member_old">Adviser</string>
+
 </resources>

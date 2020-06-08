@@ -49,7 +49,7 @@ public abstract class AbstractPresenter<V extends BaseView> implements BasePrese
         removeDisposable();
     }
 
-    public void addDisposable(Observable<ResponseBody> flowable, AbstractObserver observer) {
+    public void addDisposable(Observable<ResponseBody> flowable, AbstractBaseObserver observer) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }
@@ -58,7 +58,7 @@ public abstract class AbstractPresenter<V extends BaseView> implements BasePrese
 
     }
 
-    public void addDisposable(Flowable<Object> flowable, AbstractSubscriber subscriber) {
+    public void addDisposable(Flowable<Object> flowable, AbstractBaseSubscriber subscriber) {
         if (compositeDisposable == null) {
             compositeDisposable = new CompositeDisposable();
         }

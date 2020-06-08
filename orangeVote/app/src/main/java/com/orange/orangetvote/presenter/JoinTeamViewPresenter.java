@@ -9,7 +9,6 @@ import com.orange.orangetvote.response.team.TeamServerResponse;
 import com.orange.orangetvote.server.TeamApiServer;
 import com.orange.orangetvote.view.viewCallback.JoinTeamView;
 import java.util.List;
-import okhttp3.ResponseBody;
 
 public class JoinTeamViewPresenter extends AbstractPresenter<JoinTeamView> {
     public JoinTeamViewPresenter(JoinTeamView baseView) {
@@ -25,8 +24,7 @@ public class JoinTeamViewPresenter extends AbstractPresenter<JoinTeamView> {
         initMap();
 
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
-            new AbstractObserver<ResponseBody, TeamServerResponse, TeamResponse, FieldErrorResponse>(baseView,
-                TeamServerResponse.class) {
+            new AbstractObserver<TeamServerResponse, TeamResponse>(baseView, TeamServerResponse.class) {
 
                 @Override
                 public void onSuccess(List<TeamResponse> responseList) {
@@ -48,11 +46,9 @@ public class JoinTeamViewPresenter extends AbstractPresenter<JoinTeamView> {
     public void joinTeam(String teamUuid, String passCode) {
         initMap();
         paramsMap.put("pass_code", passCode);
-        addDisposable(
-            apiServer.executeGet(TeamApiServer.JOIN_TEAM.valueOfName().replace("{teamUuid}", teamUuid), paramsMap,
-                headerMap),
-            new AbstractObserver<ResponseBody, TeamServerResponse, TeamResponse, FieldErrorResponse>(baseView,
-                TeamServerResponse.class) {
+        addDisposable(apiServer.executeGet(TeamApiServer.JOIN_TEAM.valueOfName().replace("{teamUuid}", teamUuid),
+            paramsMap, headerMap),
+            new AbstractObserver<TeamServerResponse, TeamResponse>(baseView, TeamServerResponse.class) {
                 @Override
                 public void onSuccess(List<TeamResponse> responseList) {
                     baseView.onJoinTeamSucc(responseList.get(0));

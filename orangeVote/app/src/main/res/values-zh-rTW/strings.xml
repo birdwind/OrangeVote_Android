@@ -76,4 +76,14 @@
 
     <!--加入團隊-->
     <string name="add_team_passcode_hint">請輸入團隊代碼</string>
+
+    <!--椪柑證身分-->
+    <string name="orange_identity_admin">小椪柑</string>
+    <string name="orange_identity_captain">隊長</string>
+    <string name="orange_identity_captain2">副隊長</string>
+    <string name="orange_identity_member1">隊員</string>
+    <string name="orange_identity_member2">隊員</string>
+    <string name="orange_identity_member3">隊員</string>
+    <string name="orange_identity_member4">隊員</string>
+    <string name="orange_identity_member_old">顧問</string>
 </resources>

@@ -87,3 +87,7 @@ lint/tmp/
 orangeVote/.idea/compiler.xml
 orangeVote/.idea/eclipseCodeFormatter.xml
 orangeVote/.idea/codeStyles/codeStyleConfig.xml
+
+orangeVote/app/google-services.json
+
+orangeVote/orangevote.jks

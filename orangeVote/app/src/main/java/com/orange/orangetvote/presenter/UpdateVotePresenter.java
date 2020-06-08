@@ -5,16 +5,15 @@ import com.orange.orangetvote.basic.base.AbstractObserver;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.utils.ToastUtils;
 import com.orange.orangetvote.request.UpdateVoteRequest;
+import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.response.team.TeamResponse;
 import com.orange.orangetvote.response.team.TeamServerResponse;
-import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.response.vote.VoteDetailResponse;
 import com.orange.orangetvote.response.vote.VoteDetailServerResponse;
 import com.orange.orangetvote.server.TeamApiServer;
 import com.orange.orangetvote.server.VoteApiServer;
 import com.orange.orangetvote.view.viewCallback.UpdateVoteView;
 import java.util.List;
-import okhttp3.ResponseBody;
 
 public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
 
@@ -27,8 +26,7 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
     public void teamList() {
         initMap();
         addDisposable(apiServer.executeGet(TeamApiServer.TEAM_LIST.valueOfName(), paramsMap, headerMap),
-            new AbstractObserver<ResponseBody, TeamServerResponse, TeamResponse, FieldErrorResponse>(baseView,
-                TeamServerResponse.class) {
+            new AbstractObserver<TeamServerResponse, TeamResponse>(baseView, TeamServerResponse.class) {
 
                 @Override
                 public void onSuccess(List<TeamResponse> responseList) {
@@ -51,8 +49,8 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
         currentVoteUuid = voteUuid;
         initMap();
         addDisposable(apiServer.executeGet(VoteApiServer.TEAM_DETAIL.valueOfName() + voteUuid, paramsMap, headerMap),
-            new AbstractObserver<ResponseBody, VoteDetailServerResponse, VoteDetailResponse, FieldErrorResponse>(
-                baseView, VoteDetailServerResponse.class) {
+            new AbstractObserver<VoteDetailServerResponse, VoteDetailResponse>(baseView,
+                VoteDetailServerResponse.class) {
                 @Override
                 public void onSuccess(List<VoteDetailResponse> responseList) {
                     baseView.loadVoteDetailSuccess(responseList.get(0));
@@ -76,8 +74,8 @@ public class UpdateVotePresenter extends AbstractPresenter<UpdateVoteView> {
 
         addDisposable(
             apiServer.executePostFormUrlEncode(VoteApiServer.UPDATE.valueOfName(), paramsMap, fieldMap, headerMap),
-            new AbstractObserver<ResponseBody, VoteDetailServerResponse, VoteDetailResponse, FieldErrorResponse>(
-                baseView, VoteDetailServerResponse.class) {
+            new AbstractObserver<VoteDetailServerResponse, VoteDetailResponse>(baseView,
+                VoteDetailServerResponse.class) {
                 @Override
                 public void onSuccess(List<VoteDetailResponse> responseList) {
                     baseView.loadVoteDetailSuccess(responseList.get(0));

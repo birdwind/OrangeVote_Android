@@ -10,7 +10,6 @@ import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.PersonalApiServer;
 import com.orange.orangetvote.view.viewCallback.PersonalView;
 import java.util.List;
-import okhttp3.ResponseBody;
 
 public class PersonalPresenter extends AbstractPresenter<PersonalView> {
 
@@ -21,8 +20,7 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
     public void loadPersonalInfo() {
         initMap();
         addDisposable(apiServer.executeGet(PersonalApiServer.PERSONAL_INFO.valueOfName(), paramsMap, headerMap),
-            new AbstractObserver<ResponseBody, PersonalServerResponse, PersonalResponse, FieldErrorResponse>(baseView,
-                PersonalServerResponse.class) {
+            new AbstractObserver<PersonalServerResponse, PersonalResponse>(baseView, PersonalServerResponse.class) {
                 @Override
                 public void onSuccess(List<PersonalResponse> responseList) {
                     baseView.loadPersonalSuccess(responseList);
@@ -47,8 +45,7 @@ public class PersonalPresenter extends AbstractPresenter<PersonalView> {
         addDisposable(
             apiServer.executePostFormUrlEncode(PersonalApiServer.PERSONAL_UPDATE.valueOfName(), paramsMap, fieldMap,
                 headerMap),
-            new AbstractObserver<ResponseBody, PersonalServerResponse, PersonalResponse, FieldErrorResponse>(baseView,
-                PersonalServerResponse.class) {
+            new AbstractObserver<PersonalServerResponse, PersonalResponse>(baseView, PersonalServerResponse.class) {
 
                 @Override
                 public void onSuccess(List<PersonalResponse> responseList) {

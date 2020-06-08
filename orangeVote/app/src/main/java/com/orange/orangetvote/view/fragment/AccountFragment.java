@@ -1,5 +1,6 @@
 package com.orange.orangetvote.view.fragment;
 
+import com.orange.orangetvote.BuildConfig;
 import com.orange.orangetvote.R;
 import com.orange.orangetvote.basic.base.AbstractPresenter;
 import com.orange.orangetvote.basic.utils.SharedPreferencesUtils;
@@ -70,7 +71,7 @@ public class AccountFragment extends AbstractFragment implements LogoutDialogLis
     @Override
     public void initData(Bundle savedInstanceState) {
         version = SharedPreferencesUtils.get("version", "error");
-        tvVersion.setText(getString(R.string.account_version).replace("{version}", version));
+        tvVersion.setText(getString(R.string.account_version).replace("{version}", BuildConfig.VERSION_NAME));
     }
 
     @Override

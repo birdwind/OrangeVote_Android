@@ -10,7 +10,6 @@ import com.orange.orangetvote.response.system.FieldErrorResponse;
 import com.orange.orangetvote.server.AuthApiServer;
 import com.orange.orangetvote.view.viewCallback.LoginView;
 import java.util.List;
-import okhttp3.ResponseBody;
 
 public class LoginPresenter extends AbstractPresenter<LoginView> {
 
@@ -28,8 +27,7 @@ public class LoginPresenter extends AbstractPresenter<LoginView> {
 
         addDisposable(
             apiServer.executePostFormUrlEncode(AuthApiServer.Login.valueOfName(), paramsMap, fieldMap, headerMap),
-            new AbstractObserver<ResponseBody, LoginServerResponse, LoginResponse, FieldErrorResponse>(baseView,
-                LoginServerResponse.class) {
+            new AbstractObserver<LoginServerResponse, LoginResponse>(baseView, LoginServerResponse.class) {
 
                 @Override
                 public void onSuccess(List<LoginResponse> responseList) {

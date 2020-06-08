@@ -8,7 +8,6 @@ import com.orange.orangetvote.response.vote.MyVoteServerResponse;
 import com.orange.orangetvote.server.VoteApiServer;
 import com.orange.orangetvote.view.viewCallback.MyVoteView;
 import java.util.List;
-import okhttp3.internal.http.RealResponseBody;
 
 public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
 
@@ -20,8 +19,7 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
         initMap();
 
         addDisposable(apiServer.executeGet(VoteApiServer.MY_VOTE_LIST.valueOfName(), paramsMap, headerMap),
-            new AbstractObserver<RealResponseBody, MyVoteServerResponse, MyVoteResponse, FieldErrorResponse>(baseView,
-                MyVoteServerResponse.class) {
+            new AbstractObserver<MyVoteServerResponse, MyVoteResponse>(baseView, MyVoteServerResponse.class) {
                 @Override
                 public void onSuccess(List<MyVoteResponse> responseList) {
                     baseView.loadMyVoteList(responseList);
@@ -43,8 +41,7 @@ public class MyVotePresenter extends AbstractPresenter<MyVoteView> {
         initMap();
 
         addDisposable(apiServer.executeGet(VoteApiServer.MY_VOTED_LIST.valueOfName(), paramsMap, headerMap),
-            new AbstractObserver<RealResponseBody, MyVoteServerResponse, MyVoteResponse, FieldErrorResponse>(baseView,
-                MyVoteServerResponse.class) {
+            new AbstractObserver<MyVoteServerResponse, MyVoteResponse>(baseView, MyVoteServerResponse.class) {
                 @Override
                 public void onResponseError(String responseError) {
 

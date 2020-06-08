@@ -3,7 +3,6 @@ package com.orange.orangetvote.view.activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.orange.orangetvote.R;
-import com.orange.orangetvote.basic.utils.LogUtils;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavController;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragNavTransactionOptions;
 import com.orange.orangetvote.basic.utils.fragmentNavUtils.FragmentHistory;
@@ -13,6 +12,7 @@ import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.view.fragment.AccountFragment;
 import com.orange.orangetvote.view.fragment.AppendVoteFragment;
 import com.orange.orangetvote.view.fragment.VoteFragment;
+import com.yanzhenjie.recyclerview.touch.OnItemStateChangedListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -86,7 +86,8 @@ public class BottomNavigationActivity extends AbstractActivity
     public void initData(Bundle savedInstanceState) {
         currentNavigationPosition = 0;
 
-        FragNavTransactionOptions defaultFragNavTransactionOptions = FragNavTransactionOptions.newBuilder().customAnimations(R.anim.slide_in_from_right,
+        FragNavTransactionOptions defaultFragNavTransactionOptions =
+            FragNavTransactionOptions.newBuilder().customAnimations(R.anim.slide_in_from_right,
                 R.anim.slide_out_to_left, R.anim.slide_in_from_left, R.anim.slide_out_to_right).build();
 
         popFragNavTransactionOptions = FragNavTransactionOptions.newBuilder()
@@ -132,8 +133,8 @@ public class BottomNavigationActivity extends AbstractActivity
         return true;
     }
 
-    private boolean onNavigationItemClicked(int tab){
-        if(currentNavigationPosition == tab && !mNavController.isRootFragment()){
+    private boolean onNavigationItemClicked(int tab) {
+        if (currentNavigationPosition == tab && !mNavController.isRootFragment()) {
             mNavController.clearStack(popFragNavTransactionOptions);
         }
         switchTab(tab);
@@ -216,7 +217,7 @@ public class BottomNavigationActivity extends AbstractActivity
 
     @Override
     public void updateToolbar(String title, Boolean isShowBack, Boolean isShowClose, Boolean isShowMenu) {
-        if(title != null){
+        if (title != null) {
             tvTitle.setText(title);
         }
         showBackButton(isShowBack);
