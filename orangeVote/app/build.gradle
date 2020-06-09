@@ -64,7 +64,11 @@ dependencies {
     implementation "androidx.cardview:cardview:${libs.androidx_cardview}"
     implementation "com.google.android.material:material:${libs.androidx}"
 
-    implementation "com.google.firebase:firebase-analytics:${libs.firebase}"
+    /**
+     *      firebase
+     */
+    implementation "com.google.firebase:firebase-analytics:${libs.firebase_analytics}"
+    implementation "com.google.firebase:firebase-messaging:${libs.firebase_message}"
 
     implementation "com.ncapdevi:frag-nav:${libs.frag_nav}"
 
@@ -114,7 +118,7 @@ dependencies {
      *   okhttp
      */
     implementation "com.squareup.okhttp3:okhttp:${libs.okhttp3}"
-    implementation "com.squareup.okhttp3:logging-interceptor:${libs.logging}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${libs.okhttp3}"
 
     /**
      *   conscrypt

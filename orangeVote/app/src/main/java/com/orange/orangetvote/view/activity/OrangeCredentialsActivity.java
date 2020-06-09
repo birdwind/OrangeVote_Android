@@ -7,13 +7,17 @@ import com.orange.orangetvote.enums.IdentityEnum;
 import com.orange.orangetvote.presenter.OrangeCredentialsPresenter;
 import com.orange.orangetvote.response.orangeCredentials.OrangeCredentialsResponse;
 import com.orange.orangetvote.view.viewCallback.OrangeCredentialsView;
-import android.content.pm.ActivityInfo;
+import com.squareup.picasso.Picasso;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 
 public class OrangeCredentialsActivity extends AbstractActivity<OrangeCredentialsPresenter>
     implements OrangeCredentialsView {
+
+    @BindView(R.id.iv_orange_credentials_avatar)
+    ImageView ivAvatar;
 
     @BindView(R.id.tv_orange_credentials_identity)
     TextView tvIdentity;
@@ -88,5 +92,6 @@ public class OrangeCredentialsActivity extends AbstractActivity<OrangeCredential
         tvMajor.setText(major);
         tvOrangeId.setText(orangeId);
         tvGraduation.setText(graduation);
+        Picasso.get().load(R.drawable.avatar).resize(170, 160).into(ivAvatar);
     }
 }
