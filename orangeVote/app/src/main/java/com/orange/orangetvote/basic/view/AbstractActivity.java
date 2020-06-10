@@ -80,7 +80,7 @@ public abstract class AbstractActivity<P extends AbstractPresenter> extends AppC
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        LogUtils.e(className, "onStop");
+        LogUtils.eTAG(className, "onStop");
         clearDisposable();
         if (presenter != null) {
             presenter.detachView();
@@ -245,25 +245,25 @@ public abstract class AbstractActivity<P extends AbstractPresenter> extends AppC
     @Override
     public void onStart() {
         super.onStart();
-        LogUtils.e(className, "onStart");
+        LogUtils.eTAG(className, "onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        LogUtils.e(className, "onResume");
+        LogUtils.eTAG(className, "onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtils.e(className, "onResume");
+        LogUtils.eTAG(className, "onResume");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LogUtils.e(className, "onStop");
+        LogUtils.eTAG(className, "onStop");
     }
 
     @Override

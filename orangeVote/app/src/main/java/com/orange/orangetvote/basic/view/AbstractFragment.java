@@ -38,14 +38,14 @@ public abstract class AbstractFragment<P extends AbstractPresenter> extends Frag
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.e(className, "onCreate");
+        LogUtils.eTAG(className, "onCreate");
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
         @Nullable Bundle savedInstanceState) {
-        LogUtils.e(className, "onCreateView");
+        LogUtils.eTAG(className, "onCreateView");
         final View fragmentView = inflater.inflate(getLayoutId(), container, false);
         unbinder = ButterKnife.bind(this, fragmentView);
         presenter = createPresenter();
@@ -60,7 +60,7 @@ public abstract class AbstractFragment<P extends AbstractPresenter> extends Frag
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        LogUtils.e(className, "onViewCreated");
+        LogUtils.eTAG(className, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -195,19 +195,19 @@ public abstract class AbstractFragment<P extends AbstractPresenter> extends Frag
         if (context instanceof FragmentNavigationListener) {
             fragmentNavigationListener = (FragmentNavigationListener) context;
         }
-        LogUtils.e(className, "OnAttach");
+        LogUtils.eTAG(className, "OnAttach");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        LogUtils.e(className, "onStart");
+        LogUtils.eTAG(className, "onStart");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LogUtils.e(className, "onActivityCreated");
+        LogUtils.eTAG(className, "onActivityCreated");
     }
 
     @Override
@@ -217,32 +217,32 @@ public abstract class AbstractFragment<P extends AbstractPresenter> extends Frag
             fragmentNavigationListener.updateToolbar(setTitle(), isNeedShowBackOnToolBar(), isNeedShowCloseOnToolBar(),
                 isNeedShowMenuOnToolBar());
         }
-        LogUtils.e(className, "onResume");
+        LogUtils.eTAG(className, "onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LogUtils.e(className, "onResume");
+        LogUtils.eTAG(className, "onResume");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LogUtils.e(className, "onStop");
+        LogUtils.eTAG(className, "onStop");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         clearDisposable();
-        LogUtils.e(className, "onDestroy");
+        LogUtils.eTAG(className, "onDestroy");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        LogUtils.e(className, "onDetach");
+        LogUtils.eTAG(className, "onDetach");
     }
 
     @Override

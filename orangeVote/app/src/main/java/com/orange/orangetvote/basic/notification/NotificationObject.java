@@ -13,11 +13,9 @@ public class NotificationObject implements Serializable {
 
     private String message;
 
-    private String imageUrl;
+    private String image;
 
-    private String timestamp;
-
-    private String payload;
+    private int imageType;
 
     private int channelID = (int) NotificationChannelEnums.DEFAULT.valueOf();
 }

@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme"
         android:largeHeap="true">
 
-        <service android:name=".basic.notification.FirebaseService">
+        <service android:name=".basic.notification.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

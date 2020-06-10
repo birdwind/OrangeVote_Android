@@ -24,7 +24,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitManager {
 
-    private static String TAG = "ApiRetrofit";
+    private static String Title = "ApiRetrofit";
 
     private static final int DEFAULT_TIMEOUT = 10;
 
@@ -43,12 +43,12 @@ public class RetrofitManager {
     }
 
     public static RetrofitManager getInstance(String tag) {
-        TAG = tag;
+        Title = tag;
         return SingletonHolder.INSTANCE;
     }
 
     public static RetrofitManager getInstanceWithUrl(String tag, String url) {
-        TAG = tag;
+        Title = tag;
         return new RetrofitManager(url);
     }
 
@@ -93,15 +93,15 @@ public class RetrofitManager {
             String responseHeader = response.headers().toString();
             String cookies = cookieManger.getCookies().toString();
 
-            LogUtils.d(TAG, "----------Request Start----------------");
-            LogUtils.d(TAG, "| Cookies: " + cookies);
-            LogUtils.d(TAG, "| Request: " + request);
-            LogUtils.d(TAG, "| RequestUrl: " + request.url());
-            LogUtils.d(TAG, "| RequestMethod: " + request.method());
-            LogUtils.d(TAG, "| RequestHeader: " + request.headers().toString());
-            LogUtils.d(TAG, "| ResponseHeader: " + responseHeader);
-            LogUtils.d(TAG, "| ResponseBody: " + responseBody);
-            LogUtils.d(TAG, "----------Request End:" + duration + "毫秒----------");
+            LogUtils.d(Title, "----------Request Start----------------");
+            LogUtils.d(Title, "| Cookies: " + cookies);
+            LogUtils.d(Title, "| Request: " + request);
+            LogUtils.d(Title, "| RequestUrl: " + request.url());
+            LogUtils.d(Title, "| RequestMethod: " + request.method());
+            LogUtils.d(Title, "| RequestHeader: " + request.headers().toString());
+            LogUtils.d(Title, "| ResponseHeader: " + responseHeader);
+            LogUtils.d(Title, "| ResponseBody: " + responseBody);
+            LogUtils.d(Title, "----------Request End:" + duration + "毫秒----------");
             return response.newBuilder().body(ResponseBody.create(mediaType, responseBody)).build();
         }
     };

@@ -12,7 +12,6 @@ import com.orange.orangetvote.presenter.VotePresenter;
 import com.orange.orangetvote.view.fragment.AccountFragment;
 import com.orange.orangetvote.view.fragment.AppendVoteFragment;
 import com.orange.orangetvote.view.fragment.VoteFragment;
-import com.yanzhenjie.recyclerview.touch.OnItemStateChangedListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;

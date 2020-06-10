@@ -38,12 +38,8 @@ public class NotificationUtils {
         this.mContext = mContext;
     }
 
-    public void showNotificationMessage(String title, String message, String timeStamp, Intent intent, int channelID) {
-        showNotificationMessage(title, message, timeStamp, intent, null, channelID);
-    }
-
-    public void showNotificationMessage(final String title, final String message, final String timeStamp, Intent intent,
-        String imageUrl, int channelID) {
+    public void showNotificationMessage(final String title, final String message, String imageUrl,
+        final String timeStamp, Intent intent, int channelID) {
 
         // Check for empty push message
         if (TextUtils.isEmpty(message))
